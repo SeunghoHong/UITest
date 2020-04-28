@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D03435D245848BF00445EB2 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D03435C245848BF00445EB2 /* PageControl.swift */; };
 		4D5E77D32451494800A7C344 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D22451494800A7C344 /* AppDelegate.swift */; };
 		4D5E77D52451494800A7C344 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D42451494800A7C344 /* SceneDelegate.swift */; };
 		4D5E77D72451494800A7C344 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D62451494800A7C344 /* ViewController.swift */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		1C4530479B46DC43B743793C /* Pods_UITestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UITestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27E8D5309395CFD16E2EFF40 /* Pods_UITest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UITest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D03435C245848BF00445EB2 /* PageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageControl.swift; path = View/PageControl.swift; sourceTree = "<group>"; };
 		4D5E77CF2451494800A7C344 /* UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D5E77D22451494800A7C344 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D5E77D42451494800A7C344 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		4D5E77F424515D4400A7C344 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4D03435C245848BF00445EB2 /* PageControl.swift */,
 				4DE1E04F2455F07000A25A81 /* Banner */,
 				4DCC6D692456D59900EB0CCF /* Main */,
 				4DE1E04B2455F07000A25A81 /* User */,
@@ -377,6 +380,7 @@
 				4DE1E0522455F07000A25A81 /* User_VC.swift in Sources */,
 				4DCC6D712456DE1B00EB0CCF /* MainCell_TopUser.swift in Sources */,
 				4D5E77D72451494800A7C344 /* ViewController.swift in Sources */,
+				4D03435D245848BF00445EB2 /* PageControl.swift in Sources */,
 				4D5E77D32451494800A7C344 /* AppDelegate.swift in Sources */,
 				4DCC6D6D2456D59900EB0CCF /* Main_VC.swift in Sources */,
 				4DCC6D6C2456D59900EB0CCF /* Main_VM.swift in Sources */,

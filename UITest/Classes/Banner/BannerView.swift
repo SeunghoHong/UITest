@@ -10,12 +10,12 @@ class BannerView: UIView {
 
     private var contentView = UIView()
     private var pageViewController: UIPageViewController!
-    private var pageControl = UIPageControl()
+    private var pageControl = PageControl()
     
     private var disposeBag = DisposeBag()
     private var scrollDisposeBag = DisposeBag()
 
-    private var currentIndex = 0
+    private var currentIndex = BehaviorRelay<Int>(value: 0)
     private var viewControllers = BehaviorRelay<[UIViewController]>(value: [])
 
     var scrollInterval = 3
@@ -45,8 +45,10 @@ extension BannerView {
         self.contentView.backgroundColor = .clear
         self.addSubview(self.contentView)
 
-        self.pageControl.currentPageIndicatorTintColor = self.currentPageIndicatorTintColor
-        self.pageControl.pageIndicatorTintColor = self.pageIndicatorTintColor
+        self.pageControl.backgroundColor = .gray
+        self.addSubview(self.pageControl)
+
+        self.pageControl.backgroundColor = .lightGray
         self.addSubview(self.pageControl)
     }
 
@@ -76,8 +78,9 @@ extension BannerView {
         }
 
         self.pageControl.snp.makeConstraints { maker in
-            maker.centerX.equalToSuperview()
-            maker.centerY.equalToSuperview()
+            maker.leading.trailing.equalToSuperview()
+            maker.top.equalTo(self.pageViewController.view.snp.bottom)
+            maker.height.equalTo(54.0)
         }
     }
 
@@ -107,6 +110,15 @@ extension BannerView {
                 }
             })
             .disposed(by: self.disposeBag)
+
+        self.viewControllers.asDriver()
+            .map { $0.count }
+            .drive(self.pageControl.numberOfPages)
+            .disposed(by: self.disposeBag)
+
+        self.currentIndex.asDriver()
+            .drive(self.pageControl.currentPage)
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -118,7 +130,7 @@ extension BannerView {
 
         Observable<Int>.interval(.seconds(self.scrollInterval), scheduler: MainScheduler.instance)
             .bind(onNext: { _ in
-                var afterIndex = self.currentIndex + 1
+                var afterIndex = self.currentIndex.value + 1
                 if afterIndex > (self.viewControllers.value.count - 1) {
                     afterIndex = 0
                 }
@@ -127,7 +139,7 @@ extension BannerView {
                     return
                 }
 
-                self.currentIndex = afterIndex
+                self.currentIndex.accept(afterIndex)
                 self.pageViewController?.setViewControllers([item], direction: .forward, animated: true, completion: nil)
             })
             .disposed(by: self.scrollDisposeBag)
@@ -142,7 +154,7 @@ extension BannerView {
 extension BannerView: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        var beforeIndex = self.currentIndex - 1
+        var beforeIndex = self.currentIndex.value - 1
         if beforeIndex < 0 {
             beforeIndex = self.viewControllers.value.count - 1
         }
@@ -151,21 +163,13 @@ extension BannerView: UIPageViewControllerDataSource {
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        var afterIndex = self.currentIndex + 1
+        var afterIndex = self.currentIndex.value + 1
         if afterIndex > (self.viewControllers.value.count - 1) {
             afterIndex = 0
         }
 
         return self.viewControllers.value[safe: afterIndex]
     }
-
-//    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-//        return self.viewControllers.value.count
-//    }
-//
-//    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-//        return self.currentIndex
-//    }
 }
 
 
@@ -183,7 +187,7 @@ extension BannerView: UIPageViewControllerDelegate {
 
         for i in 0 ..< self.viewControllers.value.count {
             if viewController == self.viewControllers.value[safe: i] {
-                self.currentIndex = i
+                self.currentIndex.accept(i)
             }
         }
     }
