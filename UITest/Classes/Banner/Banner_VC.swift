@@ -54,7 +54,6 @@ extension Banner_VC {
     }
 
     private func layout() {
-
         self.bannerView.snp.makeConstraints { maker in
             maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(16.0)
             maker.leading.trailing.equalToSuperview()

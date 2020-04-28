@@ -10,6 +10,7 @@ class ViewController: UIViewController {
 
     private var bannerVCButton = UIButton()
     private var userVCButton = UIButton()
+    private var mainVCButton = UIButton()
 
     private var disposeBag = DisposeBag()
 
@@ -44,6 +45,10 @@ extension ViewController {
         self.userVCButton.setTitle("UserVC", for: .normal)
         self.userVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.userVCButton)
+
+        self.mainVCButton.setTitle("MainVC", for: .normal)
+        self.mainVCButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.mainVCButton)
     }
 
     private func layout() {
@@ -55,6 +60,11 @@ extension ViewController {
         self.userVCButton.snp.makeConstraints { maker in
             maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(16.0)
             maker.leading.equalTo(self.bannerVCButton.snp.trailing).offset(16.0)
+        }
+
+        self.mainVCButton.snp.makeConstraints { maker in
+            maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(16.0)
+            maker.leading.equalTo(self.userVCButton.snp.trailing).offset(16.0)
         }
     }
 
@@ -72,6 +82,13 @@ extension ViewController {
                 self?.onUserVC()
             }
             .disposed(by: self.disposeBag)
+
+        self.mainVCButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onMainVC()
+            }
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -86,6 +103,12 @@ extension ViewController {
 
     private func onUserVC() {
         let vc = User_VC()
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    private func onMainVC() {
+        let vc = Main_VC()
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }

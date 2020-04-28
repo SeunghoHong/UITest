@@ -10,7 +10,8 @@ class BannerView: UIView {
 
     private var contentView = UIView()
     private var pageViewController: UIPageViewController!
-
+    private var pageControl = UIPageControl()
+    
     private var disposeBag = DisposeBag()
     private var scrollDisposeBag = DisposeBag()
 
@@ -43,6 +44,10 @@ extension BannerView {
 
         self.contentView.backgroundColor = .clear
         self.addSubview(self.contentView)
+
+        self.pageControl.currentPageIndicatorTintColor = self.currentPageIndicatorTintColor
+        self.pageControl.pageIndicatorTintColor = self.pageIndicatorTintColor
+        self.addSubview(self.pageControl)
     }
 
     private func setupPageViewController() {
@@ -50,12 +55,12 @@ extension BannerView {
         self.pageViewController.dataSource = self
         self.pageViewController.delegate = self
 
-        self.pageViewController.view.subviews.forEach { view in
-            if let pageControl = view as? UIPageControl {
-                pageControl.pageIndicatorTintColor = self.pageIndicatorTintColor
-                pageControl.currentPageIndicatorTintColor = self.currentPageIndicatorTintColor
-            }
-        }
+//        self.pageViewController.view.subviews.forEach { view in
+//            if let pageControl = view as? UIPageControl {
+//                pageControl.pageIndicatorTintColor = self.pageIndicatorTintColor
+//                pageControl.currentPageIndicatorTintColor = self.currentPageIndicatorTintColor
+//            }
+//        }
 
         self.contentView.layoutIfNeeded()
         self.contentView.addSubview(self.pageViewController.view)
@@ -68,6 +73,11 @@ extension BannerView {
 
         self.pageViewController.view.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
+        }
+
+        self.pageControl.snp.makeConstraints { maker in
+            maker.centerX.equalToSuperview()
+            maker.centerY.equalToSuperview()
         }
     }
 
@@ -149,13 +159,13 @@ extension BannerView: UIPageViewControllerDataSource {
         return self.viewControllers.value[safe: afterIndex]
     }
 
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return self.viewControllers.value.count
-    }
-
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return self.currentIndex
-    }
+//    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+//        return self.viewControllers.value.count
+//    }
+//
+//    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+//        return self.currentIndex
+//    }
 }
 
 
