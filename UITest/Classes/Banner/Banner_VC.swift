@@ -96,7 +96,7 @@ extension Banner_VC {
     }
 
     func onLoad() {
-        let views: [UIView] = zip((0...4), [UIColor.green, UIColor.red, UIColor.blue, UIColor.gray, UIColor.orange]).map {
+        let views: [UIView] = zip((0...6), [UIColor.green, UIColor.red, UIColor.blue, UIColor.gray, UIColor.orange, UIColor.yellow]).map {
             let view = UIView()
             view.backgroundColor = $1
             let label = UILabel()

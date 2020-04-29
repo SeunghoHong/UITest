@@ -21,8 +21,7 @@ class BannerView: UIView {
     var scrollInterval = 3
     var items = BehaviorRelay<[UIView]>(value: [])
 
-    var pageIndicatorTintColor: UIColor = .gray
-    var currentPageIndicatorTintColor: UIColor = .orange
+    var pageControlHeight = 54.0
 
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -44,12 +43,6 @@ extension BannerView {
 
         self.contentView.backgroundColor = .clear
         self.addSubview(self.contentView)
-
-        self.pageControl.backgroundColor = .gray
-        self.addSubview(self.pageControl)
-
-        self.pageControl.backgroundColor = .lightGray
-        self.addSubview(self.pageControl)
     }
 
     private func setupPageViewController() {
@@ -57,15 +50,11 @@ extension BannerView {
         self.pageViewController.dataSource = self
         self.pageViewController.delegate = self
 
-//        self.pageViewController.view.subviews.forEach { view in
-//            if let pageControl = view as? UIPageControl {
-//                pageControl.pageIndicatorTintColor = self.pageIndicatorTintColor
-//                pageControl.currentPageIndicatorTintColor = self.currentPageIndicatorTintColor
-//            }
-//        }
-
         self.contentView.layoutIfNeeded()
         self.contentView.addSubview(self.pageViewController.view)
+
+        self.pageControl.backgroundColor = .clear
+        self.contentView.addSubview(self.pageControl)
     }
 
     private func layout () {
@@ -74,13 +63,14 @@ extension BannerView {
         }
 
         self.pageViewController.view.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
+            maker.leading.trailing.top.equalToSuperview()
         }
 
         self.pageControl.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview()
             maker.top.equalTo(self.pageViewController.view.snp.bottom)
-            maker.height.equalTo(54.0)
+            maker.height.equalTo(self.pageControlHeight)
+            maker.bottom.equalToSuperview()
         }
     }
 
