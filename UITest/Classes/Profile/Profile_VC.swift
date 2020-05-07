@@ -132,6 +132,18 @@ extension Profile_VC {
                 }
             }
             .disposed(by: self.disposeBag)
+
+        self.collectionView.rx.observe(CGSize.self, "contentSize")
+            .distinctUntilChanged()
+            .bind { size in
+                guard let size = size else { return }
+                print("\(size.height)")
+                let collectionViewHeight = self.view.frame.height - 100.0
+                if size.height < collectionViewHeight {
+                    self.collectionView.contentInset = UIEdgeInsets(top: 256.0, left: 0.0, bottom: collectionViewHeight - size.height, right: 0.0)
+                }
+            }
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -139,7 +151,7 @@ extension Profile_VC {
 extension Profile_VC {
 
     private func loadItems() {
-        self.items.accept((1..<20).map { "\($0)" })
+        self.items.accept((1..<10).map { "\($0)" })
     }
 }
 
