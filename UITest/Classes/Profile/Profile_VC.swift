@@ -8,25 +8,11 @@ import RxGesture
 import SnapKit
 
 
-struct ProfileSection {
-    var items: [Item]
-}
-
-
-extension ProfileSection: SectionModelType {
-    typealias Item = String
-
-
-    init(original: ProfileSection, items: [Item]) {
-        self = original
-        self.items = items
-    }
-}
-
 class Profile_VC: UIViewController {
 
+    private var titleView = UIView()
     private var headerView = UIView()
-    private var emptyView = UIView()
+    private var tabView = UIView()
     private var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -37,10 +23,11 @@ class Profile_VC: UIViewController {
         return collectionView
     }()
 
-    private var dataSource: RxCollectionViewSectionedReloadDataSource<ProfileSection>?
-    private let sections = BehaviorRelay<[ProfileSection]>(value: [])
+    private let items = BehaviorRelay<[String]>(value: [])
     private let statusHeight = UIApplication.shared.statusBarFrame.size.height
 
+    private var headerViewTopConstraint: Constraint?
+    
     private var disposeBag = DisposeBag()
 
     private var y: CGFloat = 0.0
@@ -75,11 +62,14 @@ extension Profile_VC {
         self.collectionView.backgroundColor = .lightGray
         self.view.addSubview(self.collectionView)
 
-        self.emptyView.backgroundColor = .yellow
-        self.collectionView.addSubview(emptyView)
+        self.headerView.backgroundColor = .green
+        self.collectionView.addSubview(self.headerView)
 
-        self.headerView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
-        self.view.addSubview(self.headerView)
+        self.tabView.backgroundColor = .yellow
+        self.headerView.addSubview(self.tabView)
+
+        self.titleView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
+        self.view.addSubview(self.titleView)
     }
 
     private func setupCollectionView() {
@@ -92,10 +82,8 @@ extension Profile_VC {
             self.automaticallyAdjustsScrollViewInsets = false
         }
 
-        self.collectionView.delegate = self
-        self.setupDataSource()
-
         self.collectionView.contentInset = UIEdgeInsets(top: 256.0, left: 0.0, bottom: 0.0, right: 0.0)
+        self.collectionView.delegate = self
     }
 
     private func layout() {
@@ -103,12 +91,21 @@ extension Profile_VC {
             maker.edges.equalToSuperview()
         }
 
-        self.emptyView.snp.makeConstraints { maker in
-            maker.center.equalToSuperview()
-            maker.width.height.equalTo(80.0)
+        self.headerView.snp.makeConstraints { maker in
+            maker.leading.equalToSuperview()
+            maker.width.equalToSuperview()
+            maker.height.equalTo(256.0)
+            self.headerViewTopConstraint = maker.top.equalToSuperview().offset(-256.0).constraint
         }
 
-        self.headerView.snp.makeConstraints { maker in
+        self.tabView.snp.makeConstraints { maker in
+            maker.leading.bottom.equalToSuperview()
+            maker.width.equalToSuperview()
+            maker.height.equalTo(44.0)
+        }
+        
+
+        self.titleView.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview()
             maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             maker.height.equalTo(40.0)
@@ -116,69 +113,25 @@ extension Profile_VC {
     }
 
     private func bind() {
-        if let dataSource = self.dataSource {
-            self.sections.asDriver()
-                .drive(self.collectionView.rx.items(dataSource: dataSource))
-                .disposed(by: self.disposeBag)
-        }
-
-        self.view.rx.panGesture()
-            .bind { recognizer in
-                let location = recognizer.location(in: recognizer.view)
-                switch recognizer.state {
-                case .began:
-                    self.y = location.y
-                case .changed:
-                    let move = location.y - self.y
-                    self.y = location.y
-
-                    var top = self.collectionView.contentInset.top + move
-                    if top < 40.0 {
-                        top = 40.0
-                    } else if top > 256.0 {
-                        top = 256.0
-                    }
-                    print("top: \(top)")
-                    self.collectionView.contentInset = UIEdgeInsets(top: top, left: 0.0, bottom: 0.0, right: 0.0)
-                    
-                case .ended:
-                    self.y = 0.0
-                default: break
-                }
+        self.items.asDriver()
+            .drive(self.collectionView.rx.items(cellIdentifier: "UICollectionViewCell",
+                                                cellType: UICollectionViewCell.self)) { index, item, cell in
+                cell.backgroundColor = .blue
             }
             .disposed(by: self.disposeBag)
-
+        
         self.collectionView.rx.contentOffset
             .distinctUntilChanged()
             .bind {
-                print("contentOffset: \($0.y)")
+                if $0.y < -256.0 {
+                    self.headerViewTopConstraint?.update(offset: $0.y)
+                } else if $0.y <= -100.0 {
+                    self.headerViewTopConstraint?.update(offset: -256.0)
+                } else {
+                    self.headerViewTopConstraint?.update(offset: -256.0 + (100.0 + $0.y))
+                }
             }
             .disposed(by: self.disposeBag)
-    }
-}
-
-
-extension Profile_VC {
-
-    private func setupDataSource() {
-        self.dataSource = RxCollectionViewSectionedReloadDataSource(
-            configureCell: { dataSource, collectionView, indexPath, items -> UICollectionViewCell in
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UICollectionViewCell", for: indexPath)
-                cell.backgroundColor = .blue
-                return cell
-            }
-        )
-
-        self.dataSource?.configureSupplementaryView = { dataSource, collectionView, kind, indexPath -> UICollectionReusableView in
-            guard kind == UICollectionView.elementKindSectionHeader else {
-                return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "UICollectionReusableView", for: indexPath)
-            }
-
-            let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "UICollectionReusableView", for: indexPath)
-            reusableView.backgroundColor = .green
-
-            return reusableView
-        }
     }
 }
 
@@ -186,7 +139,7 @@ extension Profile_VC {
 extension Profile_VC {
 
     private func loadItems() {
-        self.sections.accept([ProfileSection(items: (1..<20).map { "\($0)" })])
+        self.items.accept((1..<20).map { "\($0)" })
     }
 }
 
@@ -207,9 +160,5 @@ extension Profile_VC: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: 80.0)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: 60.0)
     }
 }

@@ -13,6 +13,9 @@ class Banner_VC: UIViewController {
     private var closeButton = UIButton()
     private var loadButton = UIButton()
 
+    private var baseView = UIView()
+    private var stackView = UIStackView()
+
     private var disposeBag = DisposeBag()
 
 
@@ -51,6 +54,12 @@ extension Banner_VC {
         self.loadButton.setTitle("load", for: .normal)
         self.loadButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.loadButton)
+
+        self.baseView.backgroundColor = .lightGray
+        self.view.addSubview(self.baseView)
+
+        self.stackView.spacing = 12.0
+        self.baseView.addSubview(self.stackView)
     }
 
     private func layout() {
@@ -68,6 +77,16 @@ extension Banner_VC {
         self.loadButton.snp.makeConstraints { maker in
             maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(16.0)
             maker.trailing.equalToSuperview().offset(-16.0)
+        }
+
+        self.baseView.snp.makeConstraints { maker in
+            maker.leading.trailing.equalToSuperview()
+            maker.centerY.equalToSuperview()
+            maker.height.equalTo(32.0)
+        }
+
+        self.stackView.snp.makeConstraints { maker in
+            maker.leading.top.equalToSuperview()
         }
     }
 
@@ -109,6 +128,23 @@ extension Banner_VC {
         }
 
         self.bannerView.items.accept(views)
+
+        if stackView.arrangedSubviews.isEmpty {
+            (1...5).forEach {
+                let label = UILabel()
+                label.snp.makeConstraints { maker in
+                    maker.width.height.equalTo(32.0)
+                }
+                label.backgroundColor = .red
+                label.text = "\($0)"
+                self.stackView.addArrangedSubview(label)
+            }
+        } else {
+            self.stackView.arrangedSubviews.forEach {
+                self.stackView.removeArrangedSubview($0)
+                $0.removeFromSuperview()
+            }
+        }
     }
 }
 
