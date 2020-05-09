@@ -144,6 +144,8 @@ extension BannerView {
 extension BannerView: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard self.viewControllers.value.count > 1 else { return nil }
+
         var beforeIndex = self.currentIndex.value - 1
         if beforeIndex < 0 {
             beforeIndex = self.viewControllers.value.count - 1
@@ -153,6 +155,8 @@ extension BannerView: UIPageViewControllerDataSource {
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard self.viewControllers.value.count > 1 else { return nil }
+
         var afterIndex = self.currentIndex.value + 1
         if afterIndex > (self.viewControllers.value.count - 1) {
             afterIndex = 0
