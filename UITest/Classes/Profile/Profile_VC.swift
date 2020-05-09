@@ -23,11 +23,12 @@ class Profile_VC: UIViewController {
         return collectionView
     }()
 
+    private let alpha = BehaviorRelay<CGFloat>(value: 0.0)
     private let items = BehaviorRelay<[String]>(value: [])
     private let statusHeight = UIApplication.shared.statusBarFrame.size.height
 
     private var headerViewTopConstraint: Constraint?
-    
+
     private var disposeBag = DisposeBag()
 
     private var y: CGFloat = 0.0
@@ -59,14 +60,14 @@ extension Profile_VC {
     private func setup() {
         self.view.backgroundColor = .white
 
-        self.collectionView.backgroundColor = .lightGray
+        self.collectionView.backgroundColor = .clear
         self.view.addSubview(self.collectionView)
 
         self.headerView.backgroundColor = .green
         self.collectionView.addSubview(self.headerView)
 
         self.tabView.backgroundColor = .yellow
-        self.headerView.addSubview(self.tabView)
+        self.collectionView.addSubview(self.tabView)
 
         self.titleView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
         self.view.addSubview(self.titleView)
@@ -101,9 +102,9 @@ extension Profile_VC {
         self.tabView.snp.makeConstraints { maker in
             maker.leading.bottom.equalToSuperview()
             maker.width.equalToSuperview()
-            maker.height.equalTo(44.0)
+            maker.height.equalTo(40.0)
         }
-        
+
 
         self.titleView.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview()
@@ -119,16 +120,27 @@ extension Profile_VC {
                 cell.backgroundColor = .blue
             }
             .disposed(by: self.disposeBag)
-        
+
         self.collectionView.rx.contentOffset
-            .distinctUntilChanged()
             .bind {
-                if $0.y < -256.0 {
-                    self.headerViewTopConstraint?.update(offset: $0.y)
-                } else if $0.y <= -100.0 {
-                    self.headerViewTopConstraint?.update(offset: -256.0)
+                let offsetY = $0.y
+                let maxY = self.headerView.frame.size.height
+                let minY = self.statusHeight + self.tabView.frame.size.height + self.titleView.frame.size.height
+
+                if -minY < offsetY {
+                    self.alpha.accept(0.0)
+                } else if offsetY < -maxY {
+                    self.alpha.accept(1.0)
                 } else {
-                    self.headerViewTopConstraint?.update(offset: -256.0 + (100.0 + $0.y))
+                    self.alpha.accept(((abs(offsetY) - minY) / (maxY - minY)))
+                }
+
+                if offsetY < -maxY {
+                    self.headerViewTopConstraint?.update(offset: offsetY)
+                } else if offsetY <= -minY {
+                    self.headerViewTopConstraint?.update(offset: -maxY)
+                } else {
+                    self.headerViewTopConstraint?.update(offset: -maxY + (offsetY + $0.y))
                 }
             }
             .disposed(by: self.disposeBag)
@@ -137,12 +149,24 @@ extension Profile_VC {
             .distinctUntilChanged()
             .bind { size in
                 guard let size = size else { return }
-                print("\(size.height)")
-                let collectionViewHeight = self.view.frame.height - 100.0
+
+                let offsetY = self.statusHeight + self.tabView.frame.size.height + self.titleView.frame.size.height
+                let collectionViewHeight = self.view.frame.height - offsetY
                 if size.height < collectionViewHeight {
                     self.collectionView.contentInset = UIEdgeInsets(top: 256.0, left: 0.0, bottom: collectionViewHeight - size.height, right: 0.0)
                 }
             }
+            .disposed(by: self.disposeBag)
+
+        self.alpha.asDriver()
+            .distinctUntilChanged()
+            .map { 1.0 - $0 }
+            .drive(self.titleView.rx.alpha)
+            .disposed(by: self.disposeBag)
+
+        self.alpha.asDriver()
+            .distinctUntilChanged()
+            .drive(self.headerView.rx.alpha)
             .disposed(by: self.disposeBag)
     }
 }
