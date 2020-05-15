@@ -110,12 +110,12 @@ class Page_VC: UIViewController {
 
     private var headerViewTopConstraint: Constraint?
 
-    private var isOnScrolling = false
     private let statusHeight = UIApplication.shared.statusBarFrame.size.height
-    private let titleViewHeight: CGFloat = 50.0
-    private let pageControlHeight: CGFloat = 40.0
-    private let headerViewHeight: CGFloat = 200.0
-    private var offsetY: CGFloat = 0.0
+    private let titleViewHeight: CGFloat = 80.0
+    private let pageControlHeight: CGFloat = 60.0
+    private let headerViewHeight: CGFloat = 400.0
+
+    private var offsetY = BehaviorRelay<CGFloat>(value: 0.0)
     private var beginY: CGFloat = 0.0
 
     private var currentIndex = BehaviorRelay<Int>(value: 0)
@@ -179,7 +179,7 @@ extension Page_VC {
     private func layout() {
         self.headerView.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview()
-            maker.height.equalTo(200.0)
+            maker.height.equalTo(self.headerViewHeight)
 
             self.headerViewTopConstraint = maker.top.equalToSuperview().constraint
         }
@@ -187,7 +187,7 @@ extension Page_VC {
         self.pageControl.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview()
             maker.top.equalTo(self.headerView.snp.bottom)
-            maker.height.equalTo(40.0)
+            maker.height.equalTo(self.pageControlHeight)
         }
 
         self.pageView.snp.makeConstraints { maker in
@@ -208,7 +208,7 @@ extension Page_VC {
         self.titleView.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview()
             maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            maker.height.equalTo(50.0)
+            maker.height.equalTo(self.titleViewHeight)
         }
     }
 
@@ -222,10 +222,23 @@ extension Page_VC {
                 case .changed:
                     self.doScroll(location.y)
                 case .ended:
-                    self.endScroll(location.y)
+                    let maxY: CGFloat = 0.0
+                    let minY: CGFloat = -(self.headerViewHeight - self.statusHeight - self.titleViewHeight)
+
+                    let velocity = recognizer.velocity(in: recognizer.view)
+                    UIView.animate(withDuration: 0.3) {
+                        self.offsetY.accept((velocity.y > 0.0) ? maxY : minY)
+                        self.view.layoutIfNeeded()
+                    }
                 default: break
                 }
             }
+            .disposed(by: self.disposeBag)
+
+        self.offsetY.asDriver()
+            .drive(onNext: { [weak self] offsetY in
+                self?.headerViewTopConstraint?.update(offset: offsetY)
+            })
             .disposed(by: self.disposeBag)
     }
 }
@@ -234,34 +247,25 @@ extension Page_VC {
 extension Page_VC {
 
     private func beginScroll(_ y: CGFloat) {
-        self.isOnScrolling = true
         self.beginY = y
     }
 
     private func doScroll(_ y: CGFloat) {
-        guard self.isOnScrolling else { return }
-
         let moveY = self.beginY - y
         self.beginY = y
 
         let maxY: CGFloat = 0.0
         let minY: CGFloat = -(self.headerViewHeight - self.statusHeight - self.titleViewHeight)
 
-        let offsetY = self.offsetY - moveY
+        let offsetY = self.offsetY.value - moveY
 
         if offsetY < minY {
-            self.offsetY = minY
+            self.offsetY.accept(minY)
         } else if maxY < offsetY {
-            self.offsetY = maxY
+            self.offsetY.accept(maxY)
         } else {
-            self.offsetY = offsetY
+            self.offsetY.accept(offsetY)
         }
-
-        self.headerViewTopConstraint?.update(offset: self.offsetY)
-    }
-
-    private func endScroll(_ y: CGFloat) {
-        guard self.isOnScrolling else { return }
     }
 }
 

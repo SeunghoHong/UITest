@@ -11,6 +11,10 @@ import SnapKit
 class Profile_VC: UIViewController {
 
     private var titleView = UIView()
+    private var menuStackView = UIStackView()
+    private var menuButton = UIButton()
+    private var titleLabel = UILabel()
+
     private var headerView = UIView()
     private var tabView = UIView()
     private var collectionView: UICollectionView = {
@@ -71,6 +75,19 @@ extension Profile_VC {
 
         self.titleView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
         self.view.addSubview(self.titleView)
+
+        self.menuStackView.axis = .horizontal
+        self.menuStackView.alignment = .center
+        self.menuStackView.spacing = 8.0
+        self.titleView.addSubview(self.menuStackView)
+
+        self.menuButton.backgroundColor = .red
+        self.menuStackView.addArrangedSubview(self.menuButton)
+
+        self.titleLabel.textColor = .black
+        self.titleLabel.textAlignment = .center
+        self.titleLabel.text = "123123"
+        self.menuStackView.addArrangedSubview(self.titleLabel)
     }
 
     private func setupCollectionView() {
@@ -105,11 +122,20 @@ extension Profile_VC {
             maker.height.equalTo(40.0)
         }
 
-
         self.titleView.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview()
             maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             maker.height.equalTo(40.0)
+        }
+
+        self.menuStackView.snp.makeConstraints { maker in
+            maker.leading.equalToSuperview().offset(16.0)
+            maker.trailing.lessThanOrEqualToSuperview().offset(-16.0)
+            maker.top.bottom.equalToSuperview()
+        }
+
+        self.menuButton.snp.makeConstraints { maker in
+            maker.width.height.equalTo(36.0)
         }
     }
 
