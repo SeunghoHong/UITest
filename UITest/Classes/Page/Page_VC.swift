@@ -7,104 +7,12 @@ import RxGesture
 import SnapKit
 
 
-class Test_VC: UIViewController {
-
-    private var collectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
-        collectionView.showsVerticalScrollIndicator = true
-        collectionView.alwaysBounceVertical = true
-        return collectionView
-    }()
-
-    private var items = BehaviorRelay<[String]>(value: [])
-    private var color: UIColor?
-
-    private var disposeBag = DisposeBag()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.setup()
-        self.layout()
-        self.bind()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
-
-    private func setup() {
-        self.view.backgroundColor = .cyan
-
-        self.collectionView.backgroundColor = .clear
-        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
-        self.collectionView.delegate = self
-        self.view.addSubview(self.collectionView)
-    }
-
-    private func layout() {
-        self.collectionView.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
-        }
-    }
-
-    private func bind() {
-        self.items.asObservable()
-            .bind(to: self.collectionView.rx.items(cellIdentifier: "UICollectionViewCell",
-                                                   cellType: UICollectionViewCell.self)) { index, item, cell in
-                cell.backgroundColor = self.color
-            }
-            .disposed(by: self.disposeBag)
-    }
-}
-
-
-extension Test_VC {
-
-    func bind(_ items: [String], color: UIColor) -> UIViewController {
-        self.color = color
-        self.items.accept(items)
-        return self
-    }
-}
-
-
-extension Test_VC: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20.0, left: 0.0, bottom: 20.0, right: 0.0)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 8.0
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: 80.0)
-    }
-}
-
-
-
-
 class Page_VC: UIViewController {
 
     private var titleView = UIView()
     private var headerView = UIView()
     private var pageControl = PageControl()
     private var pageView = UIView()
-
-    private var emptyView = UIView()
 
     private var pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
 
@@ -118,13 +26,21 @@ class Page_VC: UIViewController {
     private var offsetY = BehaviorRelay<CGFloat>(value: 0.0)
     private var beginY: CGFloat = 0.0
 
+    private var isOnTop = BehaviorRelay<Bool>(value: false)
+    private var contentOffset = BehaviorRelay<CGPoint>(value: CGPoint.zero)
+
     private var currentIndex = BehaviorRelay<Int>(value: 0)
-    private var viewControllers = [
-        Test_VC().bind((0..<10).map { "\($0)" }, color: .blue),
-        Test_VC().bind((0..<20).map { "\($0)" }, color: .yellow),
-        Test_VC().bind((0..<2).map { "\($0)" }, color: .gray)
-    ]
-    
+    private lazy var viewControllers: [UIViewController] = {
+//        return [
+//            Test_VC().bind((0..<10).map { "\($0)" }, color: .blue, isOnTop: self.isOnTop),
+//            Test_VC().bind((0..<20).map { "\($0)" }, color: .yellow, isOnTop: self.isOnTop),
+//            Test_VC().bind((0..<2).map { "\($0)" }, color: .gray, isOnTop: self.isOnTop)
+//        ]
+        return [
+            Test_VC().bind((0..<10).map { "\($0)" }, color: .blue, isOnTop: self.isOnTop, contentOffset: self.contentOffset)
+        ]
+    }()
+
     private var disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -159,9 +75,6 @@ extension Page_VC {
         self.pageView.backgroundColor = .yellow
         self.view.addSubview(self.pageView)
 
-        self.emptyView.backgroundColor = .black
-        self.pageView.addSubview(self.emptyView)
-
         self.titleView.backgroundColor = .green
         self.view.addSubview(self.titleView)
 
@@ -173,7 +86,7 @@ extension Page_VC {
         self.pageView.addSubview(self.pageViewController.view)
         self.pageViewController.didMove(toParent: self)
 
-        self.pageViewController.setViewControllers([Test_VC().bind((0..<10).map { "\($0)" }, color: .blue)], direction: .forward, animated: true, completion: nil)
+        self.pageViewController.setViewControllers([self.viewControllers[0]], direction: .forward, animated: true, completion: nil)
     }
 
     private func layout() {
@@ -193,16 +106,11 @@ extension Page_VC {
         self.pageView.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview()
             maker.top.equalTo(self.pageControl.snp.bottom)
-            maker.bottom.equalToSuperview()
+            maker.height.equalTo(self.view.frame.height - self.statusHeight - self.pageControlHeight - self.titleViewHeight)
         }
 
         self.pageViewController.view.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
-        }
-
-        self.emptyView.snp.makeConstraints { maker in
-            maker.center.equalToSuperview()
-            maker.width.height.equalTo(80.0)
         }
 
         self.titleView.snp.makeConstraints { maker in
@@ -213,7 +121,23 @@ extension Page_VC {
     }
 
     private func bind() {
-        self.view.rx.panGesture()
+        self.offsetY.asDriver()
+            .drive(onNext: { [weak self] offsetY in
+                self?.headerViewTopConstraint?.update(offset: offsetY)
+            })
+            .disposed(by: self.disposeBag)
+
+        self.offsetY.asDriver()
+            .map { $0 == -(self.headerViewHeight - self.statusHeight - self.titleViewHeight) }
+            .drive(self.isOnTop)
+            .disposed(by: self.disposeBag)
+
+        Observable.combineLatest(self.contentOffset.asObservable(),
+                                 self.view.rx.panGesture().asObservable()) { contentOffset, recognizer in
+                (contentOffset, recognizer)
+            }
+            .filter { ($0.0.y <= 0.0) }
+            .map { $0.1 }
             .bind { recognizer in
                 let location = recognizer.location(in: recognizer.view)
                 switch recognizer.state {
@@ -233,12 +157,6 @@ extension Page_VC {
                 default: break
                 }
             }
-            .disposed(by: self.disposeBag)
-
-        self.offsetY.asDriver()
-            .drive(onNext: { [weak self] offsetY in
-                self?.headerViewTopConstraint?.update(offset: offsetY)
-            })
             .disposed(by: self.disposeBag)
     }
 }
@@ -302,5 +220,110 @@ extension Page_VC: UIPageViewControllerDelegate {
                 self.currentIndex.accept(i)
             }
         }
+    }
+}
+
+
+
+
+class Test_VC: UIViewController {
+
+    private var collectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
+        collectionView.showsVerticalScrollIndicator = true
+        collectionView.alwaysBounceVertical = true
+        return collectionView
+    }()
+
+    private var items = BehaviorRelay<[String]>(value: [])
+    private var color: UIColor?
+
+    private var disposeBag = DisposeBag()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.setup()
+        self.layout()
+        self.bind()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+
+    private func setup() {
+        self.view.backgroundColor = .cyan
+
+        if #available(iOS 11.0, *) {
+            self.collectionView.contentInsetAdjustmentBehavior = .never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
+
+        self.collectionView.backgroundColor = .clear
+        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
+        self.collectionView.delegate = self
+        self.view.addSubview(self.collectionView)
+    }
+
+    private func layout() {
+        self.collectionView.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+        }
+    }
+
+    private func bind() {
+        self.items.asObservable()
+            .bind(to: self.collectionView.rx.items(cellIdentifier: "UICollectionViewCell",
+                                                   cellType: UICollectionViewCell.self)) { index, item, cell in
+                cell.backgroundColor = self.color
+            }
+            .disposed(by: self.disposeBag)
+    }
+}
+
+
+extension Test_VC {
+
+    func bind(_ items: [String], color: UIColor, isOnTop: BehaviorRelay<Bool>, contentOffset: BehaviorRelay<CGPoint>) -> UIViewController {
+        self.color = color
+        self.items.accept(items)
+
+        isOnTop.asDriver()
+            .drive(self.collectionView.rx.isUserInteractionEnabled)
+            .disposed(by: self.disposeBag)
+
+        self.collectionView.rx.contentOffset
+            .bind(to: contentOffset)
+            .disposed(by: self.disposeBag)
+
+        return self
+    }
+}
+
+
+extension Test_VC: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 20.0, left: 0.0, bottom: 20.0, right: 0.0)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8.0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: 80.0)
     }
 }
