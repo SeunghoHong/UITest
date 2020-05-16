@@ -10,8 +10,9 @@ import SnapKit
 class Page_VC: UIViewController {
 
     private var titleView = UIView()
+    private var closeButton = UIButton()
     private var headerView = UIView()
-    private var pageControl = PageControl()
+    private var pageControl = UIView()
     private var pageView = UIView()
 
     private var pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -29,15 +30,14 @@ class Page_VC: UIViewController {
     private var isOnTop = BehaviorRelay<Bool>(value: false)
     private var contentOffset = BehaviorRelay<CGPoint>(value: CGPoint.zero)
 
+    private var selectedIndex = BehaviorRelay<Int>(value: 0)
+
     private var currentIndex = BehaviorRelay<Int>(value: 0)
     private lazy var viewControllers: [UIViewController] = {
-//        return [
-//            Test_VC().bind((0..<10).map { "\($0)" }, color: .blue, isOnTop: self.isOnTop),
-//            Test_VC().bind((0..<20).map { "\($0)" }, color: .yellow, isOnTop: self.isOnTop),
-//            Test_VC().bind((0..<2).map { "\($0)" }, color: .gray, isOnTop: self.isOnTop)
-//        ]
         return [
-            Test_VC().bind((0..<10).map { "\($0)" }, color: .blue, isOnTop: self.isOnTop, contentOffset: self.contentOffset)
+            Test_VC().bind((0..<10).map { "\($0)" }, color: .blue, isOnTop: self.isOnTop, contentOffset: self.contentOffset),
+            Test_VC().bind((0..<20).map { "\($0)" }, color: .yellow, isOnTop: self.isOnTop, contentOffset: self.contentOffset),
+            Test_VC().bind([], color: .gray, isOnTop: self.isOnTop, contentOffset: self.contentOffset)
         ]
     }()
 
@@ -78,15 +78,65 @@ extension Page_VC {
         self.titleView.backgroundColor = .green
         self.view.addSubview(self.titleView)
 
+        self.closeButton.setTitle("close", for: .normal)
+        self.closeButton.setTitleColor(.black, for: .normal)
+        self.titleView.addSubview(self.closeButton)
+
         self.pageViewController.view.backgroundColor = .clear
         self.pageViewController.dataSource = self
         self.pageViewController.delegate = self
+
+        self.pageViewController.isScrollEnabled = false
 
         self.addChild(self.pageViewController)
         self.pageView.addSubview(self.pageViewController.view)
         self.pageViewController.didMove(toParent: self)
 
         self.pageViewController.setViewControllers([self.viewControllers[0]], direction: .forward, animated: true, completion: nil)
+
+        do {
+            let button1 = UIButton()
+            button1.setTitle("1st", for: .normal)
+            self.pageControl.addSubview(button1)
+
+            button1.snp.makeConstraints { maker in
+                maker.leading.equalToSuperview().offset(16.0)
+                maker.centerY.equalToSuperview()
+            }
+
+            button1.rx.tap
+                .map { 0 }
+                .bind(to: self.selectedIndex)
+                .disposed(by: self.disposeBag)
+
+            let button2 = UIButton()
+            button2.setTitle("2nd", for: .normal)
+            self.pageControl.addSubview(button2)
+
+            button2.snp.makeConstraints { maker in
+                maker.leading.equalTo(button1.snp.trailing).offset(16.0)
+                maker.centerY.equalToSuperview()
+            }
+
+            button2.rx.tap
+                .map { 1 }
+                .bind(to: self.selectedIndex)
+                .disposed(by: self.disposeBag)
+
+            let button3 = UIButton()
+            button3.setTitle("3rd", for: .normal)
+            self.pageControl.addSubview(button3)
+
+            button3.snp.makeConstraints { maker in
+                maker.leading.equalTo(button2.snp.trailing).offset(16.0)
+                maker.centerY.equalToSuperview()
+            }
+
+            button3.rx.tap
+                .map { 2 }
+                .bind(to: self.selectedIndex)
+                .disposed(by: self.disposeBag)
+        }
     }
 
     private func layout() {
@@ -118,9 +168,21 @@ extension Page_VC {
             maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             maker.height.equalTo(self.titleViewHeight)
         }
+
+        self.closeButton.snp.makeConstraints { maker in
+            maker.leading.equalToSuperview().offset(16.0)
+            maker.centerY.equalToSuperview()
+        }
     }
 
     private func bind() {
+        self.selectedIndex.asDriver()
+            .distinctUntilChanged()
+            .drive(onNext: { [weak self] selectedIndex in
+                self?.onSelect(at: selectedIndex)
+            })
+            .disposed(by: self.disposeBag)
+
         self.offsetY.asDriver()
             .drive(onNext: { [weak self] offsetY in
                 self?.headerViewTopConstraint?.update(offset: offsetY)
@@ -136,7 +198,7 @@ extension Page_VC {
                                  self.view.rx.panGesture().asObservable()) { contentOffset, recognizer in
                 (contentOffset, recognizer)
             }
-            .filter { ($0.0.y <= 0.0) }
+            .filter { self.isOnTop.value == false || ($0.0.y <= 0.0) }
             .map { $0.1 }
             .bind { recognizer in
                 let location = recognizer.location(in: recognizer.view)
@@ -156,6 +218,13 @@ extension Page_VC {
                     }
                 default: break
                 }
+            }
+            .disposed(by: self.disposeBag)
+
+        self.closeButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.dismiss(animated: true, completion: nil)
             }
             .disposed(by: self.disposeBag)
     }
@@ -184,6 +253,20 @@ extension Page_VC {
         } else {
             self.offsetY.accept(offsetY)
         }
+    }
+}
+
+
+extension Page_VC {
+
+    private func onSelect(at index: Int, animated: Bool = true) {
+        guard let viewController = self.viewControllers[safe: index] else { return }
+
+        let currentIndex = self.currentIndex.value
+        pageViewController.setViewControllers([viewController], direction: (currentIndex < index) ? .forward : .reverse, animated: true) { _ in
+        }
+
+        self.currentIndex.accept(index)
     }
 }
 
@@ -237,6 +320,7 @@ class Test_VC: UIViewController {
         return collectionView
     }()
 
+    private var isFocused = BehaviorRelay<Bool>(value: false)
     private var items = BehaviorRelay<[String]>(value: [])
     private var color: UIColor?
 
@@ -252,10 +336,12 @@ class Test_VC: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.isFocused.accept(true)
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.isFocused.accept(false)
     }
 
     private func setup() {
@@ -300,7 +386,7 @@ extension Test_VC {
             .drive(self.collectionView.rx.isUserInteractionEnabled)
             .disposed(by: self.disposeBag)
 
-        self.collectionView.rx.contentOffset
+        self.collectionView.rx.contentOffset.asObservable()
             .bind(to: contentOffset)
             .disposed(by: self.disposeBag)
 
@@ -312,7 +398,7 @@ extension Test_VC {
 extension Test_VC: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20.0, left: 0.0, bottom: 20.0, right: 0.0)
+        return UIEdgeInsets(top: 20.0, left: 16.0, bottom: 20.0, right: 16.0)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -320,10 +406,12 @@ extension Test_VC: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
+        return 8.0
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: 80.0)
+        let cellWidth = (collectionView.frame.size.width - (16.0 * 2.0) - 8.0) / 2.0
+        return CGSize(width: cellWidth, height: cellWidth)
+
     }
 }

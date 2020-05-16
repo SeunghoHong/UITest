@@ -1,4 +1,5 @@
-# Uncomment the next line to define a global platform for your project
+#
+#Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
 target 'UITest' do
@@ -15,6 +16,8 @@ target 'UITest' do
   pod 'RxAppState'
 
   pod 'SnapKit'
+
+  pod 'Gedatsu', configuration: %w(Debug)
 
   target 'UITestTests' do
     inherit! :search_paths
