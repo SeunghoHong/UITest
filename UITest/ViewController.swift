@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     private var mainVCButton = UIButton()
     private var profileVCButton = UIButton()
     private var pageVCButton = UIButton()
+    private var messageVCButton = UIButton()
 
     private var disposeBag = DisposeBag()
 
@@ -59,6 +60,10 @@ extension ViewController {
         self.pageVCButton.setTitle("PageVCButton", for: .normal)
         self.pageVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.pageVCButton)
+
+        self.messageVCButton.setTitle("MessageVCButton", for: .normal)
+        self.messageVCButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.messageVCButton)
     }
 
     private func layout() {
@@ -85,6 +90,11 @@ extension ViewController {
         self.pageVCButton.snp.makeConstraints { maker in
             maker.top.equalTo(self.bannerVCButton.snp.bottom).offset(16.0)
             maker.leading.equalToSuperview().offset(16.0)
+        }
+
+        self.messageVCButton.snp.makeConstraints { maker in
+            maker.top.equalTo(self.bannerVCButton.snp.bottom).offset(16.0)
+            maker.leading.equalTo(self.pageVCButton.snp.trailing).offset(16.0)
         }
     }
 
@@ -120,7 +130,14 @@ extension ViewController {
         self.pageVCButton.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .bind { [weak self] _ in
-                self?.onPageVCButton()
+                self?.onPageVC()
+            }
+            .disposed(by: self.disposeBag)
+
+        self.messageVCButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onMessageVC()
             }
             .disposed(by: self.disposeBag)
     }
@@ -153,8 +170,14 @@ extension ViewController {
         self.present(vc, animated: true, completion: nil)
     }
 
-    private func onPageVCButton() {
+    private func onPageVC() {
         let vc = Page_VC()
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    private func onMessageVC() {
+        let vc = Message_VC()
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }

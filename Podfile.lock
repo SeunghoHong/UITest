@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.1.0)
+  - Alamofire (5.2.0)
   - Differentiator (4.0.1)
   - Gedatsu (1.0.5)
   - RxAppState (1.6.0):
@@ -44,7 +44,7 @@ SPEC REPOS:
     - SnapKit
 
 SPEC CHECKSUMS:
-  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  Alamofire: c1ca147559e730bfb2182c8c7aafbdd90a867987
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Gedatsu: 09222eaf87b70a9dc76a094b2ccf0d948f39f1a8
   RxAppState: b633d7370970ecb80081912ea08a7bf3eb644b4e

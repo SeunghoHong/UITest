@@ -8,12 +8,19 @@
 
 import UIKit
 
+#if DEBUG
+import Gedatsu
+#endif
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        #if DEBUG
+        Gedatsu.open()
+        #endif
         // Override point for customization after application launch.
         return true
     }
