@@ -15,6 +15,10 @@ class Banner_VC: UIViewController {
     private var baseView = UIView()
     private var stackView = UIStackView()
 
+    private var visualize = Visualizer()
+    private var startButton = UIButton()
+    private var stopButton = UIButton()
+
     private var disposeBag = DisposeBag()
 
 
@@ -59,6 +63,16 @@ extension Banner_VC {
 
         self.stackView.spacing = 12.0
         self.baseView.addSubview(self.stackView)
+
+        self.view.addSubview(self.visualize)
+
+        self.startButton.setTitle("start", for: .normal)
+        self.startButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.startButton)
+
+        self.stopButton.setTitle("stop", for: .normal)
+        self.stopButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.stopButton)
     }
 
     private func layout() {
@@ -87,6 +101,22 @@ extension Banner_VC {
         self.stackView.snp.makeConstraints { maker in
             maker.leading.top.equalToSuperview()
         }
+
+        self.visualize.snp.makeConstraints { maker in
+            maker.leading.equalToSuperview().offset(16.0)
+            maker.bottom.equalToSuperview().offset(-16.0)
+            maker.width.height.equalTo(78.0)
+        }
+
+        self.startButton.snp.makeConstraints { maker in
+            maker.leading.equalTo(self.visualize.snp.trailing).offset(16.0)
+            maker.top.equalTo(self.visualize.snp.top)
+        }
+
+        self.stopButton.snp.makeConstraints { maker in
+            maker.leading.equalTo(self.visualize.snp.trailing).offset(16.0)
+            maker.bottom.equalTo(self.visualize.snp.bottom)
+        }
     }
 
     private func bind() {
@@ -101,6 +131,20 @@ extension Banner_VC {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .bind { [weak self] _ in
                 self?.onLoad()
+            }
+            .disposed(by: self.disposeBag)
+
+        self.startButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.visualize.start()
+            }
+            .disposed(by: self.disposeBag)
+
+        self.stopButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.visualize.stop()
             }
             .disposed(by: self.disposeBag)
     }
