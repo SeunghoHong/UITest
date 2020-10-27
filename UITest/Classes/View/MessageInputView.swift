@@ -25,6 +25,8 @@ class MessageInputView: UIView {
 
     private var disposeBag = DisposeBag()
 
+    var onText: ((String) -> Void)?
+
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     override init(frame: CGRect) {
@@ -105,7 +107,6 @@ extension MessageInputView {
 
         self.sendButton.snp.makeConstraints { maker in
             maker.trailing.top.bottom.equalToSuperview()
-//            maker.width.equalTo(50.0)
         }
     }
 
@@ -155,5 +156,22 @@ extension MessageInputView {
                 self.textViewHeightConstraint?.update(offset: height)
             }
             .disposed(by: self.disposeBag)
+
+        self.sendButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onSend()
+            }
+            .disposed(by: self.disposeBag)
+
+    }
+}
+
+
+extension MessageInputView {
+
+    private func onSend() {
+        guard let text = self.textView.text, let onText = self.onText else { return }
+        onText(text)
     }
 }

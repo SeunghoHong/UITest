@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     private var profileVCButton = UIButton()
     private var pageVCButton = UIButton()
     private var messageVCButton = UIButton()
+    private var recorderVCButton = UIButton()
 
     private var disposeBag = DisposeBag()
 
@@ -57,13 +58,17 @@ extension ViewController {
         self.profileVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.profileVCButton)
 
-        self.pageVCButton.setTitle("PageVCButton", for: .normal)
+        self.pageVCButton.setTitle("PageVC", for: .normal)
         self.pageVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.pageVCButton)
 
-        self.messageVCButton.setTitle("MessageVCButton", for: .normal)
+        self.messageVCButton.setTitle("MessageVC", for: .normal)
         self.messageVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.messageVCButton)
+
+        self.recorderVCButton.setTitle("RecorderVC", for: .normal)
+        self.recorderVCButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.recorderVCButton)
     }
 
     private func layout() {
@@ -93,8 +98,13 @@ extension ViewController {
         }
 
         self.messageVCButton.snp.makeConstraints { maker in
-            maker.top.equalTo(self.bannerVCButton.snp.bottom).offset(16.0)
             maker.leading.equalTo(self.pageVCButton.snp.trailing).offset(16.0)
+            maker.centerY.equalTo(self.pageVCButton.snp.centerY)
+        }
+
+        self.recorderVCButton.snp.makeConstraints { maker in
+            maker.leading.equalTo(self.messageVCButton.snp.trailing).offset(16.0)
+            maker.centerY.equalTo(self.pageVCButton.snp.centerY)
         }
     }
 
@@ -140,6 +150,13 @@ extension ViewController {
                 self?.onMessageVC()
             }
             .disposed(by: self.disposeBag)
+
+        self.recorderVCButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onRecorderVC()
+            }
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -178,6 +195,13 @@ extension ViewController {
 
     private func onMessageVC() {
         let vc = Message_VC()
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    private func onRecorderVC() {
+        let vc = Recorder_VC()
+        vc.bind(Recorder_VM())
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
