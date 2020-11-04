@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     private var pageVCButton = UIButton()
     private var messageVCButton = UIButton()
     private var recorderVCButton = UIButton()
+    private var pickerVCButton = UIButton()
 
     private var disposeBag = DisposeBag()
 
@@ -85,6 +86,10 @@ extension ViewController {
         self.recorderVCButton.setTitle("RecorderVC", for: .normal)
         self.recorderVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.recorderVCButton)
+
+        self.pickerVCButton.setTitle("PickerVC", for: .normal)
+        self.pickerVCButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.pickerVCButton)
     }
 
     private func layout() {
@@ -121,6 +126,11 @@ extension ViewController {
         self.recorderVCButton.snp.makeConstraints { maker in
             maker.leading.equalTo(self.messageVCButton.snp.trailing).offset(16.0)
             maker.centerY.equalTo(self.pageVCButton.snp.centerY)
+        }
+
+        self.pickerVCButton.snp.makeConstraints { maker in
+            maker.top.equalTo(self.pageVCButton.snp.bottom).offset(16.0)
+            maker.leading.equalToSuperview().offset(16.0)
         }
     }
 
@@ -173,6 +183,13 @@ extension ViewController {
                 self?.onRecorderVC()
             }
             .disposed(by: self.disposeBag)
+
+        self.pickerVCButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onPickerVC()
+            }
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -218,6 +235,12 @@ extension ViewController {
     private func onRecorderVC() {
         let vc = Recorder_VC()
         vc.bind(Recorder_VM())
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    private func onPickerVC() {
+        let vc = Picker_VC()
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }

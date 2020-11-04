@@ -30,6 +30,7 @@
 		4D5E77EA2451494D00A7C344 /* UITestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77E92451494D00A7C344 /* UITestTests.swift */; };
 		4D5E77FB24515E1300A7C344 /* Collection+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77FA24515E1300A7C344 /* Collection+Util.swift */; };
 		4D63F40B24A9DB520012730D /* Visualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D63F40A24A9DB520012730D /* Visualizer.swift */; };
+		4D69F5A725523488007827D7 /* Picker_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D69F5A625523488007827D7 /* Picker_VC.swift */; };
 		4D7DCEC9246EFBA400787D9B /* UIPageViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7DCEC8246EFBA400787D9B /* UIPageViewController+Util.swift */; };
 		4D9FD72624705043007A9703 /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9FD72524705043007A9703 /* MessageInputView.swift */; };
 		4D9FD72824705172007A9703 /* RxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9FD72724705172007A9703 /* RxView.swift */; };
@@ -81,6 +82,7 @@
 		4D5E77EB2451494D00A7C344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D5E77FA24515E1300A7C344 /* Collection+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Util.swift"; sourceTree = "<group>"; };
 		4D63F40A24A9DB520012730D /* Visualizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visualizer.swift; sourceTree = "<group>"; };
+		4D69F5A625523488007827D7 /* Picker_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Picker_VC.swift; sourceTree = "<group>"; };
 		4D7DCEC8246EFBA400787D9B /* UIPageViewController+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+Util.swift"; sourceTree = "<group>"; };
 		4D9FD72524705043007A9703 /* MessageInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
 		4D9FD72724705172007A9703 /* RxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxView.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				4DCC6D692456D59900EB0CCF /* Main */,
 				4D9FD7292470F1A4007A9703 /* Message */,
 				4DC6F52B246D8CA0003D3B0E /* Page */,
+				4D69F5A525523488007827D7 /* Picker */,
 				4DB3F02C246318BE00602F96 /* Profile */,
 				4D256F1925486BC3004B3C38 /* Record */,
 				4DE1E04B2455F07000A25A81 /* User */,
@@ -208,6 +211,14 @@
 				4D7DCEC8246EFBA400787D9B /* UIPageViewController+Util.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		4D69F5A525523488007827D7 /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				4D69F5A625523488007827D7 /* Picker_VC.swift */,
+			);
+			path = Picker;
 			sourceTree = "<group>";
 		};
 		4D9FD7292470F1A4007A9703 /* Message */ = {
@@ -410,6 +421,7 @@
 				4D7DCEC9246EFBA400787D9B /* UIPageViewController+Util.swift in Sources */,
 				4D256F1E25486BC3004B3C38 /* AudioRecorder.swift in Sources */,
 				4DB3F030246318BF00602F96 /* Profile_VC.swift in Sources */,
+				4D69F5A725523488007827D7 /* Picker_VC.swift in Sources */,
 				4D5E77D32451494800A7C344 /* AppDelegate.swift in Sources */,
 				4D9FD72624705043007A9703 /* MessageInputView.swift in Sources */,
 				4DCC6D6D2456D59900EB0CCF /* Main_VC.swift in Sources */,
