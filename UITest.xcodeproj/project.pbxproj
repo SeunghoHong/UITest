@@ -20,6 +20,7 @@
 		4D256F1E25486BC3004B3C38 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D256F1B25486BC3004B3C38 /* AudioRecorder.swift */; };
 		4D256F1F25486BC3004B3C38 /* Recorder_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D256F1C25486BC3004B3C38 /* Recorder_VC.swift */; };
 		4D256F2B25487153004B3C38 /* Error+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D256F2A25487153004B3C38 /* Error+Util.swift */; };
+		4D449ACD254C8BA000BC5623 /* Data+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D449ACC254C8BA000BC5623 /* Data+Util.swift */; };
 		4D5E77D32451494800A7C344 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D22451494800A7C344 /* AppDelegate.swift */; };
 		4D5E77D52451494800A7C344 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D42451494800A7C344 /* SceneDelegate.swift */; };
 		4D5E77D72451494800A7C344 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D62451494800A7C344 /* ViewController.swift */; };
@@ -66,6 +67,7 @@
 		4D256F1B25486BC3004B3C38 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		4D256F1C25486BC3004B3C38 /* Recorder_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder_VC.swift; sourceTree = "<group>"; };
 		4D256F2A25487153004B3C38 /* Error+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+Util.swift"; sourceTree = "<group>"; };
+		4D449ACC254C8BA000BC5623 /* Data+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Util.swift"; sourceTree = "<group>"; };
 		4D5E77CF2451494800A7C344 /* UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D5E77D22451494800A7C344 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D5E77D42451494800A7C344 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				4D5E77FA24515E1300A7C344 /* Collection+Util.swift */,
+				4D449ACC254C8BA000BC5623 /* Data+Util.swift */,
 				4D256F2A25487153004B3C38 /* Error+Util.swift */,
 				4D9FD72724705172007A9703 /* RxView.swift */,
 				4D7DCEC8246EFBA400787D9B /* UIPageViewController+Util.swift */,
@@ -397,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DE1E0562455F07000A25A81 /* Banner_VC.swift in Sources */,
+				4D449ACD254C8BA000BC5623 /* Data+Util.swift in Sources */,
 				4D5E77FB24515E1300A7C344 /* Collection+Util.swift in Sources */,
 				4D9FD72D2470F1A4007A9703 /* Message_VM.swift in Sources */,
 				4DE1E0522455F07000A25A81 /* User_VC.swift in Sources */,

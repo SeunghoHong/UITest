@@ -25,6 +25,8 @@ class ViewController: UIViewController {
         self.setup()
         self.layout()
         self.bind()
+
+        self.test()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +41,20 @@ class ViewController: UIViewController {
 
 extension ViewController {
 
+    private func test() {
+        Data.request(with: URL(string: "http://test.com/data")!)
+            .retryWhen { e in
+                e.enumerated().flatMap { (retry, error) -> Observable<Int> in
+                    guard retry < 3 else { return Observable.never() }
+                    return Observable<Int>.timer(.milliseconds(1000), scheduler: MainScheduler.instance)
+                }
+            }
+            .bind { data in
+                
+            }
+            .disposed(by: self.disposeBag)
+    }
+    
     private func setup() {
         self.view.backgroundColor = .white
 
