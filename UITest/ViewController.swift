@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     private var messageVCButton = UIButton()
     private var recorderVCButton = UIButton()
     private var pickerVCButton = UIButton()
+    private var tooltipVCButton = UIButton()
 
     private var disposeBag = DisposeBag()
 
@@ -90,6 +91,10 @@ extension ViewController {
         self.pickerVCButton.setTitle("PickerVC", for: .normal)
         self.pickerVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.pickerVCButton)
+
+        self.tooltipVCButton.setTitle("TooltipVC", for: .normal)
+        self.tooltipVCButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.tooltipVCButton)
     }
 
     private func layout() {
@@ -131,6 +136,11 @@ extension ViewController {
         self.pickerVCButton.snp.makeConstraints { maker in
             maker.top.equalTo(self.pageVCButton.snp.bottom).offset(16.0)
             maker.leading.equalToSuperview().offset(16.0)
+        }
+
+        self.tooltipVCButton.snp.makeConstraints { maker in
+            maker.leading.equalTo(self.pickerVCButton.snp.trailing).offset(16.0)
+            maker.centerY.equalTo(self.pickerVCButton.snp.centerY)
         }
     }
 
@@ -190,6 +200,13 @@ extension ViewController {
                 self?.onPickerVC()
             }
             .disposed(by: self.disposeBag)
+
+        self.tooltipVCButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onTooltipVC()
+            }
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -241,6 +258,12 @@ extension ViewController {
 
     private func onPickerVC() {
         let vc = Picker_VC()
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    private func onTooltipVC() {
+        let vc = Tooltip_VC()
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }

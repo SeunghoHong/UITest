@@ -21,6 +21,8 @@
 		4D256F1F25486BC3004B3C38 /* Recorder_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D256F1C25486BC3004B3C38 /* Recorder_VC.swift */; };
 		4D256F2B25487153004B3C38 /* Error+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D256F2A25487153004B3C38 /* Error+Util.swift */; };
 		4D449ACD254C8BA000BC5623 /* Data+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D449ACC254C8BA000BC5623 /* Data+Util.swift */; };
+		4D47F5DC2581BD8600DD209D /* Tooltip_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D47F5DB2581BD8600DD209D /* Tooltip_VC.swift */; };
+		4D47F5E22581C27C00DD209D /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D47F5E12581C27C00DD209D /* TooltipView.swift */; };
 		4D5E77D32451494800A7C344 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D22451494800A7C344 /* AppDelegate.swift */; };
 		4D5E77D52451494800A7C344 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D42451494800A7C344 /* SceneDelegate.swift */; };
 		4D5E77D72451494800A7C344 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D62451494800A7C344 /* ViewController.swift */; };
@@ -69,6 +71,8 @@
 		4D256F1C25486BC3004B3C38 /* Recorder_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder_VC.swift; sourceTree = "<group>"; };
 		4D256F2A25487153004B3C38 /* Error+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+Util.swift"; sourceTree = "<group>"; };
 		4D449ACC254C8BA000BC5623 /* Data+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Util.swift"; sourceTree = "<group>"; };
+		4D47F5DB2581BD8600DD209D /* Tooltip_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tooltip_VC.swift; sourceTree = "<group>"; };
+		4D47F5E12581C27C00DD209D /* TooltipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
 		4D5E77CF2451494800A7C344 /* UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D5E77D22451494800A7C344 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D5E77D42451494800A7C344 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +146,15 @@
 			path = Record;
 			sourceTree = "<group>";
 		};
+		4D47F5DA2581BD8600DD209D /* Tooltip */ = {
+			isa = PBXGroup;
+			children = (
+				4D47F5E12581C27C00DD209D /* TooltipView.swift */,
+				4D47F5DB2581BD8600DD209D /* Tooltip_VC.swift */,
+			);
+			path = Tooltip;
+			sourceTree = "<group>";
+		};
 		4D5E77C62451494800A7C344 = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +208,7 @@
 				4D69F5A525523488007827D7 /* Picker */,
 				4DB3F02C246318BE00602F96 /* Profile */,
 				4D256F1925486BC3004B3C38 /* Record */,
+				4D47F5DA2581BD8600DD209D /* Tooltip */,
 				4DE1E04B2455F07000A25A81 /* User */,
 				4DC6F530246D8CD4003D3B0E /* View */,
 			);
@@ -411,6 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DE1E0562455F07000A25A81 /* Banner_VC.swift in Sources */,
+				4D47F5DC2581BD8600DD209D /* Tooltip_VC.swift in Sources */,
 				4D449ACD254C8BA000BC5623 /* Data+Util.swift in Sources */,
 				4D5E77FB24515E1300A7C344 /* Collection+Util.swift in Sources */,
 				4D9FD72D2470F1A4007A9703 /* Message_VM.swift in Sources */,
@@ -441,6 +456,7 @@
 				4D9FD72824705172007A9703 /* RxView.swift in Sources */,
 				4D63F40B24A9DB520012730D /* Visualizer.swift in Sources */,
 				4DE1E0542455F07000A25A81 /* UserCell.swift in Sources */,
+				4D47F5E22581C27C00DD209D /* TooltipView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
