@@ -74,6 +74,15 @@ extension Tooltip_VC {
             }
             .disposed(by: self.disposeBag)
 
+        self.randomButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                if let image = UIImage(named: "img_round"),
+                   let alpha = image.alpha(0.5) {
+                    self?.fallParticles([image, alpha])
+                }
+            }
+            .disposed(by: self.disposeBag)
     }
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0A50AE259627EC00DC966D /* UIViewController+Festival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0A50AD259627EC00DC966D /* UIViewController+Festival.swift */; };
 		4D256EF425486786004B3C38 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4D256EF325486786004B3C38 /* RxCocoa */; };
 		4D256EF625486786004B3C38 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4D256EF525486786004B3C38 /* RxSwift */; };
 		4D256EFB254867F8004B3C38 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 4D256EFA254867F8004B3C38 /* RxGesture */; };
@@ -66,6 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D0A50AD259627EC00DC966D /* UIViewController+Festival.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Festival.swift"; sourceTree = "<group>"; };
 		4D256F1A25486BC3004B3C38 /* Recorder_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder_VM.swift; sourceTree = "<group>"; };
 		4D256F1B25486BC3004B3C38 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		4D256F1C25486BC3004B3C38 /* Recorder_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder_VC.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				4D256F2A25487153004B3C38 /* Error+Util.swift */,
 				4D9FD72724705172007A9703 /* RxView.swift */,
 				4D7DCEC8246EFBA400787D9B /* UIPageViewController+Util.swift */,
+				4D0A50AD259627EC00DC966D /* UIViewController+Festival.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				4D63F40B24A9DB520012730D /* Visualizer.swift in Sources */,
 				4DE1E0542455F07000A25A81 /* UserCell.swift in Sources */,
 				4D47F5E22581C27C00DD209D /* TooltipView.swift in Sources */,
+				4D0A50AE259627EC00DC966D /* UIViewController+Festival.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
