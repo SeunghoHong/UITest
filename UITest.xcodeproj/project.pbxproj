@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D0A50AE259627EC00DC966D /* UIViewController+Festival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0A50AD259627EC00DC966D /* UIViewController+Festival.swift */; };
 		4D256EF425486786004B3C38 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4D256EF325486786004B3C38 /* RxCocoa */; };
 		4D256EF625486786004B3C38 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4D256EF525486786004B3C38 /* RxSwift */; };
 		4D256EFB254867F8004B3C38 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 4D256EFA254867F8004B3C38 /* RxGesture */; };
@@ -39,6 +38,9 @@
 		4D9FD72824705172007A9703 /* RxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9FD72724705172007A9703 /* RxView.swift */; };
 		4D9FD72C2470F1A4007A9703 /* Message_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9FD72A2470F1A4007A9703 /* Message_VC.swift */; };
 		4D9FD72D2470F1A4007A9703 /* Message_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9FD72B2470F1A4007A9703 /* Message_VM.swift */; };
+		4DABE82F2598ED9A0047D704 /* Sprinklable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABE82E2598ED9A0047D704 /* Sprinklable.swift */; };
+		4DABE8352598F1C60047D704 /* UIView+Sprinkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABE8342598F1C60047D704 /* UIView+Sprinkle.swift */; };
+		4DABE83B2598F29D0047D704 /* UIImage+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABE83A2598F29D0047D704 /* UIImage+Util.swift */; };
 		4DB3F02F246318BF00602F96 /* Profile_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB3F02D246318BE00602F96 /* Profile_VM.swift */; };
 		4DB3F030246318BF00602F96 /* Profile_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB3F02E246318BE00602F96 /* Profile_VC.swift */; };
 		4DC6F52E246D8CA0003D3B0E /* Page_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC6F52C246D8CA0003D3B0E /* Page_VM.swift */; };
@@ -67,7 +69,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4D0A50AD259627EC00DC966D /* UIViewController+Festival.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Festival.swift"; sourceTree = "<group>"; };
 		4D256F1A25486BC3004B3C38 /* Recorder_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder_VM.swift; sourceTree = "<group>"; };
 		4D256F1B25486BC3004B3C38 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		4D256F1C25486BC3004B3C38 /* Recorder_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder_VC.swift; sourceTree = "<group>"; };
@@ -94,6 +95,9 @@
 		4D9FD72724705172007A9703 /* RxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxView.swift; sourceTree = "<group>"; };
 		4D9FD72A2470F1A4007A9703 /* Message_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message_VC.swift; sourceTree = "<group>"; };
 		4D9FD72B2470F1A4007A9703 /* Message_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message_VM.swift; sourceTree = "<group>"; };
+		4DABE82E2598ED9A0047D704 /* Sprinklable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sprinklable.swift; sourceTree = "<group>"; };
+		4DABE8342598F1C60047D704 /* UIView+Sprinkle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Sprinkle.swift"; sourceTree = "<group>"; };
+		4DABE83A2598F29D0047D704 /* UIImage+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Util.swift"; sourceTree = "<group>"; };
 		4DB3F02D246318BE00602F96 /* Profile_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile_VM.swift; sourceTree = "<group>"; };
 		4DB3F02E246318BE00602F96 /* Profile_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile_VC.swift; sourceTree = "<group>"; };
 		4DC6F52C246D8CA0003D3B0E /* Page_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page_VM.swift; sourceTree = "<group>"; };
@@ -224,8 +228,10 @@
 				4D449ACC254C8BA000BC5623 /* Data+Util.swift */,
 				4D256F2A25487153004B3C38 /* Error+Util.swift */,
 				4D9FD72724705172007A9703 /* RxView.swift */,
+				4DABE82E2598ED9A0047D704 /* Sprinklable.swift */,
+				4DABE83A2598F29D0047D704 /* UIImage+Util.swift */,
 				4D7DCEC8246EFBA400787D9B /* UIPageViewController+Util.swift */,
-				4D0A50AD259627EC00DC966D /* UIViewController+Festival.swift */,
+				4DABE8342598F1C60047D704 /* UIView+Sprinkle.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -437,6 +443,7 @@
 				4D256F1D25486BC3004B3C38 /* Recorder_VM.swift in Sources */,
 				4D5E77D72451494800A7C344 /* ViewController.swift in Sources */,
 				4D7DCEC9246EFBA400787D9B /* UIPageViewController+Util.swift in Sources */,
+				4DABE82F2598ED9A0047D704 /* Sprinklable.swift in Sources */,
 				4D256F1E25486BC3004B3C38 /* AudioRecorder.swift in Sources */,
 				4DB3F030246318BF00602F96 /* Profile_VC.swift in Sources */,
 				4D69F5A725523488007827D7 /* Picker_VC.swift in Sources */,
@@ -450,6 +457,7 @@
 				4DC6F52E246D8CA0003D3B0E /* Page_VM.swift in Sources */,
 				4D256F2B25487153004B3C38 /* Error+Util.swift in Sources */,
 				4D5E77D52451494800A7C344 /* SceneDelegate.swift in Sources */,
+				4DABE8352598F1C60047D704 /* UIView+Sprinkle.swift in Sources */,
 				4DC6F52F246D8CA0003D3B0E /* Page_VC.swift in Sources */,
 				4DCC6D732456DE1B00EB0CCF /* MainCell_NewUser.swift in Sources */,
 				4DE1E0532455F07000A25A81 /* UserCell_VM.swift in Sources */,
@@ -460,7 +468,7 @@
 				4D63F40B24A9DB520012730D /* Visualizer.swift in Sources */,
 				4DE1E0542455F07000A25A81 /* UserCell.swift in Sources */,
 				4D47F5E22581C27C00DD209D /* TooltipView.swift in Sources */,
-				4D0A50AE259627EC00DC966D /* UIViewController+Festival.swift in Sources */,
+				4DABE83B2598F29D0047D704 /* UIImage+Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

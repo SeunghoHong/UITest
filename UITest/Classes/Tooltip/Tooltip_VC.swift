@@ -79,7 +79,7 @@ extension Tooltip_VC {
             .bind { [weak self] _ in
                 if let image = UIImage(named: "img_round"),
                    let alpha = image.alpha(0.5) {
-                    self?.fallParticles([image, alpha])
+                    self?.view.sprinkle([image, alpha])
                 }
             }
             .disposed(by: self.disposeBag)

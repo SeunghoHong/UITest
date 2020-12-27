@@ -32,6 +32,16 @@ class BannerView: UIView {
         self.setupPageViewController()
         self.layout()
         self.bind()
+
+        self.rx.layoutSubviews
+            .take(1)
+            .bind { [weak self] _ in
+                if let image = UIImage(named: "img_round"),
+                   let alpha = image.alpha(0.5) {
+                    self?.sprinkle([image, alpha])
+                }
+            }
+            .disposed(by: self.disposeBag)
     }
 }
 
