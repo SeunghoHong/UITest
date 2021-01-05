@@ -29,6 +29,8 @@ class ViewController: UIViewController {
         self.bind()
 
         self.test()
+        self.checkLogin()
+        self.checkLogin2()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +45,24 @@ class ViewController: UIViewController {
 
 extension ViewController {
 
+    enum UserError: Error {
+        case errNo(Int)
+        var localizedDescription: String {
+            switch self {
+            case .errNo(let status): return "error status \(status)"
+            }
+        }
+    }
+
+    enum LiveError: Error {
+        case errNo(Int)
+        var localizedDescription: String {
+            switch self {
+            case .errNo(let status): return "error status \(status)"
+            }
+        }
+    }
+
     private func test() {
         Data.request(with: URL(string: "http://test.com/data")!)
             .retryWhen { e in
@@ -56,6 +76,75 @@ extension ViewController {
             }
             .disposed(by: self.disposeBag)
     }
+
+    private func login2(_ flag: Bool = true) throws {
+        throw UserError.errNo(-1)
+    }
+
+    private func liveItem2(_ flag: Bool = true) throws -> String {
+        throw LiveError.errNo(-2)
+    }
+
+    private func aaaa(_ bbbb: String) {
+
+    }
+
+    private func checkLogin2() {
+        do {
+            try self.login2()
+            let _ = try self.liveItem2()
+            self.aaaa(try self.liveItem2())
+        } catch UserError.errNo(let code) {
+            print("UserError \(code)")
+        } catch LiveError.errNo(let code) {
+            print("LiveError \(code)")
+        } catch let e {
+            print("\(e)")
+        }
+    }
+
+    private func login(_ flag: Bool = true) -> Observable<Void> {
+        return Observable<Void>.create { observer -> Disposable in
+            if flag {
+                observer.onNext(())
+                observer.onCompleted()
+            } else {
+                observer.onError(NSError(domain: "", code: -1, userInfo: nil))
+            }
+
+            return Disposables.create()
+        }
+    }
+
+    private func liveItem(_ flag: Bool = true) -> Observable<String> {
+        return Observable<String>.create { observer -> Disposable in
+            if flag {
+                observer.onNext("12345")
+                observer.onCompleted()
+            } else {
+                observer.onError(NSError(domain: "", code: -2, userInfo: nil))
+            }
+
+            return Disposables.create()
+        }
+    }
+
+    private func checkLogin() {
+        Observable.just(false)
+            .flatMap { self.login($0) }
+            .flatMap { self.liveItem() }
+            .subscribe(onNext: { `id` in
+                print("\(id)")
+            }, onError: { error in
+                guard let error = error as? NSError else { return }
+                print("\(error.code)")
+            })
+            .disposed(by: self.disposeBag)
+    }
+}
+
+
+extension ViewController {
     
     private func setup() {
         self.view.backgroundColor = .white
