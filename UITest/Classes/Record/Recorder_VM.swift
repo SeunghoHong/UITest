@@ -12,6 +12,7 @@ class Recorder_VM: RecorderBindable {
 
     let recordButtonTapped = PublishRelay<Void>()
     let stopButtonTapped = PublishRelay<Void>()
+    let playButtonTapped = PublishRelay<Void>()
 
     private let recorder = AudioRecorder()
     private var disposeBag = DisposeBag()
@@ -34,6 +35,12 @@ extension Recorder_VM {
         self.stopButtonTapped
             .bind { [weak self] _ in
                 self?.recorder.stop()
+            }
+            .disposed(by: self.disposeBag)
+
+        self.playButtonTapped
+            .bind { [weak self] _ in
+                self?.recorder.review()
             }
             .disposed(by: self.disposeBag)
 

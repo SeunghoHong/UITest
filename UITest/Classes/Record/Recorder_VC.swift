@@ -13,6 +13,7 @@ protocol RecorderBindable {
 
     var recordButtonTapped: PublishRelay<Void> { get }
     var stopButtonTapped: PublishRelay<Void> { get }
+    var playButtonTapped: PublishRelay<Void> { get }
 }
 
 class Recorder_VC: UIViewController {
@@ -20,6 +21,7 @@ class Recorder_VC: UIViewController {
     private var closeButton = UIButton()
     private var recordButton = UIButton()
     private var stopButton = UIButton()
+    private var playButton = UIButton()
 
     private var fileLabel = UILabel()
     private var progressLabel = UILabel()
@@ -63,6 +65,10 @@ extension Recorder_VC {
         self.stopButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.stopButton)
 
+        self.playButton.setTitle("play", for: .normal)
+        self.playButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.playButton)
+
         self.fileLabel.textColor = .black
         self.view.addSubview(self.fileLabel)
 
@@ -83,6 +89,11 @@ extension Recorder_VC {
 
         self.stopButton.snp.makeConstraints { maker in
             maker.top.equalTo(self.recordButton.snp.bottom).offset(16.0)
+            maker.trailing.equalToSuperview().offset(-16.0)
+        }
+
+        self.playButton.snp.makeConstraints { maker in
+            maker.top.equalTo(self.stopButton.snp.bottom).offset(16.0)
             maker.trailing.equalToSuperview().offset(-16.0)
         }
 
@@ -134,6 +145,11 @@ extension Recorder_VC {
         self.stopButton.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .bind(to: viewModel.stopButtonTapped)
+            .disposed(by: self.disposeBag)
+
+        self.playButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind(to: viewModel.playButtonTapped)
             .disposed(by: self.disposeBag)
     }
 }

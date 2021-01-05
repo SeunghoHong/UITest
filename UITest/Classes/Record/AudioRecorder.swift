@@ -9,6 +9,7 @@ import RxSwift
 class AudioRecorder: NSObject {
 
     private var audioRecorder: AVAudioRecorder?
+    private var avPlayer: AVPlayer?
     private lazy var fileURL: URL? = {
         guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
         return documentsURL.appendingPathComponent("record.m4a")
@@ -25,6 +26,9 @@ class AudioRecorder: NSObject {
 
     let error = BehaviorRelay<Error?>(value: nil)
 
+    var url: URL? {
+        get { return self.fileURL }
+    }
 
     override init() {
         super.init()
@@ -87,16 +91,20 @@ extension AudioRecorder {
             return
         }
 
+        self.isRecording.accept(true)
+        
         // MARK: 슬립모드 진입 방지
         DispatchQueue.main.async {
             UIApplication.shared.isIdleTimerDisabled = true
         }
 
+        // FIXME: AVAudioRecorder.currentTime은 observable 하지 않음
         Observable<Int>.interval(.milliseconds(33 /* 30fps */), scheduler: MainScheduler.instance)
             .bind(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                guard let audioRecorder = self.audioRecorder else { return }
-                guard audioRecorder.isRecording == true else { return }
+                guard let self = self,
+                      let audioRecorder = self.audioRecorder,
+                      audioRecorder.isRecording == true
+                else { return }
 
                 self.currentTime.accept(audioRecorder.currentTime)
             })
@@ -106,19 +114,51 @@ extension AudioRecorder {
     func stop() {
         self.progressDisposeBag = DisposeBag()
 
-        guard let audioRecorder = self.audioRecorder, audioRecorder.isRecording == true else { return }
-
-        audioRecorder.stop()
-        self.audioRecorder = nil
-
         // MARK: 슬립모드 진입 방지 제거
         DispatchQueue.main.async {
             UIApplication.shared.isIdleTimerDisabled = false
         }
+
+        if self.isRecording.value == true {
+            self.isRecording.accept(false)
+
+            guard let audioRecorder = self.audioRecorder,
+                  audioRecorder.isRecording == true
+            else { return }
+
+            audioRecorder.stop()
+            self.audioRecorder = nil
+        } else {
+            guard let avPlayer = self.avPlayer else { return }
+
+            avPlayer.pause()
+            self.avPlayer = nil
+        }
     }
 
     func review(_ url: URL? = nil) {
-        
+        guard self.isRecording.value == false else { return }
+
+        // MARK: default fileURL
+        let url = url ?? self.fileURL
+
+        guard let fileURL = url else {
+            self.error.accept(NSError.trace())
+            return
+        }
+
+        self.avPlayer = AVPlayer(url: fileURL)
+        self.avPlayer?.play()
+
+        Observable<Int>.interval(.milliseconds(33 /* 30fps */), scheduler: MainScheduler.instance)
+            .bind(onNext: { [weak self] _ in
+                guard let self = self,
+                      let avPlayer = self.avPlayer
+                else { return }
+
+                self.currentTime.accept(avPlayer.currentTime().seconds)
+            })
+            .disposed(by: self.progressDisposeBag)
     }
 }
 
@@ -126,11 +166,12 @@ extension AudioRecorder {
 extension AudioRecorder: AVAudioRecorderDelegate {
 
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        self.isRecording.accept(recorder.isRecording)
+        self.stop()
     }
 
     func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
         self.error.accept(error)
+        self.stop()
     }
 }
 
