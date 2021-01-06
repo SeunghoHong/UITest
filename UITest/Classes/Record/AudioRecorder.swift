@@ -34,6 +34,10 @@ class AudioRecorder: NSObject {
         super.init()
         self.prepare()
     }
+
+    deinit {
+        self.audioRecorder = nil
+    }
 }
 
 
@@ -55,11 +59,6 @@ extension AudioRecorder {
             self.audioRecorder?.delegate = self
         } catch let error {
             self.error.accept(error)
-        }
- 
-        // MARK: 슬립모드 진입 방지
-        DispatchQueue.main.async {
-            UIApplication.shared.isIdleTimerDisabled = true
         }
     }
 }
@@ -98,16 +97,8 @@ extension AudioRecorder {
             UIApplication.shared.isIdleTimerDisabled = true
         }
 
-        // FIXME: AVAudioRecorder.currentTime은 observable 하지 않음
-        Observable<Int>.interval(.milliseconds(33 /* 30fps */), scheduler: MainScheduler.instance)
-            .bind(onNext: { [weak self] _ in
-                guard let self = self,
-                      let audioRecorder = self.audioRecorder,
-                      audioRecorder.isRecording == true
-                else { return }
-
-                self.currentTime.accept(audioRecorder.currentTime)
-            })
+        audioRecorder.rx.position
+            .bind(to: self.currentTime)
             .disposed(by: self.progressDisposeBag)
     }
 
@@ -122,12 +113,10 @@ extension AudioRecorder {
         if self.isRecording.value == true {
             self.isRecording.accept(false)
 
-            guard let audioRecorder = self.audioRecorder,
-                  audioRecorder.isRecording == true
-            else { return }
+            guard let audioRecorder = self.audioRecorder else { return }
 
             audioRecorder.stop()
-            self.audioRecorder = nil
+//            self.audioRecorder = nil
         } else {
             guard let avPlayer = self.avPlayer else { return }
 

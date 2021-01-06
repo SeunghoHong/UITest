@@ -123,13 +123,13 @@ extension Recorder_VC {
     func bind(_ viewModel: RecorderBindable) {
         self.viewModel = viewModel
 
-        viewModel.file
-            .bind(to: self.fileLabel.rx.text)
+        viewModel.file.asDriver()
+            .drive(self.fileLabel.rx.text)
             .disposed(by: self.disposeBag)
 
-        viewModel.progress
+        viewModel.progress.asDriver()
             .map { "\(Int($0))" }
-            .bind(to: self.progressLabel.rx.text)
+            .drive(self.progressLabel.rx.text)
             .disposed(by: self.disposeBag)
 
         viewModel.error
