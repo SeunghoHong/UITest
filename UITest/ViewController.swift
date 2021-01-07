@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     private var recorderVCButton = UIButton()
     private var pickerVCButton = UIButton()
     private var tooltipVCButton = UIButton()
+    private var sampleVCButton = UIButton()
 
     private var disposeBag = DisposeBag()
 
@@ -184,6 +185,10 @@ extension ViewController {
         self.tooltipVCButton.setTitle("TooltipVC", for: .normal)
         self.tooltipVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.tooltipVCButton)
+
+        self.sampleVCButton.setTitle("TestVC", for: .normal)
+        self.sampleVCButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.sampleVCButton)
     }
 
     private func layout() {
@@ -229,6 +234,11 @@ extension ViewController {
 
         self.tooltipVCButton.snp.makeConstraints { maker in
             maker.leading.equalTo(self.pickerVCButton.snp.trailing).offset(16.0)
+            maker.centerY.equalTo(self.pickerVCButton.snp.centerY)
+        }
+
+        self.sampleVCButton.snp.makeConstraints { maker in
+            maker.leading.equalTo(self.tooltipVCButton.snp.trailing).offset(16.0)
             maker.centerY.equalTo(self.pickerVCButton.snp.centerY)
         }
     }
@@ -296,6 +306,13 @@ extension ViewController {
                 self?.onTooltipVC()
             }
             .disposed(by: self.disposeBag)
+
+        self.sampleVCButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onSampleVC()
+            }
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -356,6 +373,54 @@ extension ViewController {
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
+
+    private func onSampleVC() {
+        let vc = Sample_VC()
+        vc.complete = { [weak vc] in
+            vc?.dismiss(animated: true, completion: nil)
+        }
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
 }
 
 
+class Sample_VC: UIViewController {
+
+    private let closeButton = UIButton()
+    private var disposeBag = DisposeBag()
+
+    var complete: (() -> Void)?
+
+
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        print("\(#fileID) \(#function)")
+    }
+
+    deinit {
+        print("\(#fileID) \(#function)")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .white
+
+        self.closeButton.setTitle("close", for: .normal)
+        self.closeButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.closeButton)
+
+        self.closeButton.snp.makeConstraints { maker in
+            maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(16.0)
+            maker.leading.equalToSuperview().offset(16.0)
+        }
+
+        self.closeButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.complete?()
+            }
+            .disposed(by: self.disposeBag)
+    }
+}
