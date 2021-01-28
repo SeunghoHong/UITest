@@ -8,6 +8,9 @@ import SnapKit
 
 class Notice_VC: UIViewController {
 
+    private var viewModel: Notice_VM?
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -34,5 +37,13 @@ extension Notice_VC {
 
     private func bind() {
         
+    }
+}
+
+
+extension Notice_VC {
+
+    func bind(_ viewModel: Notice_VM) {
+        self.viewModel = viewModel
     }
 }

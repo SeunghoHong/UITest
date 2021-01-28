@@ -20,7 +20,8 @@ class Notice_VM {
 
 
     init() {
-        
+        self.bind()
+        self.load()
     }
 }
 
@@ -42,19 +43,25 @@ extension Notice_VM {
                 method: .get,
                 queries: ["is_popup":"true"]
             )
+            .debug()
             .retryWhen { e in
                 e.enumerated().flatMap { (retry, error) -> Observable<Int> in
                     guard retry < 3 else { return Observable.never() }
 
                     return Observable<Int>.timer(
                         .milliseconds(300),
-                        scheduler: ConcurrentDispatchQueueScheduler(queue: .global()))
+                        scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
+                    )
                 }
             }
             .subscribe(onNext: { response in
-
+                print("onNext")
             }, onError: { error in
-                print("\(error)")
+                print("onError \(error)")
+            }, onCompleted: {
+                print("onCompleted")
+            }, onDisposed: {
+                print("onDisposed")
             })
             .disposed(by: self.disposeBag)
         

@@ -15,17 +15,17 @@ class S4RESTClient {
         queries: [String : Any]? = nil,
         body: String? = nil,
         headers: [String : String]? = [:]
-    ) -> Observable<Result<T, Error>> {
-        return Observable<Result<T, Error>>.create { observer -> Disposable in
+    ) -> Observable<T> {
+        return Observable<T>.create { observer -> Disposable in
             guard let url = URL(string: url), let fullURL = url.appendQueries(queries) else {
                 observer.onError(NSError.trace())
                 return Disposables.create()
             }
 
             var customHeaders: [String : String] = [
-//                "User-Agent" : Device.userAgentString(),
+                "User-Agent" : "Spoon/6.1.0(1334) CFNetwork/1220.1 Darwin/20.2.0 x86_64 iOS/14.4",
                 "Accept" : "application/json",
-//                "Accept-Language" : Device.languageCode() ?? "en-US"
+                "Accept-Language" : "en-US"
             ]
 
             headers?.forEach { customHeaders[$0.0] = $0.1 }
@@ -47,17 +47,12 @@ class S4RESTClient {
                     headers: HTTPHeaders(customHeaders)
                 )
                 .validate()
-                .responseData { response in
-//                .responseJSON { response in
+                .responseDecodable(of: T.self) { response in
                     switch response.result {
                     case .failure(let error):
                         observer.onError(error)
-                    case .success(let data):
-                        do {
-                            observer.onNext(try JSONDecoder().decode(type, from: data))
-                        } catch let e {
-                            observer.onError(e)
-                        }
+                    case .success(let obj):
+                        observer.onNext(obj)
                     }
                 }
 

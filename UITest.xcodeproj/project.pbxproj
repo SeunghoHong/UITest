@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D17142625C2884D006063AA /* WKWebView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D17142525C2884D006063AA /* WKWebView+Rx.swift */; };
+		4D17142C25C2887E006063AA /* Web_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D17142A25C2887E006063AA /* Web_VM.swift */; };
+		4D17142D25C2887E006063AA /* Web_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D17142B25C2887E006063AA /* Web_VC.swift */; };
+		4D17143125C288B6006063AA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D17143025C288B6006063AA /* WebView.swift */; };
 		4D256EF425486786004B3C38 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 4D256EF325486786004B3C38 /* RxCocoa */; };
 		4D256EF625486786004B3C38 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4D256EF525486786004B3C38 /* RxSwift */; };
 		4D256EFB254867F8004B3C38 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 4D256EFA254867F8004B3C38 /* RxGesture */; };
@@ -75,6 +79,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D17142525C2884D006063AA /* WKWebView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKWebView+Rx.swift"; sourceTree = "<group>"; };
+		4D17142A25C2887E006063AA /* Web_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Web_VM.swift; sourceTree = "<group>"; };
+		4D17142B25C2887E006063AA /* Web_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Web_VC.swift; sourceTree = "<group>"; };
+		4D17143025C288B6006063AA /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		4D256F1A25486BC3004B3C38 /* Recorder_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder_VM.swift; sourceTree = "<group>"; };
 		4D256F1B25486BC3004B3C38 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		4D256F1C25486BC3004B3C38 /* Recorder_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder_VC.swift; sourceTree = "<group>"; };
@@ -154,6 +162,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D17142925C2887E006063AA /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				4D17142A25C2887E006063AA /* Web_VM.swift */,
+				4D17142B25C2887E006063AA /* Web_VC.swift */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
 		4D256F1925486BC3004B3C38 /* Record */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,10 +236,10 @@
 		4D5E77F424515D4400A7C344 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				4D5EBE8925C12CBF00BF443C /* Notice */,
 				4DE1E04F2455F07000A25A81 /* Banner */,
 				4DCC6D692456D59900EB0CCF /* Main */,
 				4D9FD7292470F1A4007A9703 /* Message */,
+				4D5EBE8925C12CBF00BF443C /* Notice */,
 				4DC6F52B246D8CA0003D3B0E /* Page */,
 				4D69F5A525523488007827D7 /* Picker */,
 				4DB3F02C246318BE00602F96 /* Profile */,
@@ -230,6 +247,7 @@
 				4D47F5DA2581BD8600DD209D /* Tooltip */,
 				4DE1E04B2455F07000A25A81 /* User */,
 				4DC6F530246D8CD4003D3B0E /* View */,
+				4D17142925C2887E006063AA /* WebView */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -248,6 +266,7 @@
 				4D7DCEC8246EFBA400787D9B /* UIPageViewController+Util.swift */,
 				4DABE8342598F1C60047D704 /* UIView+Sprinkle.swift */,
 				4D5EBE9625C133D100BF443C /* URL+Util.swift */,
+				4D17142525C2884D006063AA /* WKWebView+Rx.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -303,6 +322,7 @@
 				4D9FD72524705043007A9703 /* MessageInputView.swift */,
 				4DC6F531246D8CD4003D3B0E /* PageControl.swift */,
 				4D63F40A24A9DB520012730D /* Visualizer.swift */,
+				4D17143025C288B6006063AA /* WebView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -460,8 +480,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DE1E0562455F07000A25A81 /* Banner_VC.swift in Sources */,
+				4D17143125C288B6006063AA /* WebView.swift in Sources */,
 				4D47F5DC2581BD8600DD209D /* Tooltip_VC.swift in Sources */,
 				4D449ACD254C8BA000BC5623 /* Data+Util.swift in Sources */,
+				4D17142625C2884D006063AA /* WKWebView+Rx.swift in Sources */,
 				4D5E77FB24515E1300A7C344 /* Collection+Util.swift in Sources */,
 				4D9FD72D2470F1A4007A9703 /* Message_VM.swift in Sources */,
 				4DE1E0522455F07000A25A81 /* User_VC.swift in Sources */,
@@ -481,6 +503,7 @@
 				4D5EBE9725C133D100BF443C /* URL+Util.swift in Sources */,
 				4DCC6D6D2456D59900EB0CCF /* Main_VC.swift in Sources */,
 				4D256F1F25486BC3004B3C38 /* Recorder_VC.swift in Sources */,
+				4D17142D25C2887E006063AA /* Web_VC.swift in Sources */,
 				4DCC6D6C2456D59900EB0CCF /* Main_VM.swift in Sources */,
 				4DC6F532246D8CD4003D3B0E /* PageControl.swift in Sources */,
 				4DE1E0552455F07000A25A81 /* BannerView.swift in Sources */,
@@ -493,6 +516,7 @@
 				4DC6F52F246D8CA0003D3B0E /* Page_VC.swift in Sources */,
 				4DCC6D732456DE1B00EB0CCF /* MainCell_NewUser.swift in Sources */,
 				4DE1E0532455F07000A25A81 /* UserCell_VM.swift in Sources */,
+				4D17142C25C2887E006063AA /* Web_VM.swift in Sources */,
 				4DE1E0582455F1E700A25A81 /* User.swift in Sources */,
 				4D9FD72C2470F1A4007A9703 /* Message_VC.swift in Sources */,
 				4DB3F02F246318BF00602F96 /* Profile_VM.swift in Sources */,

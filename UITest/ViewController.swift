@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     private var pickerVCButton = UIButton()
     private var tooltipVCButton = UIButton()
     private var sampleVCButton = UIButton()
+    private var webVCButton = UIButton()
+    private var noticeVCButton = UIButton()
 
     private var disposeBag = DisposeBag()
 
@@ -189,6 +191,14 @@ extension ViewController {
         self.sampleVCButton.setTitle("TestVC", for: .normal)
         self.sampleVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.sampleVCButton)
+
+        self.webVCButton.setTitle("WebVC", for: .normal)
+        self.webVCButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.webVCButton)
+
+        self.noticeVCButton.setTitle("NoticeVC", for: .normal)
+        self.noticeVCButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.noticeVCButton)
     }
 
     private func layout() {
@@ -240,6 +250,16 @@ extension ViewController {
         self.sampleVCButton.snp.makeConstraints { maker in
             maker.leading.equalTo(self.tooltipVCButton.snp.trailing).offset(16.0)
             maker.centerY.equalTo(self.pickerVCButton.snp.centerY)
+        }
+
+        self.webVCButton.snp.makeConstraints { maker in
+            maker.top.equalTo(self.pickerVCButton.snp.bottom).offset(16.0)
+            maker.leading.equalToSuperview().offset(16.0)
+        }
+
+        self.noticeVCButton.snp.makeConstraints { maker in
+            maker.leading.equalTo(self.webVCButton.snp.trailing).offset(16.0)
+            maker.centerY.equalTo(self.webVCButton.snp.centerY)
         }
     }
 
@@ -313,6 +333,20 @@ extension ViewController {
                 self?.onSampleVC()
             }
             .disposed(by: self.disposeBag)
+
+        self.webVCButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onWebVC()
+            }
+            .disposed(by: self.disposeBag)
+
+        self.noticeVCButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onNoticeVC()
+            }
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -379,6 +413,19 @@ extension ViewController {
         vc.complete = { [weak vc] in
             vc?.dismiss(animated: true, completion: nil)
         }
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    private func onWebVC() {
+        let vc = Web_VC()
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    private func onNoticeVC() {
+        let vc = Notice_VC()
+        vc.bind(Notice_VM())
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
