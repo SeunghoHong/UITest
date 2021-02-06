@@ -8,6 +8,14 @@ import RxCocoa
 
 class S4RESTClient {
 
+    struct Response<T: Codable>: Codable {
+        var status_code: String
+        var detail: String
+        var next: String
+        var previous: String
+        var results: [T]
+    }
+
     static func json<T: Codable>(
         type: T.Type,
         url: String,
@@ -15,10 +23,10 @@ class S4RESTClient {
         queries: [String : Any]? = nil,
         body: String? = nil,
         headers: [String : String]? = [:]
-    ) -> Observable<T> {
-        return Observable<T>.create { observer -> Disposable in
+    ) -> Observable<Result<Response<T>, Error>> {
+        return Observable<Result<Response<T>, Error>>.create { observer -> Disposable in
             guard let url = URL(string: url), let fullURL = url.appendQueries(queries) else {
-                observer.onError(NSError.trace())
+                observer.onNext(.failure(NSError.trace()))
                 return Disposables.create()
             }
 
@@ -35,7 +43,7 @@ class S4RESTClient {
                 do {
                     parameters = try JSONSerialization.jsonObject(with: body, options: .mutableContainers) as? [String : Any]
                 } catch let e {
-                    observer.onError(e)
+                    observer.onNext(.failure(e))
                 }
             }
 
@@ -47,12 +55,12 @@ class S4RESTClient {
                     headers: HTTPHeaders(customHeaders)
                 )
                 .validate()
-                .responseDecodable(of: T.self) { response in
+                .responseDecodable(of: Response<T>.self) { response in
                     switch response.result {
                     case .failure(let error):
-                        observer.onError(error)
+                        observer.onNext(.failure(error))
                     case .success(let obj):
-                        observer.onNext(obj)
+                        observer.onNext(.success(obj))
                     }
                 }
 
