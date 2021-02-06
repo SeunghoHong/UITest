@@ -35,7 +35,7 @@
 		4D5E77DF2451494C00A7C344 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D5E77DD2451494C00A7C344 /* LaunchScreen.storyboard */; };
 		4D5E77EA2451494D00A7C344 /* UITestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77E92451494D00A7C344 /* UITestTests.swift */; };
 		4D5E77FB24515E1300A7C344 /* Collection+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77FA24515E1300A7C344 /* Collection+Util.swift */; };
-		4D5EBE8625C1144C00BF443C /* S4RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5EBE8525C1144C00BF443C /* S4RESTClient.swift */; };
+		4D5EBE8625C1144C00BF443C /* RESTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5EBE8525C1144C00BF443C /* RESTClient.swift */; };
 		4D5EBE8B25C12CBF00BF443C /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5EBE8A25C12CBF00BF443C /* Notice.swift */; };
 		4D5EBE9025C12DD100BF443C /* Notice_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5EBE8E25C12DD100BF443C /* Notice_VC.swift */; };
 		4D5EBE9125C12DD100BF443C /* Notice_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5EBE8F25C12DD100BF443C /* Notice_VM.swift */; };
@@ -104,7 +104,7 @@
 		4D5E77E92451494D00A7C344 /* UITestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestTests.swift; sourceTree = "<group>"; };
 		4D5E77EB2451494D00A7C344 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D5E77FA24515E1300A7C344 /* Collection+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Util.swift"; sourceTree = "<group>"; };
-		4D5EBE8525C1144C00BF443C /* S4RESTClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S4RESTClient.swift; sourceTree = "<group>"; };
+		4D5EBE8525C1144C00BF443C /* RESTClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTClient.swift; sourceTree = "<group>"; };
 		4D5EBE8A25C12CBF00BF443C /* Notice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		4D5EBE8E25C12DD100BF443C /* Notice_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notice_VC.swift; sourceTree = "<group>"; };
 		4D5EBE8F25C12DD100BF443C /* Notice_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notice_VM.swift; sourceTree = "<group>"; };
@@ -264,7 +264,7 @@
 				4D449ACC254C8BA000BC5623 /* Data+Util.swift */,
 				4D256F2A25487153004B3C38 /* Error+Util.swift */,
 				4D9FD72724705172007A9703 /* RxView.swift */,
-				4D5EBE8525C1144C00BF443C /* S4RESTClient.swift */,
+				4D5EBE8525C1144C00BF443C /* RESTClient.swift */,
 				4DABE82E2598ED9A0047D704 /* Sprinklable.swift */,
 				4DABE83A2598F29D0047D704 /* UIImage+Util.swift */,
 				4D7DCEC8246EFBA400787D9B /* UIPageViewController+Util.swift */,
@@ -504,7 +504,7 @@
 				4D69F5A725523488007827D7 /* Picker_VC.swift in Sources */,
 				4D5E77D32451494800A7C344 /* AppDelegate.swift in Sources */,
 				4D5EBE8B25C12CBF00BF443C /* Notice.swift in Sources */,
-				4D5EBE8625C1144C00BF443C /* S4RESTClient.swift in Sources */,
+				4D5EBE8625C1144C00BF443C /* RESTClient.swift in Sources */,
 				4D9FD72624705043007A9703 /* MessageInputView.swift in Sources */,
 				4D5EBE9725C133D100BF443C /* URL+Util.swift in Sources */,
 				4DCC6D6D2456D59900EB0CCF /* Main_VC.swift in Sources */,

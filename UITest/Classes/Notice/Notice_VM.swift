@@ -8,11 +8,11 @@ import RxCocoa
 class Notice_VM {
 
     private let notices = BehaviorRelay<[Notice]>(value: [])
+
     private let disposeBag = DisposeBag()
 
 
     init() {
-        self.bind()
         self.load()
     }
 }
@@ -20,16 +20,8 @@ class Notice_VM {
 
 extension Notice_VM {
 
-    private func bind() {
-        
-    }
-}
-
-
-extension Notice_VM {
-
     private func load() {
-        S4RESTClient.json(
+        RESTClient.json(
                 type: Notice.self,
                 url: "https://us-api.spooncast.net/commons/notices/",
                 method: .get,

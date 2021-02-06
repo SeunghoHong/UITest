@@ -3,10 +3,9 @@ import Foundation
 
 import Alamofire
 import RxSwift
-import RxCocoa
 
 
-class S4RESTClient {
+class RESTClient {
 
     struct Response<T: Codable>: Codable {
         var status_code: String
@@ -25,7 +24,9 @@ class S4RESTClient {
         headers: [String : String]? = [:]
     ) -> Observable<Result<Response<T>, Error>> {
         return Observable<Result<Response<T>, Error>>.create { observer -> Disposable in
-            guard let url = URL(string: url), let fullURL = url.appendQueries(queries) else {
+            guard let url = URL(string: url),
+                  let fullURL = url.appendQueries(queries)
+            else {
                 observer.onNext(.failure(NSError.trace()))
                 return Disposables.create()
             }
