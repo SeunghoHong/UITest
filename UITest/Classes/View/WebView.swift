@@ -4,6 +4,7 @@ import WebKit
 
 import RxSwift
 import RxCocoa
+import RxGesture
 import SnapKit
 
 
@@ -17,8 +18,9 @@ class WebView: UIView {
     private var reloadButton = UIButton()
     private var shareButton = UIButton()
     private var closeButton = UIButton()
-
     private var progressView = UIProgressView()
+
+    private var navigationStackViewHeightConstraint: Constraint?
 
     private var disposeBag = DisposeBag()
 
@@ -103,7 +105,7 @@ extension WebView {
         }
 
         self.navigationStackView.snp.makeConstraints { maker in
-            maker.height.equalTo(48.0)
+            self.navigationStackViewHeightConstraint = maker.height.equalTo(48.0).constraint
         }
 
         self.progressView.snp.makeConstraints { maker in
@@ -168,6 +170,19 @@ extension WebView {
 
         self.webView.rx.canGoForward
             .bind(to: self.forwardButton.rx.isEnabled)
+            .disposed(by: self.disposeBag)
+
+        self.webView.rx.swipeGesture([.up, .down])
+            .when(.recognized)
+            .map { $0.direction == .up ? 0.0 : 48.0 }
+            .bind(onNext: { [weak self] height in
+                guard let self = self else { return }
+
+                self.navigationStackViewHeightConstraint?.update(offset: height)
+                UIView.animate(withDuration: 0.2) {
+                    self.layoutIfNeeded()
+                }
+            })
             .disposed(by: self.disposeBag)
     }
 }
