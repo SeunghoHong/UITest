@@ -23,7 +23,7 @@ extension Notice_VM {
     private func load() {
         RESTClient.json(
                 type: Notice.self,
-                url: "https://us-api.spooncast.net/commons/notices/",
+                url: "https://us-api.test.net/commons/notices/",
                 method: .get,
                 queries: ["is_popup":"true"]
             )

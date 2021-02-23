@@ -32,7 +32,7 @@ class RESTClient {
             }
 
             var customHeaders: [String : String] = [
-                "User-Agent" : "Spoon/6.1.0(1334) CFNetwork/1220.1 Darwin/20.2.0 x86_64 iOS/14.4",
+                "User-Agent" : "Test/6.1.0(1334) CFNetwork/1220.1 Darwin/20.2.0 x86_64 iOS/14.4",
                 "Accept" : "application/json",
                 "Accept-Language" : "en-US"
             ]
