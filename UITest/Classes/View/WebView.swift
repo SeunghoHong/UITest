@@ -172,17 +172,34 @@ extension WebView {
             .bind(to: self.forwardButton.rx.isEnabled)
             .disposed(by: self.disposeBag)
 
-        self.webView.rx.swipeGesture([.up, .down])
-            .when(.recognized)
-            .map { $0.direction == .up ? 0.0 : 48.0 }
-            .bind(onNext: { [weak self] height in
+        self.webView.rx.panGesture()
+            .when(.changed)
+            .map { $0.location(in: $0.view).y }
+            .scan([]) { Array($0 + [$1]).suffix(2) }
+            .bind { [weak self] locations in
+                guard let self = self,
+                      let old = locations[safe: 0],
+                      let new = locations[safe: 1]
+                else { return }
+
+                let height = self.navigationStackView.bounds.size.height + (new - old)
+                if (0.0 ... 48.0) ~= height {
+                    self.navigationStackViewHeightConstraint?.update(offset: height)
+                }
+            }
+            .disposed(by: self.disposeBag)
+
+        self.webView.rx.panGesture()
+            .when(.ended)
+            .bind { [weak self] recognizer in
                 guard let self = self else { return }
 
+                let height = (recognizer.velocity(in: recognizer.view).y > 0.0) ? 48.0 : 0.0
                 self.navigationStackViewHeightConstraint?.update(offset: height)
                 UIView.animate(withDuration: 0.2) {
                     self.layoutIfNeeded()
                 }
-            })
+            }
             .disposed(by: self.disposeBag)
     }
 }
