@@ -10,6 +10,8 @@ import SnapKit
 
 class Profile_VC: UIViewController {
 
+    private var closeButton = UIButton()
+
     private var titleView = UIView()
     private var menuStackView = UIStackView()
     private var menuButton = UIButton()
@@ -64,6 +66,10 @@ extension Profile_VC {
     private func setup() {
         self.view.backgroundColor = .white
 
+        self.closeButton.setTitle("close", for: .normal)
+        self.closeButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.closeButton)
+
         self.collectionView.backgroundColor = .clear
         self.view.addSubview(self.collectionView)
 
@@ -105,8 +111,14 @@ extension Profile_VC {
     }
 
     private func layout() {
+        self.closeButton.snp.makeConstraints { maker in
+            maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(16.0)
+            maker.leading.equalToSuperview().offset(16.0)
+        }
+
         self.collectionView.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
+            maker.top.equalTo(self.closeButton.snp.bottom).offset(16.0)
+            maker.bottom.leading.trailing.equalToSuperview()
         }
 
         self.headerView.snp.makeConstraints { maker in
@@ -124,7 +136,7 @@ extension Profile_VC {
 
         self.titleView.snp.makeConstraints { maker in
             maker.leading.trailing.equalToSuperview()
-            maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            maker.top.equalTo(self.collectionView.snp.top)
             maker.height.equalTo(40.0)
         }
 
@@ -140,9 +152,20 @@ extension Profile_VC {
     }
 
     private func bind() {
+        self.closeButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onClose()
+            }
+            .disposed(by: self.disposeBag)
+
         self.items.asDriver()
-            .drive(self.collectionView.rx.items(cellIdentifier: "UICollectionViewCell",
-                                                cellType: UICollectionViewCell.self)) { index, item, cell in
+            .drive(
+                self.collectionView.rx.items(
+                    cellIdentifier: "UICollectionViewCell",
+                    cellType: UICollectionViewCell.self
+                )
+            ) { index, item, cell in
                 cell.backgroundColor = .blue
             }
             .disposed(by: self.disposeBag)
@@ -199,6 +222,10 @@ extension Profile_VC {
 
 
 extension Profile_VC {
+
+    private func onClose() {
+        self.dismiss(animated: true, completion: nil)
+    }
 
     private func loadItems() {
         self.items.accept((1..<10).map { "\($0)" })
