@@ -74,6 +74,11 @@ extension MessageInputView {
         self.sendButton.setTitleColor(.white, for: .normal)
         self.sendButton.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
         self.baseView.addSubview(self.sendButton)
+
+        self.textView.setContentHuggingPriority(UILayoutPriority(249), for: .horizontal)
+        self.sendButton.setContentHuggingPriority(UILayoutPriority(250), for: .horizontal)
+        self.textView.setContentCompressionResistancePriority(UILayoutPriority(749), for: .horizontal)
+        self.sendButton.setContentCompressionResistancePriority(UILayoutPriority(750), for: .horizontal)
     }
 
     private func layout() {
