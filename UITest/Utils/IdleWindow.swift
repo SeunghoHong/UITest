@@ -7,6 +7,7 @@ import RxSwift
 
 class IdleWindow: UIWindow {
 
+    private let IDLE_TIME = 5
     private var disposeBag = DisposeBag()
 
 
@@ -23,10 +24,11 @@ class IdleWindow: UIWindow {
     func setIdleTimer() {
         self.disposeBag = DisposeBag()
 
-        Observable.just(()).delay(.seconds(5), scheduler: MainScheduler.instance)
+        Observable.just(()).delay(.seconds(IDLE_TIME), scheduler: MainScheduler.instance)
             .bind { [weak self] _ in
                 guard let self = self,
-                      let visibleViewController = self.visibleViewController
+                      let rootViewController = self.rootViewController,
+                      let visibleViewController = self.visibleViewController(rootViewController)
                 else { return }
 
                 print("\(String(describing: visibleViewController.classForCoder))")
@@ -39,15 +41,13 @@ class IdleWindow: UIWindow {
 
 extension IdleWindow {
 
-    var visibleViewController: UIViewController? {
-        guard let rootViewController = self.rootViewController else { return nil }
-
-        return visibleViewController(rootViewController)
-    }
-
     private func visibleViewController(_ rootViewController: UIViewController) -> UIViewController? {
         if let presentedViewController = rootViewController.presentedViewController {
             return visibleViewController(presentedViewController)
+        }
+
+        if let child = rootViewController.children.last {
+            return visibleViewController(child)
         }
 
         if let navigationController = rootViewController as? UINavigationController {
