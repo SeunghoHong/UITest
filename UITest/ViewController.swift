@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     private var sampleVCButton = UIButton()
     private var webVCButton = UIButton()
     private var noticeVCButton = UIButton()
+    private var slotVCButton = UIButton()
 
     private var disposeBag = DisposeBag()
 
@@ -199,6 +200,10 @@ extension ViewController {
         self.noticeVCButton.setTitle("NoticeVC", for: .normal)
         self.noticeVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.noticeVCButton)
+
+        self.slotVCButton.setTitle("SlotVC", for: .normal)
+        self.slotVCButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.slotVCButton)
     }
 
     private func layout() {
@@ -259,6 +264,11 @@ extension ViewController {
 
         self.noticeVCButton.snp.makeConstraints { maker in
             maker.leading.equalTo(self.webVCButton.snp.trailing).offset(16.0)
+            maker.centerY.equalTo(self.webVCButton.snp.centerY)
+        }
+
+        self.slotVCButton.snp.makeConstraints { maker in
+            maker.leading.equalTo(self.noticeVCButton.snp.trailing).offset(16.0)
             maker.centerY.equalTo(self.webVCButton.snp.centerY)
         }
     }
@@ -347,6 +357,13 @@ extension ViewController {
                 self?.onNoticeVC()
             }
             .disposed(by: self.disposeBag)
+
+        self.slotVCButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onSlotVC()
+            }
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -426,6 +443,13 @@ extension ViewController {
     private func onNoticeVC() {
         let vc = Notice_VC()
         vc.bind(Notice_VM())
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    private func onSlotVC() {
+        let vc = Slot_VC()
+        vc.bind(Slot_VM())
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
