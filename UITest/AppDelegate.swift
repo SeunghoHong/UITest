@@ -21,7 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
         Gedatsu.open()
         #endif
-        // Override point for customization after application launch.
+
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { isAllowed, error in
+            guard error == nil, isAllowed else { return }
+
+            DispatchQueue.main.async {
+                application.registerForRemoteNotifications()
+            }
+        }
+
         return true
     }
 

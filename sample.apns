@@ -1,0 +1,10 @@
+{
+   "Simulator Target Bundle":"com.raymond.UITest",
+   "aps":{
+      "alert":{
+         "title":"sample",
+         "subtitle":"push notification",
+         "body":"This is a smaple notification."
+      }
+   }
+}
