@@ -51,6 +51,7 @@
 		4D9FD72824705172007A9703 /* RxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9FD72724705172007A9703 /* RxView.swift */; };
 		4D9FD72C2470F1A4007A9703 /* Message_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9FD72A2470F1A4007A9703 /* Message_VC.swift */; };
 		4D9FD72D2470F1A4007A9703 /* Message_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9FD72B2470F1A4007A9703 /* Message_VM.swift */; };
+		4DA48F63260F43C1004AD82F /* UIView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA48F62260F43C1004AD82F /* UIView+Util.swift */; };
 		4DABE82F2598ED9A0047D704 /* Sprinklable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABE82E2598ED9A0047D704 /* Sprinklable.swift */; };
 		4DABE8352598F1C60047D704 /* UIView+Sprinkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABE8342598F1C60047D704 /* UIView+Sprinkle.swift */; };
 		4DABE83B2598F29D0047D704 /* UIImage+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABE83A2598F29D0047D704 /* UIImage+Util.swift */; };
@@ -124,6 +125,7 @@
 		4D9FD72724705172007A9703 /* RxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxView.swift; sourceTree = "<group>"; };
 		4D9FD72A2470F1A4007A9703 /* Message_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message_VC.swift; sourceTree = "<group>"; };
 		4D9FD72B2470F1A4007A9703 /* Message_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message_VM.swift; sourceTree = "<group>"; };
+		4DA48F62260F43C1004AD82F /* UIView+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Util.swift"; sourceTree = "<group>"; };
 		4DABE82E2598ED9A0047D704 /* Sprinklable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sprinklable.swift; sourceTree = "<group>"; };
 		4DABE8342598F1C60047D704 /* UIView+Sprinkle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Sprinkle.swift"; sourceTree = "<group>"; };
 		4DABE83A2598F29D0047D704 /* UIImage+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Util.swift"; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 		4D5E77F924515E1300A7C344 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4DA48F62260F43C1004AD82F /* UIView+Util.swift */,
 				4D77989A25A53B9400485C32 /* AVAudioRecorder+Rx.swift */,
 				4D5E77FA24515E1300A7C344 /* Collection+Util.swift */,
 				4D449ACC254C8BA000BC5623 /* Data+Util.swift */,
@@ -542,6 +545,7 @@
 				4DABE8352598F1C60047D704 /* UIView+Sprinkle.swift in Sources */,
 				4D5EBE9025C12DD100BF443C /* Notice_VC.swift in Sources */,
 				4DF5D41F25CEBAE70044735C /* NoticeView.swift in Sources */,
+				4DA48F63260F43C1004AD82F /* UIView+Util.swift in Sources */,
 				4DC6F52F246D8CA0003D3B0E /* Page_VC.swift in Sources */,
 				4DCC6D732456DE1B00EB0CCF /* MainCell_NewUser.swift in Sources */,
 				4DE1E0532455F07000A25A81 /* UserCell_VM.swift in Sources */,
