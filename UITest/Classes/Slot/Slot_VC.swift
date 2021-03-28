@@ -21,8 +21,6 @@ class Slot_VC: UIViewController {
         return collectionView
     }()
 
-    private var items = BehaviorRelay<[String]>(value: [])
-
     private var collectionViewHeight: Constraint?
 
     private var viewModel: Slot_VM?
@@ -50,7 +48,7 @@ class Slot_VC: UIViewController {
 extension Slot_VC {
 
     private func setup() {
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .lightGray
 
         self.closeButton.setTitle("close", for: .normal)
         self.closeButton.setTitleColor(.black, for: .normal)
@@ -105,21 +103,11 @@ extension Slot_VC {
             }
             .disposed(by: self.disposeBag)
 
-        self.loadButton.rx.tap
-            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
-            .bind { [weak self] _ in
-                self?.onLoad()
-            }
-            .disposed(by: self.disposeBag)
-
-        self.items.asDriver()
-            .drive(self.collectionView.rx.items(
-                cellIdentifier: "SlotCell",
-                cellType: SlotCell.self
-            )) { index, items, cell in
-
-            }
-            .disposed(by: self.disposeBag)
+//        self.collectionView.rx.itemSelected
+//            .bind { [weak self] indexPath in
+//                print("\(indexPath)")
+//            }
+//            .disposed(by: self.disposeBag)
     }
 }
 
@@ -128,6 +116,20 @@ extension Slot_VC {
 
     func bind(_ viewModel: Slot_VM) {
         self.viewModel = viewModel
+
+        viewModel.items.asDriver()
+            .drive(self.collectionView.rx.items(
+                cellIdentifier: "SlotCell",
+                cellType: SlotCell.self
+            )) { index, item, cell in
+                cell.bind(SlotCellVM(with: item))
+            }
+            .disposed(by: self.disposeBag)
+
+        self.loadButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind(to: viewModel.loadButtonTapped)
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -136,10 +138,6 @@ extension Slot_VC {
 
     private func onClose() {
         self.dismiss(animated: true, completion: nil)
-    }
-
-    private func onLoad() {
-        self.items.accept(["1", "2", "", ""])
     }
 }
 

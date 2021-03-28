@@ -41,6 +41,7 @@
 		4D5EBE9125C12DD100BF443C /* Notice_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5EBE8F25C12DD100BF443C /* Notice_VM.swift */; };
 		4D5EBE9725C133D100BF443C /* URL+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5EBE9625C133D100BF443C /* URL+Util.swift */; };
 		4D63F40B24A9DB520012730D /* Visualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D63F40A24A9DB520012730D /* Visualizer.swift */; };
+		4D6739E62610D4E600497AB0 /* SlotCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6739E52610D4E600497AB0 /* SlotCellVM.swift */; };
 		4D69F5A725523488007827D7 /* Picker_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D69F5A625523488007827D7 /* Picker_VC.swift */; };
 		4D77989B25A53B9400485C32 /* AVAudioRecorder+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77989A25A53B9400485C32 /* AVAudioRecorder+Rx.swift */; };
 		4D7DCEC9246EFBA400787D9B /* UIPageViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7DCEC8246EFBA400787D9B /* UIPageViewController+Util.swift */; };
@@ -115,6 +116,7 @@
 		4D5EBE8F25C12DD100BF443C /* Notice_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notice_VM.swift; sourceTree = "<group>"; };
 		4D5EBE9625C133D100BF443C /* URL+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Util.swift"; sourceTree = "<group>"; };
 		4D63F40A24A9DB520012730D /* Visualizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visualizer.swift; sourceTree = "<group>"; };
+		4D6739E52610D4E600497AB0 /* SlotCellVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotCellVM.swift; sourceTree = "<group>"; };
 		4D69F5A625523488007827D7 /* Picker_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Picker_VC.swift; sourceTree = "<group>"; };
 		4D77989A25A53B9400485C32 /* AVAudioRecorder+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVAudioRecorder+Rx.swift"; sourceTree = "<group>"; };
 		4D7DCEC8246EFBA400787D9B /* UIPageViewController+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+Util.swift"; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				4D99720A25DDEFEE006789C8 /* Slot_VC.swift */,
 				4D99720825DDEFEE006789C8 /* Slot_VM.swift */,
 				4D99720925DDEFEE006789C8 /* SlotCell.swift */,
+				4D6739E52610D4E600497AB0 /* SlotCellVM.swift */,
 			);
 			path = Slot;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				4DABE82F2598ED9A0047D704 /* Sprinklable.swift in Sources */,
 				4D5EBE9125C12DD100BF443C /* Notice_VM.swift in Sources */,
 				4D256F1E25486BC3004B3C38 /* AudioRecorder.swift in Sources */,
+				4D6739E62610D4E600497AB0 /* SlotCellVM.swift in Sources */,
 				4DB3F030246318BF00602F96 /* Profile_VC.swift in Sources */,
 				4D99720B25DDEFEE006789C8 /* Slot_VM.swift in Sources */,
 				4D69F5A725523488007827D7 /* Picker_VC.swift in Sources */,
