@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     private var webVCButton = UIButton()
     private var noticeVCButton = UIButton()
     private var slotVCButton = UIButton()
+    private var extendedPopupVCButton = UIButton()
 
     private var disposeBag = DisposeBag()
 
@@ -204,6 +205,10 @@ extension ViewController {
         self.slotVCButton.setTitle("SlotVC", for: .normal)
         self.slotVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.slotVCButton)
+
+        self.extendedPopupVCButton.setTitle("ExtenedePopupVC", for: .normal)
+        self.extendedPopupVCButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.extendedPopupVCButton)
     }
 
     private func layout() {
@@ -269,6 +274,11 @@ extension ViewController {
 
         self.slotVCButton.snp.makeConstraints { maker in
             maker.leading.equalTo(self.noticeVCButton.snp.trailing).offset(16.0)
+            maker.centerY.equalTo(self.webVCButton.snp.centerY)
+        }
+
+        self.extendedPopupVCButton.snp.makeConstraints { maker in
+            maker.leading.equalTo(self.slotVCButton.snp.trailing).offset(16.0)
             maker.centerY.equalTo(self.webVCButton.snp.centerY)
         }
     }
@@ -364,6 +374,13 @@ extension ViewController {
                 self?.onSlotVC()
             }
             .disposed(by: self.disposeBag)
+
+        self.extendedPopupVCButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onExtendedPopupVC()
+            }
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -452,6 +469,10 @@ extension ViewController {
         vc.bind(Slot_VM())
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
+    }
+
+    private func onExtendedPopupVC() {
+        
     }
 }
 
