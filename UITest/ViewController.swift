@@ -472,7 +472,9 @@ extension ViewController {
     }
 
     private func onExtendedPopupVC() {
-        
+        let vc = EntendedPopup_VC()
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: false, completion: nil)
     }
 }
 
