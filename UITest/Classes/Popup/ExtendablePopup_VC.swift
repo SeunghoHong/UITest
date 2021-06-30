@@ -7,7 +7,7 @@ import RxGesture
 import SnapKit
 
 
-internal class EntendedPopup_VC: UIViewController {
+internal class EntendablePopup_VC: UIViewController {
 
     private let dimmedView = UIView()
     private let contentView = UIView()
@@ -55,7 +55,7 @@ internal class EntendedPopup_VC: UIViewController {
 }
 
 
-extension EntendedPopup_VC {
+extension EntendablePopup_VC {
 
     private func setup() {
         self.view.backgroundColor = .clear
@@ -174,7 +174,7 @@ extension EntendedPopup_VC {
 }
 
 
-extension EntendedPopup_VC {
+extension EntendablePopup_VC {
 
     private func showAnimation() {
         UIView.animate(withDuration: 0.3) {
@@ -208,7 +208,7 @@ extension EntendedPopup_VC {
 }
 
 
-extension EntendedPopup_VC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+extension EntendablePopup_VC: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)

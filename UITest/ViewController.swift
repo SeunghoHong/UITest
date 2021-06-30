@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     private var webVCButton = UIButton()
     private var noticeVCButton = UIButton()
     private var slotVCButton = UIButton()
-    private var extendedPopupVCButton = UIButton()
+    private var extendablePopupVCButton = UIButton()
 
     private var disposeBag = DisposeBag()
 
@@ -206,9 +206,9 @@ extension ViewController {
         self.slotVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.slotVCButton)
 
-        self.extendedPopupVCButton.setTitle("ExtenedePopupVC", for: .normal)
-        self.extendedPopupVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.extendedPopupVCButton)
+        self.extendablePopupVCButton.setTitle("ExtendablePopupVCButton", for: .normal)
+        self.extendablePopupVCButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.extendablePopupVCButton)
     }
 
     private func layout() {
@@ -277,9 +277,9 @@ extension ViewController {
             maker.centerY.equalTo(self.webVCButton.snp.centerY)
         }
 
-        self.extendedPopupVCButton.snp.makeConstraints { maker in
-            maker.leading.equalTo(self.slotVCButton.snp.trailing).offset(16.0)
-            maker.centerY.equalTo(self.webVCButton.snp.centerY)
+        self.extendablePopupVCButton.snp.makeConstraints { maker in
+            maker.top.equalTo(self.webVCButton.snp.bottom).offset(16.0)
+            maker.leading.equalToSuperview().offset(16.0)
         }
     }
 
@@ -375,10 +375,10 @@ extension ViewController {
             }
             .disposed(by: self.disposeBag)
 
-        self.extendedPopupVCButton.rx.tap
+        self.extendablePopupVCButton.rx.tap
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .bind { [weak self] _ in
-                self?.onExtendedPopupVC()
+                self?.onExtendablePopupVC()
             }
             .disposed(by: self.disposeBag)
     }
@@ -471,8 +471,8 @@ extension ViewController {
         self.present(vc, animated: true, completion: nil)
     }
 
-    private func onExtendedPopupVC() {
-        let vc = EntendedPopup_VC()
+    private func onExtendablePopupVC() {
+        let vc = EntendablePopup_VC()
         vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: false, completion: nil)
     }
