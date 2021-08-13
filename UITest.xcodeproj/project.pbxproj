@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0E273F26C433DE00657B78 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 4D0E273E26C433DE00657B78 /* PinLayout */; };
+		4D0E274226C439B600657B78 /* FlexPin_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0E274126C439B600657B78 /* FlexPin_VC.swift */; };
 		4D17142625C2884D006063AA /* WKWebView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D17142525C2884D006063AA /* WKWebView+Rx.swift */; };
 		4D17142C25C2887E006063AA /* Web_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D17142A25C2887E006063AA /* Web_VM.swift */; };
 		4D17142D25C2887E006063AA /* Web_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D17142B25C2887E006063AA /* Web_VC.swift */; };
@@ -24,9 +26,13 @@
 		4D256F1E25486BC3004B3C38 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D256F1B25486BC3004B3C38 /* AudioRecorder.swift */; };
 		4D256F1F25486BC3004B3C38 /* Recorder_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D256F1C25486BC3004B3C38 /* Recorder_VC.swift */; };
 		4D256F2B25487153004B3C38 /* Error+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D256F2A25487153004B3C38 /* Error+Util.swift */; };
+		4D385C9526C667A600A66764 /* Schedule_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D385C9426C667A600A66764 /* Schedule_VC.swift */; };
 		4D449ACD254C8BA000BC5623 /* Data+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D449ACC254C8BA000BC5623 /* Data+Util.swift */; };
 		4D47F5DC2581BD8600DD209D /* Tooltip_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D47F5DB2581BD8600DD209D /* Tooltip_VC.swift */; };
 		4D47F5E22581C27C00DD209D /* TooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D47F5E12581C27C00DD209D /* TooltipView.swift */; };
+		4D521ED626C441AD00918C06 /* FlexLayoutYogaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4D521ED526C441AD00918C06 /* FlexLayoutYogaKit */; };
+		4D521ED826C441AD00918C06 /* FlexLayoutYoga in Frameworks */ = {isa = PBXBuildFile; productRef = 4D521ED726C441AD00918C06 /* FlexLayoutYoga */; };
+		4D521EDA26C441AD00918C06 /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 4D521ED926C441AD00918C06 /* FlexLayout */; };
 		4D5E77D32451494800A7C344 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D22451494800A7C344 /* AppDelegate.swift */; };
 		4D5E77D52451494800A7C344 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D42451494800A7C344 /* SceneDelegate.swift */; };
 		4D5E77D72451494800A7C344 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D62451494800A7C344 /* ViewController.swift */; };
@@ -88,6 +94,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D0E274126C439B600657B78 /* FlexPin_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexPin_VC.swift; sourceTree = "<group>"; };
 		4D17142525C2884D006063AA /* WKWebView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKWebView+Rx.swift"; sourceTree = "<group>"; };
 		4D17142A25C2887E006063AA /* Web_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Web_VM.swift; sourceTree = "<group>"; };
 		4D17142B25C2887E006063AA /* Web_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Web_VC.swift; sourceTree = "<group>"; };
@@ -96,6 +103,7 @@
 		4D256F1B25486BC3004B3C38 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		4D256F1C25486BC3004B3C38 /* Recorder_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder_VC.swift; sourceTree = "<group>"; };
 		4D256F2A25487153004B3C38 /* Error+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Error+Util.swift"; sourceTree = "<group>"; };
+		4D385C9426C667A600A66764 /* Schedule_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule_VC.swift; sourceTree = "<group>"; };
 		4D449ACC254C8BA000BC5623 /* Data+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Util.swift"; sourceTree = "<group>"; };
 		4D47F5DB2581BD8600DD209D /* Tooltip_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tooltip_VC.swift; sourceTree = "<group>"; };
 		4D47F5E12581C27C00DD209D /* TooltipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
@@ -159,14 +167,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D256F0525486865004B3C38 /* RxAppState in Frameworks */,
+				4D521EDA26C441AD00918C06 /* FlexLayout in Frameworks */,
+				4D0E273F26C433DE00657B78 /* PinLayout in Frameworks */,
 				4D256F11254868DB004B3C38 /* Alamofire in Frameworks */,
 				4D256EF625486786004B3C38 /* RxSwift in Frameworks */,
+				4D521ED626C441AD00918C06 /* FlexLayoutYogaKit in Frameworks */,
 				4D256F1625486955004B3C38 /* Gedatsu in Frameworks */,
 				4D256F0025486820004B3C38 /* SnapKit in Frameworks */,
 				4D256EFB254867F8004B3C38 /* RxGesture in Frameworks */,
 				4D256F0C254868AA004B3C38 /* RxDataSources in Frameworks */,
 				4D256F0A254868AA004B3C38 /* Differentiator in Frameworks */,
 				4D256EF425486786004B3C38 /* RxCocoa in Frameworks */,
+				4D521ED826C441AD00918C06 /* FlexLayoutYoga in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +192,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D0E274026C439B600657B78 /* FlexPin */ = {
+			isa = PBXGroup;
+			children = (
+				4D0E274126C439B600657B78 /* FlexPin_VC.swift */,
+			);
+			path = FlexPin;
+			sourceTree = "<group>";
+		};
+		4D0E274326C43F1F00657B78 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4D17142925C2887E006063AA /* WebView */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +226,14 @@
 			path = Record;
 			sourceTree = "<group>";
 		};
+		4D385C9326C667A600A66764 /* SelfSizing */ = {
+			isa = PBXGroup;
+			children = (
+				4D385C9426C667A600A66764 /* Schedule_VC.swift */,
+			);
+			path = SelfSizing;
+			sourceTree = "<group>";
+		};
 		4D47F5DA2581BD8600DD209D /* Tooltip */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +249,7 @@
 				4D5E77D12451494800A7C344 /* UITest */,
 				4D5E77E82451494D00A7C344 /* UITestTests */,
 				4D5E77D02451494800A7C344 /* Products */,
+				4D0E274326C43F1F00657B78 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -255,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				4DE1E04F2455F07000A25A81 /* Banner */,
+				4D0E274026C439B600657B78 /* FlexPin */,
 				4DCC6D692456D59900EB0CCF /* Main */,
 				4D9FD7292470F1A4007A9703 /* Message */,
 				4D5EBE8925C12CBF00BF443C /* Notice */,
@@ -263,6 +300,7 @@
 				9BC65959265E256A0080D865 /* Popup */,
 				4DB3F02C246318BE00602F96 /* Profile */,
 				4D256F1925486BC3004B3C38 /* Record */,
+				4D385C9326C667A600A66764 /* SelfSizing */,
 				4D99720725DDEFEE006789C8 /* Slot */,
 				4D47F5DA2581BD8600DD209D /* Tooltip */,
 				4DE1E04B2455F07000A25A81 /* User */,
@@ -427,6 +465,10 @@
 				4D256F0B254868AA004B3C38 /* RxDataSources */,
 				4D256F10254868DB004B3C38 /* Alamofire */,
 				4D256F1525486955004B3C38 /* Gedatsu */,
+				4D0E273E26C433DE00657B78 /* PinLayout */,
+				4D521ED526C441AD00918C06 /* FlexLayoutYogaKit */,
+				4D521ED726C441AD00918C06 /* FlexLayoutYoga */,
+				4D521ED926C441AD00918C06 /* FlexLayout */,
 			);
 			productName = UITest;
 			productReference = 4D5E77CF2451494800A7C344 /* UITest.app */;
@@ -486,6 +528,8 @@
 				4D256F08254868AA004B3C38 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				4D256F0F254868DB004B3C38 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				4D256F1425486955004B3C38 /* XCRemoteSwiftPackageReference "Gedatsu" */,
+				4D0E273D26C433DE00657B78 /* XCRemoteSwiftPackageReference "PinLayout" */,
+				4D521ED426C441AD00918C06 /* XCRemoteSwiftPackageReference "FlexLayout" */,
 			);
 			productRefGroup = 4D5E77D02451494800A7C344 /* Products */;
 			projectDirPath = "";
@@ -543,6 +587,7 @@
 				4D99720B25DDEFEE006789C8 /* Slot_VM.swift in Sources */,
 				4D69F5A725523488007827D7 /* Picker_VC.swift in Sources */,
 				4D5E77D32451494800A7C344 /* AppDelegate.swift in Sources */,
+				4D385C9526C667A600A66764 /* Schedule_VC.swift in Sources */,
 				4D5EBE8B25C12CBF00BF443C /* Notice.swift in Sources */,
 				4D5EBE8625C1144C00BF443C /* RESTClient.swift in Sources */,
 				4D9FD72624705043007A9703 /* MessageInputView.swift in Sources */,
@@ -555,6 +600,7 @@
 				4DC6F532246D8CD4003D3B0E /* PageControl.swift in Sources */,
 				4DE1E0552455F07000A25A81 /* BannerView.swift in Sources */,
 				4DC6F52E246D8CA0003D3B0E /* Page_VM.swift in Sources */,
+				4D0E274226C439B600657B78 /* FlexPin_VC.swift in Sources */,
 				4D256F2B25487153004B3C38 /* Error+Util.swift in Sources */,
 				4D77989B25A53B9400485C32 /* AVAudioRecorder+Rx.swift in Sources */,
 				4D5E77D52451494800A7C344 /* SceneDelegate.swift in Sources */,
@@ -739,6 +785,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BT6RS3Y7F7;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"FLEXLAYOUT_SWIFT_PACKAGE=1",
+				);
 				INFOPLIST_FILE = UITest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -758,6 +809,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BT6RS3Y7F7;
+				GCC_PREPROCESSOR_DEFINITIONS = "FLEXLAYOUT_SWIFT_PACKAGE=1";
 				INFOPLIST_FILE = UITest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -845,6 +897,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4D0E273D26C433DE00657B78 /* XCRemoteSwiftPackageReference "PinLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/PinLayout";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.10.0;
+			};
+		};
 		4D256EF225486786004B3C38 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -901,9 +961,22 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		4D521ED426C441AD00918C06 /* XCRemoteSwiftPackageReference "FlexLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/layoutBox/FlexLayout.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.21;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4D0E273E26C433DE00657B78 /* PinLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D0E273D26C433DE00657B78 /* XCRemoteSwiftPackageReference "PinLayout" */;
+			productName = PinLayout;
+		};
 		4D256EF325486786004B3C38 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4D256EF225486786004B3C38 /* XCRemoteSwiftPackageReference "RxSwift" */;
@@ -948,6 +1021,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4D256F1425486955004B3C38 /* XCRemoteSwiftPackageReference "Gedatsu" */;
 			productName = Gedatsu;
+		};
+		4D521ED526C441AD00918C06 /* FlexLayoutYogaKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D521ED426C441AD00918C06 /* XCRemoteSwiftPackageReference "FlexLayout" */;
+			productName = FlexLayoutYogaKit;
+		};
+		4D521ED726C441AD00918C06 /* FlexLayoutYoga */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D521ED426C441AD00918C06 /* XCRemoteSwiftPackageReference "FlexLayout" */;
+			productName = FlexLayoutYoga;
+		};
+		4D521ED926C441AD00918C06 /* FlexLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D521ED426C441AD00918C06 /* XCRemoteSwiftPackageReference "FlexLayout" */;
+			productName = FlexLayout;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

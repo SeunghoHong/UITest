@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     private var noticeVCButton = UIButton()
     private var slotVCButton = UIButton()
     private var extendablePopupVCButton = UIButton()
+    private var scheduleVCButton = UIButton()
+    private var flexPinVCButton = UIButton()
 
     private var disposeBag = DisposeBag()
 
@@ -206,9 +208,17 @@ extension ViewController {
         self.slotVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.slotVCButton)
 
-        self.extendablePopupVCButton.setTitle("ExtendablePopupVCButton", for: .normal)
+        self.extendablePopupVCButton.setTitle("ExtendablePopupVC", for: .normal)
         self.extendablePopupVCButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.extendablePopupVCButton)
+
+        self.scheduleVCButton.setTitle("scheduleVC", for: .normal)
+        self.scheduleVCButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.scheduleVCButton)
+
+        self.flexPinVCButton.setTitle("FlexPinVC", for: .normal)
+        self.flexPinVCButton.setTitleColor(.black, for: .normal)
+        self.view.addSubview(self.flexPinVCButton)
     }
 
     private func layout() {
@@ -279,6 +289,16 @@ extension ViewController {
 
         self.extendablePopupVCButton.snp.makeConstraints { maker in
             maker.top.equalTo(self.webVCButton.snp.bottom).offset(16.0)
+            maker.leading.equalToSuperview().offset(16.0)
+        }
+
+        self.scheduleVCButton.snp.makeConstraints { maker in
+            maker.top.equalTo(self.webVCButton.snp.bottom).offset(16.0)
+            maker.leading.equalTo(self.extendablePopupVCButton.snp.trailing).offset(16.0)
+        }
+
+        self.flexPinVCButton.snp.makeConstraints { maker in
+            maker.top.equalTo(self.extendablePopupVCButton.snp.bottom).offset(16.0)
             maker.leading.equalToSuperview().offset(16.0)
         }
     }
@@ -381,6 +401,20 @@ extension ViewController {
                 self?.onExtendablePopupVC()
             }
             .disposed(by: self.disposeBag)
+
+        self.scheduleVCButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onScheduleVC()
+            }
+            .disposed(by: self.disposeBag)
+
+        self.flexPinVCButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onFlexPinVC()
+            }
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -475,6 +509,18 @@ extension ViewController {
         let vc = EntendablePopup_VC()
         vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: false, completion: nil)
+    }
+
+    private func onScheduleVC() {
+        let vc = Schedule_VC()
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    private func onFlexPinVC() {
+        let vc = FlexPin_VC()
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true, completion: nil)
     }
 }
 
