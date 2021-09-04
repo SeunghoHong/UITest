@@ -8,22 +8,22 @@ import SnapKit
 
 class ViewController: UIViewController {
 
-    private var bannerVCButton = UIButton()
-    private var userVCButton = UIButton()
-    private var mainVCButton = UIButton()
-    private var profileVCButton = UIButton()
-    private var pageVCButton = UIButton()
-    private var messageVCButton = UIButton()
-    private var recorderVCButton = UIButton()
-    private var pickerVCButton = UIButton()
-    private var tooltipVCButton = UIButton()
-    private var sampleVCButton = UIButton()
-    private var webVCButton = UIButton()
-    private var noticeVCButton = UIButton()
-    private var slotVCButton = UIButton()
-    private var extendablePopupVCButton = UIButton()
-    private var scheduleVCButton = UIButton()
-    private var flexPinVCButton = UIButton()
+    private let contentView = UIScrollView()
+    private let baseView = UIView()
+    private let bannerVCButton = UIButton()
+    private let profileVCButton = UIButton()
+    private let pageVCButton = UIButton()
+    private let messageVCButton = UIButton()
+    private let recorderVCButton = UIButton()
+    private let pickerVCButton = UIButton()
+    private let tooltipVCButton = UIButton()
+    private let webVCButton = UIButton()
+    private let noticeVCButton = UIButton()
+    private let slotVCButton = UIButton()
+    private let extendablePopupVCButton = UIButton()
+    private let scheduleVCButton = UIButton()
+    private let flexPinVCButton = UIButton()
+    private let stretchVCButton = UIButton()
 
     private var disposeBag = DisposeBag()
 
@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         self.setup()
-        self.layout()
+        self.setupFlex()
         self.bind()
 
         self.test()
@@ -46,6 +46,12 @@ class ViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        self.layout()
     }
 }
 
@@ -156,33 +162,23 @@ extension ViewController {
     private func setup() {
         self.view.backgroundColor = .white
 
+        self.view.addSubview(self.contentView)
+        self.contentView.addSubview(self.baseView)
+
         self.bannerVCButton.setTitle("BannerVC", for: .normal)
         self.bannerVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.bannerVCButton)
-
-        self.userVCButton.setTitle("UserVC", for: .normal)
-        self.userVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.userVCButton)
-
-        self.mainVCButton.setTitle("MainVC", for: .normal)
-        self.mainVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.mainVCButton)
 
         self.profileVCButton.setTitle("ProfileVC", for: .normal)
         self.profileVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.profileVCButton)
 
         self.pageVCButton.setTitle("PageVC", for: .normal)
         self.pageVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.pageVCButton)
 
         self.messageVCButton.setTitle("MessageVC", for: .normal)
         self.messageVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.messageVCButton)
 
         self.recorderVCButton.setTitle("RecorderVC", for: .normal)
         self.recorderVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.recorderVCButton)
 
         self.pickerVCButton.setTitle("PickerVC", for: .normal)
         self.pickerVCButton.setTitleColor(.black, for: .normal)
@@ -190,117 +186,58 @@ extension ViewController {
 
         self.tooltipVCButton.setTitle("TooltipVC", for: .normal)
         self.tooltipVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.tooltipVCButton)
-
-        self.sampleVCButton.setTitle("TestVC", for: .normal)
-        self.sampleVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.sampleVCButton)
 
         self.webVCButton.setTitle("WebVC", for: .normal)
         self.webVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.webVCButton)
 
         self.noticeVCButton.setTitle("NoticeVC", for: .normal)
         self.noticeVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.noticeVCButton)
 
         self.slotVCButton.setTitle("SlotVC", for: .normal)
         self.slotVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.slotVCButton)
 
         self.extendablePopupVCButton.setTitle("ExtendablePopupVC", for: .normal)
         self.extendablePopupVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.extendablePopupVCButton)
 
         self.scheduleVCButton.setTitle("scheduleVC", for: .normal)
         self.scheduleVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.scheduleVCButton)
 
         self.flexPinVCButton.setTitle("FlexPinVC", for: .normal)
         self.flexPinVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.flexPinVCButton)
     }
 
+    private func setupFlex() {
+        self.baseView.flex.direction(.column)
+            .define { flex in
+                flex.addItem(self.bannerVCButton)
+                flex.addItem(self.profileVCButton)
+                flex.addItem(self.pageVCButton)
+                flex.addItem(self.messageVCButton)
+                flex.addItem(self.recorderVCButton)
+                flex.addItem(self.pickerVCButton)
+                flex.addItem(self.tooltipVCButton)
+                flex.addItem(self.webVCButton)
+                flex.addItem(self.noticeVCButton)
+                flex.addItem(self.slotVCButton)
+                flex.addItem(self.extendablePopupVCButton)
+                flex.addItem(self.scheduleVCButton)
+                flex.addItem(self.flexPinVCButton)
+                flex.addItem(self.stretchVCButton)
+            }
+    }
+    
     private func layout() {
-        self.bannerVCButton.snp.makeConstraints { maker in
-            maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(16.0)
-            maker.leading.equalToSuperview().offset(16.0)
-        }
+        self.contentView.pin
+            .all(self.view.pin.safeArea)
 
-        self.userVCButton.snp.makeConstraints { maker in
-            maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(16.0)
-            maker.leading.equalTo(self.bannerVCButton.snp.trailing).offset(16.0)
-        }
+        self.baseView.pin
+            .top()
+            .horizontally()
 
-        self.mainVCButton.snp.makeConstraints { maker in
-            maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(16.0)
-            maker.leading.equalTo(self.userVCButton.snp.trailing).offset(16.0)
-        }
+        self.baseView.flex
+            .layout(mode: .adjustHeight)
 
-        self.profileVCButton.snp.makeConstraints { maker in
-            maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(16.0)
-            maker.leading.equalTo(self.mainVCButton.snp.trailing).offset(16.0)
-        }
-
-        self.pageVCButton.snp.makeConstraints { maker in
-            maker.top.equalTo(self.bannerVCButton.snp.bottom).offset(16.0)
-            maker.leading.equalToSuperview().offset(16.0)
-        }
-
-        self.messageVCButton.snp.makeConstraints { maker in
-            maker.leading.equalTo(self.pageVCButton.snp.trailing).offset(16.0)
-            maker.centerY.equalTo(self.pageVCButton.snp.centerY)
-        }
-
-        self.recorderVCButton.snp.makeConstraints { maker in
-            maker.leading.equalTo(self.messageVCButton.snp.trailing).offset(16.0)
-            maker.centerY.equalTo(self.pageVCButton.snp.centerY)
-        }
-
-        self.pickerVCButton.snp.makeConstraints { maker in
-            maker.top.equalTo(self.pageVCButton.snp.bottom).offset(16.0)
-            maker.leading.equalToSuperview().offset(16.0)
-        }
-
-        self.tooltipVCButton.snp.makeConstraints { maker in
-            maker.leading.equalTo(self.pickerVCButton.snp.trailing).offset(16.0)
-            maker.centerY.equalTo(self.pickerVCButton.snp.centerY)
-        }
-
-        self.sampleVCButton.snp.makeConstraints { maker in
-            maker.leading.equalTo(self.tooltipVCButton.snp.trailing).offset(16.0)
-            maker.centerY.equalTo(self.pickerVCButton.snp.centerY)
-        }
-
-        self.webVCButton.snp.makeConstraints { maker in
-            maker.top.equalTo(self.pickerVCButton.snp.bottom).offset(16.0)
-            maker.leading.equalToSuperview().offset(16.0)
-        }
-
-        self.noticeVCButton.snp.makeConstraints { maker in
-            maker.leading.equalTo(self.webVCButton.snp.trailing).offset(16.0)
-            maker.centerY.equalTo(self.webVCButton.snp.centerY)
-        }
-
-        self.slotVCButton.snp.makeConstraints { maker in
-            maker.leading.equalTo(self.noticeVCButton.snp.trailing).offset(16.0)
-            maker.centerY.equalTo(self.webVCButton.snp.centerY)
-        }
-
-        self.extendablePopupVCButton.snp.makeConstraints { maker in
-            maker.top.equalTo(self.webVCButton.snp.bottom).offset(16.0)
-            maker.leading.equalToSuperview().offset(16.0)
-        }
-
-        self.scheduleVCButton.snp.makeConstraints { maker in
-            maker.top.equalTo(self.webVCButton.snp.bottom).offset(16.0)
-            maker.leading.equalTo(self.extendablePopupVCButton.snp.trailing).offset(16.0)
-        }
-
-        self.flexPinVCButton.snp.makeConstraints { maker in
-            maker.top.equalTo(self.extendablePopupVCButton.snp.bottom).offset(16.0)
-            maker.leading.equalToSuperview().offset(16.0)
-        }
+        self.contentView.contentSize = self.baseView.frame.size
     }
 
     private func bind() {
@@ -308,20 +245,6 @@ extension ViewController {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .bind { [weak self] _ in
                 self?.onBannerVC()
-            }
-            .disposed(by: self.disposeBag)
-
-        self.userVCButton.rx.tap
-            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
-            .bind { [weak self] _ in
-                self?.onUserVC()
-            }
-            .disposed(by: self.disposeBag)
-
-        self.mainVCButton.rx.tap
-            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
-            .bind { [weak self] _ in
-                self?.onMainVC()
             }
             .disposed(by: self.disposeBag)
 
@@ -364,13 +287,6 @@ extension ViewController {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .bind { [weak self] _ in
                 self?.onTooltipVC()
-            }
-            .disposed(by: self.disposeBag)
-
-        self.sampleVCButton.rx.tap
-            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
-            .bind { [weak self] _ in
-                self?.onSampleVC()
             }
             .disposed(by: self.disposeBag)
 
@@ -427,18 +343,6 @@ extension ViewController {
         self.present(vc, animated: true, completion: nil)
     }
 
-    private func onUserVC() {
-        let vc = User_VC()
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true, completion: nil)
-    }
-
-    private func onMainVC() {
-        let vc = Main_VC()
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true, completion: nil)
-    }
-
     private func onProfileVC() {
         let vc = Profile_VC()
         vc.modalPresentationStyle = .overFullScreen
@@ -472,15 +376,6 @@ extension ViewController {
 
     private func onTooltipVC() {
         let vc = Tooltip_VC()
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true, completion: nil)
-    }
-
-    private func onSampleVC() {
-        let vc = Sample_VC()
-        vc.complete = { [weak vc] in
-            vc?.dismiss(animated: true, completion: nil)
-        }
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }
@@ -521,46 +416,5 @@ extension ViewController {
         let vc = FlexPin_VC()
         vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: true, completion: nil)
-    }
-}
-
-
-class Sample_VC: UIViewController {
-
-    private let closeButton = UIButton()
-    private var disposeBag = DisposeBag()
-
-    var complete: (() -> Void)?
-
-
-    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        print("\(#fileID) \(#function)")
-    }
-
-    deinit {
-        print("\(#fileID) \(#function)")
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .white
-
-        self.closeButton.setTitle("close", for: .normal)
-        self.closeButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.closeButton)
-
-        self.closeButton.snp.makeConstraints { maker in
-            maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(16.0)
-            maker.leading.equalToSuperview().offset(16.0)
-        }
-
-        self.closeButton.rx.tap
-            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
-            .bind { [weak self] _ in
-                self?.complete?()
-            }
-            .disposed(by: self.disposeBag)
     }
 }
