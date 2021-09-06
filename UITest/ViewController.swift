@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     private let pageVCButton = UIButton()
     private let messageVCButton = UIButton()
     private let recorderVCButton = UIButton()
+    private let playerVCButton = UIButton()
     private let pickerVCButton = UIButton()
     private let tooltipVCButton = UIButton()
     private let webVCButton = UIButton()
@@ -180,9 +181,11 @@ extension ViewController {
         self.recorderVCButton.setTitle("RecorderVC", for: .normal)
         self.recorderVCButton.setTitleColor(.black, for: .normal)
 
+        self.playerVCButton.setTitle("PlayerVC", for: .normal)
+        self.playerVCButton.setTitleColor(.black, for: .normal)
+
         self.pickerVCButton.setTitle("PickerVC", for: .normal)
         self.pickerVCButton.setTitleColor(.black, for: .normal)
-        self.view.addSubview(self.pickerVCButton)
 
         self.tooltipVCButton.setTitle("TooltipVC", for: .normal)
         self.tooltipVCButton.setTitleColor(.black, for: .normal)
@@ -214,6 +217,7 @@ extension ViewController {
                 flex.addItem(self.pageVCButton)
                 flex.addItem(self.messageVCButton)
                 flex.addItem(self.recorderVCButton)
+                flex.addItem(self.playerVCButton)
                 flex.addItem(self.pickerVCButton)
                 flex.addItem(self.tooltipVCButton)
                 flex.addItem(self.webVCButton)
@@ -273,6 +277,13 @@ extension ViewController {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .bind { [weak self] _ in
                 self?.onRecorderVC()
+            }
+            .disposed(by: self.disposeBag)
+
+        self.playerVCButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.onPlayerVC()
             }
             .disposed(by: self.disposeBag)
 
@@ -364,6 +375,12 @@ extension ViewController {
     private func onRecorderVC() {
         let vc = Recorder_VC()
         vc.bind(Recorder_VM())
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    private func onPlayerVC() {
+        let vc = Player_VC()
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: true, completion: nil)
     }

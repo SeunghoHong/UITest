@@ -35,6 +35,9 @@
 		4D521ED626C441AD00918C06 /* FlexLayoutYogaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4D521ED526C441AD00918C06 /* FlexLayoutYogaKit */; };
 		4D521ED826C441AD00918C06 /* FlexLayoutYoga in Frameworks */ = {isa = PBXBuildFile; productRef = 4D521ED726C441AD00918C06 /* FlexLayoutYoga */; };
 		4D521EDA26C441AD00918C06 /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 4D521ED926C441AD00918C06 /* FlexLayout */; };
+		4D53007326E5B47A000FC662 /* Player_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D53007026E5B47A000FC662 /* Player_VC.swift */; };
+		4D53007426E5B47A000FC662 /* Player_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D53007126E5B47A000FC662 /* Player_VM.swift */; };
+		4D53007526E5B47A000FC662 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D53007226E5B47A000FC662 /* Player.swift */; };
 		4D5E77D32451494800A7C344 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D22451494800A7C344 /* AppDelegate.swift */; };
 		4D5E77D52451494800A7C344 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D42451494800A7C344 /* SceneDelegate.swift */; };
 		4D5E77D72451494800A7C344 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D62451494800A7C344 /* ViewController.swift */; };
@@ -104,6 +107,9 @@
 		4D449ACC254C8BA000BC5623 /* Data+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Util.swift"; sourceTree = "<group>"; };
 		4D47F5DB2581BD8600DD209D /* Tooltip_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tooltip_VC.swift; sourceTree = "<group>"; };
 		4D47F5E12581C27C00DD209D /* TooltipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
+		4D53007026E5B47A000FC662 /* Player_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player_VC.swift; sourceTree = "<group>"; };
+		4D53007126E5B47A000FC662 /* Player_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player_VM.swift; sourceTree = "<group>"; };
+		4D53007226E5B47A000FC662 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		4D5E77CF2451494800A7C344 /* UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D5E77D22451494800A7C344 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D5E77D42451494800A7C344 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -235,6 +241,16 @@
 			path = Tooltip;
 			sourceTree = "<group>";
 		};
+		4D53006F26E5B47A000FC662 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				4D53007026E5B47A000FC662 /* Player_VC.swift */,
+				4D53007126E5B47A000FC662 /* Player_VM.swift */,
+				4D53007226E5B47A000FC662 /* Player.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
 		4D5E77C62451494800A7C344 = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +304,7 @@
 				4D5EBE8925C12CBF00BF443C /* Notice */,
 				4DC6F52B246D8CA0003D3B0E /* Page */,
 				4D69F5A525523488007827D7 /* Picker */,
+				4D53006F26E5B47A000FC662 /* Player */,
 				9BC65959265E256A0080D865 /* Popup */,
 				4DB3F02C246318BE00602F96 /* Profile */,
 				4D256F1925486BC3004B3C38 /* Record */,
@@ -546,6 +563,7 @@
 				4DE1E0562455F07000A25A81 /* Banner_VC.swift in Sources */,
 				4D17143125C288B6006063AA /* WebView.swift in Sources */,
 				4D47F5DC2581BD8600DD209D /* Tooltip_VC.swift in Sources */,
+				4D53007426E5B47A000FC662 /* Player_VM.swift in Sources */,
 				4D449ACD254C8BA000BC5623 /* Data+Util.swift in Sources */,
 				4D17142625C2884D006063AA /* WKWebView+Rx.swift in Sources */,
 				4D99720C25DDEFEE006789C8 /* SlotCell.swift in Sources */,
@@ -575,6 +593,7 @@
 				4DE1E0552455F07000A25A81 /* BannerView.swift in Sources */,
 				4D385C9726C6AF9F00A66764 /* TestPinCell.swift in Sources */,
 				4DC6F52E246D8CA0003D3B0E /* Page_VM.swift in Sources */,
+				4D53007526E5B47A000FC662 /* Player.swift in Sources */,
 				4D0E274226C439B600657B78 /* FlexPin_VC.swift in Sources */,
 				4D256F2B25487153004B3C38 /* Error+Util.swift in Sources */,
 				4D77989B25A53B9400485C32 /* AVAudioRecorder+Rx.swift in Sources */,
@@ -592,6 +611,7 @@
 				4D63F40B24A9DB520012730D /* Visualizer.swift in Sources */,
 				4D47F5E22581C27C00DD209D /* TooltipView.swift in Sources */,
 				4D99720D25DDEFEE006789C8 /* Slot_VC.swift in Sources */,
+				4D53007326E5B47A000FC662 /* Player_VC.swift in Sources */,
 				4DB8489725F9ED7A0036FE9A /* IdleWindow.swift in Sources */,
 				4DF5D42425CEBB660044735C /* NoticeViewModel.swift in Sources */,
 				4DABE83B2598F29D0047D704 /* UIImage+Util.swift in Sources */,
