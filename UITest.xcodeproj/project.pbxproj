@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D07825726E73993006DF872 /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D07825626E73993006DF872 /* CircleProgressBar.swift */; };
+		4D07825A26E73A3B006DF872 /* PlayerDetail_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D07825826E73A3A006DF872 /* PlayerDetail_VC.swift */; };
+		4D07825B26E73A3B006DF872 /* PlayerDetail_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D07825926E73A3B006DF872 /* PlayerDetail_VM.swift */; };
 		4D0E273F26C433DE00657B78 /* PinLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 4D0E273E26C433DE00657B78 /* PinLayout */; };
 		4D0E274226C439B600657B78 /* FlexPin_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0E274126C439B600657B78 /* FlexPin_VC.swift */; };
 		4D17142625C2884D006063AA /* WKWebView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D17142525C2884D006063AA /* WKWebView+Rx.swift */; };
@@ -92,6 +95,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D07825626E73993006DF872 /* CircleProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
+		4D07825826E73A3A006DF872 /* PlayerDetail_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetail_VC.swift; sourceTree = "<group>"; };
+		4D07825926E73A3B006DF872 /* PlayerDetail_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetail_VM.swift; sourceTree = "<group>"; };
 		4D0E274126C439B600657B78 /* FlexPin_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexPin_VC.swift; sourceTree = "<group>"; };
 		4D17142525C2884D006063AA /* WKWebView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKWebView+Rx.swift"; sourceTree = "<group>"; };
 		4D17142A25C2887E006063AA /* Web_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Web_VM.swift; sourceTree = "<group>"; };
@@ -247,6 +253,8 @@
 				4D53007026E5B47A000FC662 /* Player_VC.swift */,
 				4D53007126E5B47A000FC662 /* Player_VM.swift */,
 				4D53007226E5B47A000FC662 /* Player.swift */,
+				4D07825826E73A3A006DF872 /* PlayerDetail_VC.swift */,
+				4D07825926E73A3B006DF872 /* PlayerDetail_VM.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -400,6 +408,7 @@
 		4DC6F530246D8CD4003D3B0E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4D07825626E73993006DF872 /* CircleProgressBar.swift */,
 				4D9FD72524705043007A9703 /* MessageInputView.swift */,
 				4DC6F531246D8CD4003D3B0E /* PageControl.swift */,
 				4D63F40A24A9DB520012730D /* Visualizer.swift */,
@@ -565,6 +574,7 @@
 				4D47F5DC2581BD8600DD209D /* Tooltip_VC.swift in Sources */,
 				4D53007426E5B47A000FC662 /* Player_VM.swift in Sources */,
 				4D449ACD254C8BA000BC5623 /* Data+Util.swift in Sources */,
+				4D07825A26E73A3B006DF872 /* PlayerDetail_VC.swift in Sources */,
 				4D17142625C2884D006063AA /* WKWebView+Rx.swift in Sources */,
 				4D99720C25DDEFEE006789C8 /* SlotCell.swift in Sources */,
 				4D5E77FB24515E1300A7C344 /* Collection+Util.swift in Sources */,
@@ -590,6 +600,7 @@
 				4D256F1F25486BC3004B3C38 /* Recorder_VC.swift in Sources */,
 				4D17142D25C2887E006063AA /* Web_VC.swift in Sources */,
 				4DC6F532246D8CD4003D3B0E /* PageControl.swift in Sources */,
+				4D07825726E73993006DF872 /* CircleProgressBar.swift in Sources */,
 				4DE1E0552455F07000A25A81 /* BannerView.swift in Sources */,
 				4D385C9726C6AF9F00A66764 /* TestPinCell.swift in Sources */,
 				4DC6F52E246D8CA0003D3B0E /* Page_VM.swift in Sources */,
@@ -598,6 +609,7 @@
 				4D256F2B25487153004B3C38 /* Error+Util.swift in Sources */,
 				4D77989B25A53B9400485C32 /* AVAudioRecorder+Rx.swift in Sources */,
 				4D5E77D52451494800A7C344 /* SceneDelegate.swift in Sources */,
+				4D07825B26E73A3B006DF872 /* PlayerDetail_VM.swift in Sources */,
 				4DABE8352598F1C60047D704 /* UIView+Sprinkle.swift in Sources */,
 				4D5EBE9025C12DD100BF443C /* Notice_VC.swift in Sources */,
 				4DF5D41F25CEBAE70044735C /* NoticeView.swift in Sources */,
