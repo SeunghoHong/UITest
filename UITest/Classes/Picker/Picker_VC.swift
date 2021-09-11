@@ -49,6 +49,8 @@ extension Picker_VC {
         self.loadButton.setTitle("load", for: .normal)
         self.loadButton.setTitleColor(.black, for: .normal)
         self.view.addSubview(self.loadButton)
+
+        self.view.addSubview(self.pickerView)
     }
 
     private func layout() {

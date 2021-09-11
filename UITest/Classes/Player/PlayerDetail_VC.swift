@@ -14,8 +14,13 @@ final class PlayerDetail_VC: UIViewController {
     private let circleProgressBar = CircleProgressBar()
     private let profileImageView = UIImageView()
 
-    private let titleLabel = UILabel()
+    private let infoView = UIView()
     private let nicknameLabel = UILabel()
+    private let titleLabel = UILabel()
+
+    private let followButton = UIButton()
+    private let likeButton = UIButton()
+    private let shareButton = UIButton()
 
     private var player: AVPlayer?
 
@@ -35,8 +40,10 @@ final class PlayerDetail_VC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(#function)
 
         self.setup()
+        self.setupFlex()
         self.bind()
 
         self.prepare()
@@ -44,20 +51,21 @@ final class PlayerDetail_VC: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         print(#function)
+
         self.player?.play()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
         print(#function)
+
         self.player?.pause()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        print(#function)
 
         self.layout()
     }
@@ -81,11 +89,55 @@ extension PlayerDetail_VC {
         self.profileImageView.radius = 100.0
         self.view.addSubview(self.profileImageView)
 
-        self.titleLabel.backgroundColor = .green
-        self.view.addSubview(self.titleLabel)
+        self.infoView.backgroundColor = .cyan
+        self.view.addSubview(self.infoView)
 
         self.nicknameLabel.backgroundColor = .yellow
-        self.view.addSubview(self.nicknameLabel)
+        self.nicknameLabel.textColor = .black
+        self.nicknameLabel.text = "Apple Event"
+
+        self.titleLabel.backgroundColor = .green
+        self.titleLabel.textColor = .black
+        self.titleLabel.text = "Introducing the new MacBook Air, 13‑inch MacBook Pro, and Mac mini, all with the Apple M1 chip."
+
+        self.followButton.backgroundColor = .red
+        self.likeButton.backgroundColor = .blue
+        self.shareButton.backgroundColor = .yellow
+    }
+
+    private func setupFlex() {
+        self.infoView.flex
+            .direction(.row)
+            .marginHorizontal(16.0)
+            .alignItems(.baseline)
+            .define { flex in
+                flex.addItem()
+                    .direction(.column)
+                    .shrink(1)
+                    .define { flex in
+                        flex.addItem(self.nicknameLabel)
+
+                        flex.addItem(self.titleLabel)
+                            .marginTop(8.0)
+                    }
+
+                flex.addItem()
+                    .direction(.column)
+                    .backgroundColor(.green)
+                    .marginLeft(28.0)
+                    .define { flex in
+                        flex.addItem(self.followButton)
+                            .size(40)
+
+                        flex.addItem(self.likeButton)
+                            .marginTop(24.0)
+                            .size(40)
+
+                        flex.addItem(self.shareButton)
+                            .marginTop(24.0)
+                            .size(40)
+                    }
+            }
     }
 
     private func layout() {
@@ -99,11 +151,19 @@ extension PlayerDetail_VC {
             .top(64.0)
             .marginTop(16.0)
             .hCenter()
-//            .width(30%)
             .size(200.0)
 
         self.backgroundImageView.pin
             .all()
+
+        self.infoView.pin
+            .horizontally()
+
+        self.infoView.flex
+            .layout(mode: .adjustHeight)
+
+        self.infoView.pin
+            .bottom(self.view.pin.safeArea.bottom + 86.0)
     }
 
     private func bind() {
@@ -115,16 +175,5 @@ extension PlayerDetail_VC {
 extension PlayerDetail_VC {
 
     func prepare() {
-        self.player = AVPlayer(url: URL(string: "http://kr-cdn.spooncast.net/profiles/E/VX2O4Et3Xozb4/4857feeb-d461-479a-957f-8e0fd9a991ae.m4a")!)
-        self.player?.addPeriodicTimeObserver(
-            forInterval: CMTimeMake(value: 33, timescale: 1000),
-            queue: nil
-        ) { [weak self] time in
-            guard let duration = self?.player?.currentItem?.duration else { return }
-
-            let progress = CGFloat(time.seconds / duration.seconds)
-            self?.circleProgressBar.progress = progress
-//            print("\(time.seconds) / \(duration.seconds)")
-        }
     }
 }

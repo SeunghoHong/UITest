@@ -40,7 +40,6 @@
 		4D521EDA26C441AD00918C06 /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 4D521ED926C441AD00918C06 /* FlexLayout */; };
 		4D53007326E5B47A000FC662 /* Player_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D53007026E5B47A000FC662 /* Player_VC.swift */; };
 		4D53007426E5B47A000FC662 /* Player_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D53007126E5B47A000FC662 /* Player_VM.swift */; };
-		4D53007526E5B47A000FC662 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D53007226E5B47A000FC662 /* Player.swift */; };
 		4D5E77D32451494800A7C344 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D22451494800A7C344 /* AppDelegate.swift */; };
 		4D5E77D52451494800A7C344 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D42451494800A7C344 /* SceneDelegate.swift */; };
 		4D5E77D72451494800A7C344 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D62451494800A7C344 /* ViewController.swift */; };
@@ -59,6 +58,8 @@
 		4D69F5A725523488007827D7 /* Picker_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D69F5A625523488007827D7 /* Picker_VC.swift */; };
 		4D77989B25A53B9400485C32 /* AVAudioRecorder+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77989A25A53B9400485C32 /* AVAudioRecorder+Rx.swift */; };
 		4D7DCEC9246EFBA400787D9B /* UIPageViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7DCEC8246EFBA400787D9B /* UIPageViewController+Util.swift */; };
+		4D85F62D26ECE64B0051C54C /* RevealServer.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D85F62C26ECE64B0051C54C /* RevealServer.xcframework */; };
+		4D85F62E26ECE64B0051C54C /* RevealServer.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4D85F62C26ECE64B0051C54C /* RevealServer.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4D99720B25DDEFEE006789C8 /* Slot_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D99720825DDEFEE006789C8 /* Slot_VM.swift */; };
 		4D99720C25DDEFEE006789C8 /* SlotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D99720925DDEFEE006789C8 /* SlotCell.swift */; };
 		4D99720D25DDEFEE006789C8 /* Slot_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D99720A25DDEFEE006789C8 /* Slot_VC.swift */; };
@@ -94,6 +95,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4D85F62F26ECE64C0051C54C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4D85F62E26ECE64B0051C54C /* RevealServer.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		4D07825626E73993006DF872 /* CircleProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
 		4D07825826E73A3A006DF872 /* PlayerDetail_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetail_VC.swift; sourceTree = "<group>"; };
@@ -115,7 +130,6 @@
 		4D47F5E12581C27C00DD209D /* TooltipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
 		4D53007026E5B47A000FC662 /* Player_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player_VC.swift; sourceTree = "<group>"; };
 		4D53007126E5B47A000FC662 /* Player_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player_VM.swift; sourceTree = "<group>"; };
-		4D53007226E5B47A000FC662 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		4D5E77CF2451494800A7C344 /* UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D5E77D22451494800A7C344 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D5E77D42451494800A7C344 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +152,8 @@
 		4D69F5A625523488007827D7 /* Picker_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Picker_VC.swift; sourceTree = "<group>"; };
 		4D77989A25A53B9400485C32 /* AVAudioRecorder+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVAudioRecorder+Rx.swift"; sourceTree = "<group>"; };
 		4D7DCEC8246EFBA400787D9B /* UIPageViewController+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+Util.swift"; sourceTree = "<group>"; };
+		4D85F62426ECE2820051C54C /* RevealServer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RevealServer.framework; sourceTree = "<group>"; };
+		4D85F62C26ECE64B0051C54C /* RevealServer.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RevealServer.xcframework; sourceTree = "<group>"; };
 		4D99720825DDEFEE006789C8 /* Slot_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slot_VM.swift; sourceTree = "<group>"; };
 		4D99720925DDEFEE006789C8 /* SlotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotCell.swift; sourceTree = "<group>"; };
 		4D99720A25DDEFEE006789C8 /* Slot_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slot_VC.swift; sourceTree = "<group>"; };
@@ -177,6 +193,7 @@
 				4D256F1625486955004B3C38 /* Gedatsu in Frameworks */,
 				4D256F0025486820004B3C38 /* SnapKit in Frameworks */,
 				4D256EFB254867F8004B3C38 /* RxGesture in Frameworks */,
+				4D85F62D26ECE64B0051C54C /* RevealServer.xcframework in Frameworks */,
 				4D256F0C254868AA004B3C38 /* RxDataSources in Frameworks */,
 				4D256F0A254868AA004B3C38 /* Differentiator in Frameworks */,
 				4D256EF425486786004B3C38 /* RxCocoa in Frameworks */,
@@ -207,6 +224,8 @@
 		4D0E274326C43F1F00657B78 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4D85F62C26ECE64B0051C54C /* RevealServer.xcframework */,
+				4D85F62426ECE2820051C54C /* RevealServer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -252,7 +271,6 @@
 			children = (
 				4D53007026E5B47A000FC662 /* Player_VC.swift */,
 				4D53007126E5B47A000FC662 /* Player_VM.swift */,
-				4D53007226E5B47A000FC662 /* Player.swift */,
 				4D07825826E73A3A006DF872 /* PlayerDetail_VC.swift */,
 				4D07825926E73A3B006DF872 /* PlayerDetail_VM.swift */,
 			);
@@ -452,6 +470,8 @@
 				4D5E77CB2451494800A7C344 /* Sources */,
 				4D5E77CC2451494800A7C344 /* Frameworks */,
 				4D5E77CD2451494800A7C344 /* Resources */,
+				4D85F62826ECE3A30051C54C /* Integrate Reveal Server */,
+				4D85F62F26ECE64C0051C54C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -564,6 +584,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4D85F62826ECE3A30051C54C /* Integrate Reveal Server */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Integrate Reveal Server";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export REVEAL_SERVER_FILENAME=\"RevealServer.xcframework\"\n\n# Update this path to point to the location of RevealServer.xcframework in your project.\nexport REVEAL_SERVER_PATH=\"${SRCROOT}/${REVEAL_SERVER_FILENAME}\"\n\n# If RevealServer.xcframework exists at the specified path, run the integration script.\nif [ -d \"${REVEAL_SERVER_PATH}\" ]; then\n  \"${REVEAL_SERVER_PATH}/Scripts/integrate_revealserver.sh\"\nelse\n  echo \"Reveal Server not loaded into ${TARGET_NAME}: ${REVEAL_SERVER_FILENAME} could not be found.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4D5E77CB2451494800A7C344 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -604,7 +645,6 @@
 				4DE1E0552455F07000A25A81 /* BannerView.swift in Sources */,
 				4D385C9726C6AF9F00A66764 /* TestPinCell.swift in Sources */,
 				4DC6F52E246D8CA0003D3B0E /* Page_VM.swift in Sources */,
-				4D53007526E5B47A000FC662 /* Player.swift in Sources */,
 				4D0E274226C439B600657B78 /* FlexPin_VC.swift in Sources */,
 				4D256F2B25487153004B3C38 /* Error+Util.swift in Sources */,
 				4D77989B25A53B9400485C32 /* AVAudioRecorder+Rx.swift in Sources */,
@@ -789,6 +829,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BT6RS3Y7F7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -803,6 +847,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -813,6 +858,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BT6RS3Y7F7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = "FLEXLAYOUT_SWIFT_PACKAGE=1";
 				INFOPLIST_FILE = UITest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -823,6 +872,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};

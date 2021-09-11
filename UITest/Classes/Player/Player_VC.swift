@@ -51,10 +51,10 @@ extension Player_VC {
     private func setup() {
         self.view.backgroundColor = .white
 
-//        self.pageViewController.delegate = self
         self.pageViewController.dataSource = self
         self.view.addSubview(self.pageViewController.view)
         self.addChild(self.pageViewController)
+        self.pageViewController.didMove(toParent: self)
 
         self.pageViewController.setViewControllers(
             [PlayerDetail_VC()],
