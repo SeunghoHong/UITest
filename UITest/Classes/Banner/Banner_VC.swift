@@ -6,6 +6,44 @@ import RxCocoa
 import SnapKit
 
 
+
+extension CGPoint {
+    static func +=(lhs: inout CGPoint, rhs: CGPoint) {
+        lhs.x += rhs.x
+        lhs.y += rhs.y
+    }
+}
+
+class Rectangle: UIView {
+    var color: UIColor = .clear {
+        didSet { backgroundColor = color }
+    }
+
+    var borderColor: CGColor = UIColor.lightGray.cgColor {
+        didSet { layer.borderColor = borderColor }
+    }
+
+    var borderWidth : CGFloat = 0.5 {
+        didSet { layer.borderWidth = borderWidth }
+    }
+
+    override func draw(_ rect: CGRect) {
+        layer.borderColor = self.borderColor
+        layer.borderWidth = self.borderWidth
+    }
+
+    override func didMoveToSuperview() {
+        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(moveRectangleGesture(_:))))
+    }
+
+    @objc func moveRectangleGesture(_ gesture: UIPanGestureRecognizer) {
+        frame.origin += gesture.translation(in: self)
+        gesture.setTranslation(.zero, in: self)
+    }
+}
+
+
+
 class Banner_VC: UIViewController {
 
     private var bannerView = BannerView()
@@ -21,6 +59,15 @@ class Banner_VC: UIViewController {
 
     private var disposeBag = DisposeBag()
 
+    lazy var imageToEdit : UIImageView = {
+        let v = UIImageView(image: UIImage(systemName: "star.fill"))
+        v.frame = CGRect(x: 150, y: 500, width: 200, height: 200)
+        v.isUserInteractionEnabled = true
+        v.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pan(_:))))
+        return v
+    }()
+    var allRectangles: [Rectangle] = []
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +75,38 @@ class Banner_VC: UIViewController {
         self.setup()
         self.layout()
         self.bind()
+
+        view.addSubview(imageToEdit)
+    }
+
+    @objc func pan(_ gesture: UIPanGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            let rectangle = Rectangle(frame: .init(origin:     gesture.location(in: view), size: .init(width: 0, height: 0)))
+            view.addSubview(rectangle)
+            allRectangles.append(rectangle)
+        case .changed:
+            let distance = gesture.translation(in: view)
+            let index = allRectangles.index(before: allRectangles.endIndex)
+            let frame = allRectangles[index].frame
+            allRectangles[index].frame = .init(origin: frame.origin, size: .init(width: frame.width + distance.x, height: frame.height + distance.y))
+            allRectangles[index].setNeedsDisplay()
+            gesture.setTranslation(.zero, in: view)
+        case .ended:
+            let index = allRectangles.index(before: allRectangles.endIndex)
+            addBlur(to: allRectangles[index])
+            break
+        default:
+            break
+        }
+    }
+
+    func addBlur(to View: UIView) {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = View.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        View.addSubview(blurEffectView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
