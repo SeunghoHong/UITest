@@ -56,6 +56,7 @@ extension MessageInputView {
         self.baseView.clipsToBounds = true
         self.addSubview(self.baseView)
 
+        self.textView.delegate = self
         self.textView.isScrollEnabled = false
         self.textView.font = UIFont.systemFont(ofSize: 18.0)
         self.textView.textContainerInset = UIEdgeInsets.zero
@@ -178,5 +179,71 @@ extension MessageInputView {
     private func onSend() {
         guard let text = self.textView.text, let onText = self.onText else { return }
         onText(text)
+    }
+}
+
+
+extension MessageInputView: UITextViewDelegate {
+
+    func textView(
+        _ textView: UITextView,
+        shouldChangeTextIn range: NSRange,
+        replacementText text: String
+    ) -> Bool {
+        let char = text.cString(using: String.Encoding.utf8)!
+        let isBackSpace = strcmp(char, "\\b")
+        if isBackSpace == -92 {
+            if textView.text.count > 0 {
+                if let attributedString = textView.attributedText.mutableCopy() as? NSMutableAttributedString {
+                    var mentionRange: NSRange?
+
+                    attributedString.enumerateAttribute(
+                        .link,
+                        in: NSRange(location: 0, length: textView.attributedText.length)
+                    ) { value, linkRange, stop in
+                        if linkRange.contains(range.location) && value != nil {
+                            mentionRange = linkRange
+                            stop.pointee = true
+                        }
+                    }
+
+                    if let mentionRange = mentionRange {
+                        attributedString.removeAttribute(.link, range: mentionRange)
+                        attributedString.deleteCharacters(in: mentionRange)
+                        textView.attributedText = attributedString
+                        textView.selectedRange = NSRange(location: mentionRange.location, length: 0)
+                        textView.scrollRangeToVisible(NSRange(location: mentionRange.location, length: 0))
+                        return false
+                    }
+                }
+            }
+
+            return true
+        }
+
+        if text == "@" {
+            let mention = "@raymond"
+            var string = textView.text ?? ""
+            string.insert(contentsOf: "\(mention) ", at: string.index(string.startIndex, offsetBy: range.location))
+            let mentionRange = NSRange(location: range.location, length: mention.count)
+
+            let attributedString = NSMutableAttributedString(string: string as String, attributes: [.font : UIFont.systemFont(ofSize: 18.0)])
+            attributedString.addAttribute(.link, value: "test://userID/raymond", range: mentionRange)
+            textView.attributedText = attributedString
+            textView.selectedRange = NSRange(location: mentionRange.location + mention.count + 1 /* space */, length: 0)
+            return false
+        }
+
+        return true
+    }
+
+    func textView(
+        _ textView: UITextView,
+        shouldInteractWith URL: URL,
+        in characterRange: NSRange,
+        interaction: UITextItemInteraction
+    ) -> Bool {
+        print("\(characterRange) \(URL)")
+        return false
     }
 }

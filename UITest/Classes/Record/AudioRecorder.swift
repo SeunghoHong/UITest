@@ -67,6 +67,7 @@ extension AudioRecorder {
 extension AudioRecorder {
 
     func record(for duration: TimeInterval) {
+        self.progressDisposeBag = DisposeBag()
         guard let audioRecorder = self.audioRecorder else {
             self.error.accept(NSError.trace())
             return
