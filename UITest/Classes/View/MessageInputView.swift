@@ -234,6 +234,8 @@ extension MessageInputView: UITextViewDelegate {
             return false
         }
 
+        textView.typingAttributes = [.font: UIFont.systemFont(ofSize: 18.0)]
+
         return true
     }
 
