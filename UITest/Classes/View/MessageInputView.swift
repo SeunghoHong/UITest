@@ -245,7 +245,7 @@ extension MessageInputView: UITextViewDelegate {
         in characterRange: NSRange,
         interaction: UITextItemInteraction
     ) -> Bool {
-        print("\(characterRange) \(URL)")
+        LogD("\(characterRange) \(URL)")
         return false
     }
 }

@@ -55,7 +55,7 @@ extension Visualizer {
         self.addSubview(self.stackView)
 
         (0...9).forEach { index in
-            print("\(index)")
+            LogD("\(index)")
             let view = UIView()
             view.backgroundColor = .white
             self.stackView.addArrangedSubview(view)

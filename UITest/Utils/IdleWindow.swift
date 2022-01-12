@@ -31,7 +31,7 @@ class IdleWindow: UIWindow {
                       let visibleViewController = self.visibleViewController(rootViewController)
                 else { return }
 
-                print("\(String(describing: visibleViewController.classForCoder))")
+                LogD("\(String(describing: visibleViewController.classForCoder))")
             }
             .disposed(by: self.disposeBag)
             

@@ -94,7 +94,7 @@ extension Picker_VC {
 
         self.pickerView.rx.itemSelected
             .bind { indexPath in
-                print("\(self.items.value[safe: indexPath.row])")
+                LogD("\(self.items.value[safe: indexPath.row])")
             }
             .disposed(by: self.disposeBag)
     }

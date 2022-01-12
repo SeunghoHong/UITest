@@ -109,11 +109,11 @@ extension ViewController {
             let _ = try self.liveItem2()
             self.aaaa(try self.liveItem2())
         } catch UserError.errNo(let code) {
-            print("UserError \(code)")
+            LogE("UserError \(code)")
         } catch LiveError.errNo(let code) {
-            print("LiveError \(code)")
+            LogE("LiveError \(code)")
         } catch let e {
-            print("\(e)")
+            LogE("\(e)")
         }
     }
 
@@ -148,10 +148,10 @@ extension ViewController {
             .flatMap { self.login($0) }
             .flatMap { self.liveItem() }
             .subscribe(onNext: { `id` in
-                print("\(id)")
+                LogD("\(id)")
             }, onError: { error in
                 guard let error = error as? NSError else { return }
-                print("\(error.code)")
+                LogE("\(error.code)")
             })
             .disposed(by: self.disposeBag)
     }

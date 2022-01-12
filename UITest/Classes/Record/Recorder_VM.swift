@@ -46,7 +46,7 @@ extension Recorder_VM {
 
         self.recorder.isRecording
             .bind { isRecording in
-                print("isRecording \(isRecording)")
+                LogD("isRecording \(isRecording)")
             }
             .disposed(by: self.disposeBag)
 
@@ -57,7 +57,7 @@ extension Recorder_VM {
         self.recorder.error
             .compactMap { $0 }
             .bind { error in
-                print("\(error.localizedDescription)")
+                LogE("\(error.localizedDescription)")
             }
             .disposed(by: self.disposeBag)
     }

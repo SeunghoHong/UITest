@@ -138,19 +138,19 @@ extension WebView {
 
         self.webView.rx.title
             .bind {
-                print("title \($0)")
+                LogD("title \($0)")
             }
             .disposed(by: self.disposeBag)
 
         self.webView.rx.url
             .bind {
-                print("url \($0)")
+                LogD("url \($0)")
             }
             .disposed(by: self.disposeBag)
 
         self.webView.rx.isLoading
             .bind {
-                print("isLoading \($0)")
+                LogD("isLoading \($0)")
             }
             .disposed(by: self.disposeBag)
 

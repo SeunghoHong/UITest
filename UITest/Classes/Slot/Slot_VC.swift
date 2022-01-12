@@ -105,7 +105,7 @@ extension Slot_VC {
 
 //        self.collectionView.rx.itemSelected
 //            .bind { [weak self] indexPath in
-//                print("\(indexPath)")
+//                LogD("\(indexPath)")
 //            }
 //            .disposed(by: self.disposeBag)
     }

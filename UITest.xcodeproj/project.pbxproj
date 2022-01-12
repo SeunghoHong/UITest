@@ -73,6 +73,7 @@
 		4DABE83B2598F29D0047D704 /* UIImage+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABE83A2598F29D0047D704 /* UIImage+Util.swift */; };
 		4DB3F02F246318BF00602F96 /* Profile_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB3F02D246318BE00602F96 /* Profile_VM.swift */; };
 		4DB3F030246318BF00602F96 /* Profile_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB3F02E246318BE00602F96 /* Profile_VC.swift */; };
+		4DB46A72278EB5BB004B3334 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB46A71278EB5BB004B3334 /* Log.swift */; };
 		4DB8489725F9ED7A0036FE9A /* IdleWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB8489625F9ED7A0036FE9A /* IdleWindow.swift */; };
 		4DC6F52E246D8CA0003D3B0E /* Page_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC6F52C246D8CA0003D3B0E /* Page_VM.swift */; };
 		4DC6F52F246D8CA0003D3B0E /* Page_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC6F52D246D8CA0003D3B0E /* Page_VC.swift */; };
@@ -167,6 +168,8 @@
 		4DABE83A2598F29D0047D704 /* UIImage+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Util.swift"; sourceTree = "<group>"; };
 		4DB3F02D246318BE00602F96 /* Profile_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile_VM.swift; sourceTree = "<group>"; };
 		4DB3F02E246318BE00602F96 /* Profile_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile_VC.swift; sourceTree = "<group>"; };
+		4DB46A6F278EAC15004B3334 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
+		4DB46A71278EB5BB004B3334 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		4DB8489625F9ED7A0036FE9A /* IdleWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleWindow.swift; sourceTree = "<group>"; };
 		4DC6F52C246D8CA0003D3B0E /* Page_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page_VM.swift; sourceTree = "<group>"; };
 		4DC6F52D246D8CA0003D3B0E /* Page_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page_VC.swift; sourceTree = "<group>"; };
@@ -224,6 +227,7 @@
 		4D0E274326C43F1F00657B78 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4DB46A6F278EAC15004B3334 /* OSLog.framework */,
 				4D85F62C26ECE64B0051C54C /* RevealServer.xcframework */,
 				4D85F62426ECE2820051C54C /* RevealServer.framework */,
 			);
@@ -347,6 +351,7 @@
 		4D5E77F924515E1300A7C344 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4DB46A71278EB5BB004B3334 /* Log.swift */,
 				4DA48F62260F43C1004AD82F /* UIView+Util.swift */,
 				4D77989A25A53B9400485C32 /* AVAudioRecorder+Rx.swift */,
 				4D5E77FA24515E1300A7C344 /* Collection+Util.swift */,
@@ -638,6 +643,7 @@
 				4D9FD72624705043007A9703 /* MessageInputView.swift in Sources */,
 				4D5EBE9725C133D100BF443C /* URL+Util.swift in Sources */,
 				9BC6595B265E256A0080D865 /* ExtendablePopup_VC.swift in Sources */,
+				4DB46A72278EB5BB004B3334 /* Log.swift in Sources */,
 				4D256F1F25486BC3004B3C38 /* Recorder_VC.swift in Sources */,
 				4D17142D25C2887E006063AA /* Web_VC.swift in Sources */,
 				4DC6F532246D8CD4003D3B0E /* PageControl.swift in Sources */,

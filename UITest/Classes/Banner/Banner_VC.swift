@@ -6,7 +6,6 @@ import RxCocoa
 import SnapKit
 
 
-
 extension CGPoint {
     static func +=(lhs: inout CGPoint, rhs: CGPoint) {
         lhs.x += rhs.x

@@ -31,16 +31,16 @@ final class PlayerDetail_VC: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
 
-        print(#function)
+        LogD(#function)
     }
 
     deinit {
-        print(#function)
+        LogD(#function)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(#function)
+        LogD(#function)
 
         self.setup()
         self.setupFlex()
@@ -51,21 +51,21 @@ final class PlayerDetail_VC: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print(#function)
+        LogD(#function)
 
         self.player?.play()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print(#function)
+        LogD(#function)
 
         self.player?.pause()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print(#function)
+        LogD(#function)
 
         self.layout()
     }

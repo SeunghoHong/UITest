@@ -29,7 +29,7 @@ extension Notice_VM {
             )
             .bind { [weak self] result in
                 if case .success(let obj) = result {
-                    print("\(obj)")
+                    LogD("\(obj)")
                     self?.notices.accept(obj.results)
                 }
             }
