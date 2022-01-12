@@ -40,6 +40,8 @@
 		4D521EDA26C441AD00918C06 /* FlexLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 4D521ED926C441AD00918C06 /* FlexLayout */; };
 		4D53007326E5B47A000FC662 /* Player_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D53007026E5B47A000FC662 /* Player_VC.swift */; };
 		4D53007426E5B47A000FC662 /* Player_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D53007126E5B47A000FC662 /* Player_VM.swift */; };
+		4D591525278F613000106DC9 /* Rswift in Frameworks */ = {isa = PBXBuildFile; productRef = 4D591524278F613000106DC9 /* Rswift */; };
+		4D59152B278F698A00106DC9 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59152A278F698A00106DC9 /* R.generated.swift */; };
 		4D5E77D32451494800A7C344 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D22451494800A7C344 /* AppDelegate.swift */; };
 		4D5E77D52451494800A7C344 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D42451494800A7C344 /* SceneDelegate.swift */; };
 		4D5E77D72451494800A7C344 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E77D62451494800A7C344 /* ViewController.swift */; };
@@ -74,6 +76,8 @@
 		4DB3F02F246318BF00602F96 /* Profile_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB3F02D246318BE00602F96 /* Profile_VM.swift */; };
 		4DB3F030246318BF00602F96 /* Profile_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB3F02E246318BE00602F96 /* Profile_VC.swift */; };
 		4DB46A72278EB5BB004B3334 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB46A71278EB5BB004B3334 /* Log.swift */; };
+		4DB46A80278F16F0004B3334 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB46A7F278F16F0004B3334 /* Toast.swift */; };
+		4DB46A8A278F43F6004B3334 /* UIApplication+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB46A89278F43F6004B3334 /* UIApplication+Util.swift */; };
 		4DB8489725F9ED7A0036FE9A /* IdleWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB8489625F9ED7A0036FE9A /* IdleWindow.swift */; };
 		4DC6F52E246D8CA0003D3B0E /* Page_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC6F52C246D8CA0003D3B0E /* Page_VM.swift */; };
 		4DC6F52F246D8CA0003D3B0E /* Page_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC6F52D246D8CA0003D3B0E /* Page_VC.swift */; };
@@ -131,6 +135,7 @@
 		4D47F5E12581C27C00DD209D /* TooltipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TooltipView.swift; sourceTree = "<group>"; };
 		4D53007026E5B47A000FC662 /* Player_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player_VC.swift; sourceTree = "<group>"; };
 		4D53007126E5B47A000FC662 /* Player_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player_VM.swift; sourceTree = "<group>"; };
+		4D59152A278F698A00106DC9 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		4D5E77CF2451494800A7C344 /* UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D5E77D22451494800A7C344 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D5E77D42451494800A7C344 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -170,6 +175,8 @@
 		4DB3F02E246318BE00602F96 /* Profile_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile_VC.swift; sourceTree = "<group>"; };
 		4DB46A6F278EAC15004B3334 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
 		4DB46A71278EB5BB004B3334 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		4DB46A7F278F16F0004B3334 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		4DB46A89278F43F6004B3334 /* UIApplication+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Util.swift"; sourceTree = "<group>"; };
 		4DB8489625F9ED7A0036FE9A /* IdleWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleWindow.swift; sourceTree = "<group>"; };
 		4DC6F52C246D8CA0003D3B0E /* Page_VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page_VM.swift; sourceTree = "<group>"; };
 		4DC6F52D246D8CA0003D3B0E /* Page_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page_VC.swift; sourceTree = "<group>"; };
@@ -187,6 +194,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D591525278F613000106DC9 /* Rswift in Frameworks */,
 				4D256F0525486865004B3C38 /* RxAppState in Frameworks */,
 				4D521EDA26C441AD00918C06 /* FlexLayout in Frameworks */,
 				4D0E273F26C433DE00657B78 /* PinLayout in Frameworks */,
@@ -306,6 +314,7 @@
 				4D5E77F924515E1300A7C344 /* Utils */,
 				4D5E77F424515D4400A7C344 /* Classes */,
 				4D5E77D22451494800A7C344 /* AppDelegate.swift */,
+				4D59152A278F698A00106DC9 /* R.generated.swift */,
 				4D5E77D42451494800A7C344 /* SceneDelegate.swift */,
 				4D5E77D62451494800A7C344 /* ViewController.swift */,
 				4D5E77D82451494800A7C344 /* Main.storyboard */,
@@ -351,19 +360,21 @@
 		4D5E77F924515E1300A7C344 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				4DB46A71278EB5BB004B3334 /* Log.swift */,
-				4DA48F62260F43C1004AD82F /* UIView+Util.swift */,
 				4D77989A25A53B9400485C32 /* AVAudioRecorder+Rx.swift */,
 				4D5E77FA24515E1300A7C344 /* Collection+Util.swift */,
 				4D449ACC254C8BA000BC5623 /* Data+Util.swift */,
 				4D256F2A25487153004B3C38 /* Error+Util.swift */,
 				4DB8489625F9ED7A0036FE9A /* IdleWindow.swift */,
+				4DB46A71278EB5BB004B3334 /* Log.swift */,
 				4D5EBE8525C1144C00BF443C /* RESTClient.swift */,
 				4D9FD72724705172007A9703 /* RxView.swift */,
 				4DABE82E2598ED9A0047D704 /* Sprinklable.swift */,
+				4DB46A7F278F16F0004B3334 /* Toast.swift */,
+				4DB46A89278F43F6004B3334 /* UIApplication+Util.swift */,
 				4DABE83A2598F29D0047D704 /* UIImage+Util.swift */,
 				4D7DCEC8246EFBA400787D9B /* UIPageViewController+Util.swift */,
 				4DABE8342598F1C60047D704 /* UIView+Sprinkle.swift */,
+				4DA48F62260F43C1004AD82F /* UIView+Util.swift */,
 				4D5EBE9625C133D100BF443C /* URL+Util.swift */,
 				4D17142525C2884D006063AA /* WKWebView+Rx.swift */,
 			);
@@ -472,6 +483,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4D5E77EE2451494D00A7C344 /* Build configuration list for PBXNativeTarget "UITest" */;
 			buildPhases = (
+				4D59151D278F598A00106DC9 /* R.swift */,
 				4D5E77CB2451494800A7C344 /* Sources */,
 				4D5E77CC2451494800A7C344 /* Frameworks */,
 				4D5E77CD2451494800A7C344 /* Resources */,
@@ -497,6 +509,7 @@
 				4D521ED526C441AD00918C06 /* FlexLayoutYogaKit */,
 				4D521ED726C441AD00918C06 /* FlexLayoutYoga */,
 				4D521ED926C441AD00918C06 /* FlexLayout */,
+				4D591524278F613000106DC9 /* Rswift */,
 			);
 			productName = UITest;
 			productReference = 4D5E77CF2451494800A7C344 /* UITest.app */;
@@ -558,6 +571,7 @@
 				4D256F1425486955004B3C38 /* XCRemoteSwiftPackageReference "Gedatsu" */,
 				4D0E273D26C433DE00657B78 /* XCRemoteSwiftPackageReference "PinLayout" */,
 				4D521ED426C441AD00918C06 /* XCRemoteSwiftPackageReference "FlexLayout" */,
+				4D591523278F613000106DC9 /* XCRemoteSwiftPackageReference "R.swift" */,
 			);
 			productRefGroup = 4D5E77D02451494800A7C344 /* Products */;
 			projectDirPath = "";
@@ -590,6 +604,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4D59151D278F598A00106DC9 /* R.swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			name = R.swift;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/UITest/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rswift generate \"$SRCROOT/$PROJECT_NAME/R.generated.swift\" --generators image\n";
+		};
 		4D85F62826ECE3A30051C54C /* Integrate Reveal Server */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -621,6 +655,7 @@
 				4D53007426E5B47A000FC662 /* Player_VM.swift in Sources */,
 				4D449ACD254C8BA000BC5623 /* Data+Util.swift in Sources */,
 				4D07825A26E73A3B006DF872 /* PlayerDetail_VC.swift in Sources */,
+				4DB46A8A278F43F6004B3334 /* UIApplication+Util.swift in Sources */,
 				4D17142625C2884D006063AA /* WKWebView+Rx.swift in Sources */,
 				4D99720C25DDEFEE006789C8 /* SlotCell.swift in Sources */,
 				4D5E77FB24515E1300A7C344 /* Collection+Util.swift in Sources */,
@@ -640,6 +675,7 @@
 				4D385C9526C667A600A66764 /* Schedule_VC.swift in Sources */,
 				4D5EBE8B25C12CBF00BF443C /* Notice.swift in Sources */,
 				4D5EBE8625C1144C00BF443C /* RESTClient.swift in Sources */,
+				4D59152B278F698A00106DC9 /* R.generated.swift in Sources */,
 				4D9FD72624705043007A9703 /* MessageInputView.swift in Sources */,
 				4D5EBE9725C133D100BF443C /* URL+Util.swift in Sources */,
 				9BC6595B265E256A0080D865 /* ExtendablePopup_VC.swift in Sources */,
@@ -649,6 +685,7 @@
 				4DC6F532246D8CD4003D3B0E /* PageControl.swift in Sources */,
 				4D07825726E73993006DF872 /* CircleProgressBar.swift in Sources */,
 				4DE1E0552455F07000A25A81 /* BannerView.swift in Sources */,
+				4DB46A80278F16F0004B3334 /* Toast.swift in Sources */,
 				4D385C9726C6AF9F00A66764 /* TestPinCell.swift in Sources */,
 				4DC6F52E246D8CA0003D3B0E /* Page_VM.swift in Sources */,
 				4D0E274226C439B600657B78 /* FlexPin_VC.swift in Sources */,
@@ -1029,6 +1066,14 @@
 				minimumVersion = 1.3.21;
 			};
 		};
+		4D591523278F613000106DC9 /* XCRemoteSwiftPackageReference "R.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mac-cain13/R.swift.Library";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1096,6 +1141,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4D521ED426C441AD00918C06 /* XCRemoteSwiftPackageReference "FlexLayout" */;
 			productName = FlexLayout;
+		};
+		4D591524278F613000106DC9 /* Rswift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D591523278F613000106DC9 /* XCRemoteSwiftPackageReference "R.swift" */;
+			productName = Rswift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

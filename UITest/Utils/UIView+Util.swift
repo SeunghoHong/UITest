@@ -3,14 +3,14 @@ import UIKit
 
 // MARK: Layer
 extension UIView {
-
     typealias Border = (width: CGFloat, color: UIColor)
 
 
     var circle: Bool {
         get {
             return (self.layer.cornerRadius == 0.0)
-        } set (newValue) {
+        }
+        set {
             self.radius = newValue ? (self.frame.size.width / 2) : 0.0
         }
     }
@@ -18,7 +18,8 @@ extension UIView {
     var ellipse: Bool {
         get {
             return (self.layer.cornerRadius == 0.0)
-        } set (newValue) {
+        }
+        set {
             self.radius = newValue ? (self.frame.size.height / 2) : 0.0
         }
     }
@@ -26,7 +27,8 @@ extension UIView {
     var radius: CGFloat {
         get {
             return self.layer.cornerRadius
-        } set (newValue) {
+        }
+        set {
             self.layer.cornerRadius = newValue
             self.layer.masksToBounds = true
             self.clipsToBounds = true
@@ -36,7 +38,8 @@ extension UIView {
     var border: Border {
         get {
             return (self.layer.borderWidth, UIColor(cgColor: self.layer.borderColor ?? UIColor.clear.cgColor))
-        } set (newValue) {
+        }
+        set {
             self.layer.borderWidth = newValue.width
             self.layer.borderColor = newValue.color.cgColor
         }
@@ -53,35 +56,30 @@ extension UIView {
 }
 
 
-// MARK: Frame
+// MARK: Shadow
 extension UIView {
 
-    var x: CGFloat {
-        get {
-            return self.frame.origin.x
-        } set (newX) {
-            var rect = self.frame
-            rect.origin.x = newX
-            self.frame = rect
-        }
-    }
+    func shadow(color: UIColor = .black, opacity: Float = 0.3, radius: CGFloat = 0.6) {
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowOpacity = opacity
+        self.layer.shadowRadius = radius
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
 
-    var y: CGFloat {
-        get {
-            return self.frame.origin.y
-        } set (newY) {
-            var rect = self.frame
-            rect.origin.y = newY
-            self.frame = rect
-        }
+        self.layer.masksToBounds = false
     }
+}
+
+
+// MARK: Frame
+extension UIView {
 
     var width: CGFloat {
         get {
             return self.frame.size.width
-        } set (newWidth) {
+        }
+        set {
             var rect = self.frame
-            rect.size.width = newWidth
+            rect.size.width = newValue
             self.frame = rect
         }
     }
@@ -89,9 +87,10 @@ extension UIView {
     var height: CGFloat {
         get {
             return self.frame.size.height
-        } set (newHeight) {
+        }
+        set {
             var rect = self.frame
-            rect.size.height = newHeight
+            rect.size.height = newValue
             self.frame = rect
         }
     }

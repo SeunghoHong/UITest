@@ -42,7 +42,7 @@ extension TooltipView {
         self.textLabel.text = "This is a test tooltip."
         self.guideView.addSubview(self.textLabel)
 
-        self.arrowImageView.image = UIImage(named: "ic_tooltip")?.rotate(radians: (.pi / -2.0))
+        self.arrowImageView.image = R.image.ic_tooltip()?.rotate(radians: (.pi / -2.0))
         self.stackView.addArrangedSubview(self.arrowImageView)
     }
 
