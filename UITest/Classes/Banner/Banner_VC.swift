@@ -216,6 +216,8 @@ extension Banner_VC {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .bind { [weak self] _ in
                 self?.visualize.start()
+
+                Toast.showSuccess("🐵 visual start")
             }
             .disposed(by: self.disposeBag)
 
@@ -223,6 +225,8 @@ extension Banner_VC {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .bind { [weak self] _ in
                 self?.visualize.stop()
+
+                Toast.showError("🙈 visual stop")
             }
             .disposed(by: self.disposeBag)
     }

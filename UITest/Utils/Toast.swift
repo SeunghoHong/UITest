@@ -3,7 +3,109 @@ import UIKit
 
 import RxSwift
 import RxGesture
-import SnapKit
+import PinLayout
+import FlexLayout
+
+
+final class ToastView: UIView {
+
+    private var view: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.radius = 16.0
+        view.shadow(opacity: 0.1, radius: 10.0)
+
+        return view
+    }()
+
+    private var imageView: UIImageView = {
+        let imageView = UIImageView()
+
+        return imageView
+    }()
+
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 12.0)
+
+        return label
+    }()
+
+    private var messageLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 12.0)
+        label.numberOfLines = 0
+
+        return label
+    }()
+
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        self.setup()
+        self.setupFlex()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.layout()
+    }
+
+    private func setup() {
+        self.addSubview(self.view)
+    }
+
+    private func setupFlex() {
+        self.view.flex.direction(.row)
+            .margin(16.0)
+            .padding(16.0)
+            .alignItems(.center)
+            .define { flex in
+                flex.addItem(self.imageView)
+                    .size(CGSize(width: 30.0, height: 30.0))
+
+                flex.addItem().direction(.column)
+                    .marginLeft(16.0)
+                    .shrink(1.0)
+                    .define { flex in
+                        flex.addItem(self.titleLabel)
+
+                        flex.addItem(self.messageLabel)
+                            .marginTop(4.0)
+                    }
+            }
+    }
+
+    private func layout() {
+        self.view.pin
+            .horizontally()
+
+        self.view.flex
+            .layout(mode: .adjustHeight)
+
+        self.view.pin
+            .top()
+
+        self.pin.height(self.view.height)
+    }
+
+    func setData(image: UIImage?, title: String, message: String) {
+        self.imageView.image = image
+        
+        self.titleLabel.text = title
+        self.titleLabel.flex.markDirty()
+        
+        self.messageLabel.text = message
+        self.messageLabel.flex.markDirty()
+
+        self.layoutIfNeeded()
+    }
+}
+
 
 
 final class Toast {
@@ -39,57 +141,28 @@ final class Toast {
     }
 
 
-    private var window: UIWindow = {
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.backgroundColor = .clear
-        window.isUserInteractionEnabled = false
-        window.makeKeyAndVisible()
+    private var toastWindow: UIWindow = {
+        var window: UIWindow?
 
-        return window
+        let windowScene = UIApplication.shared
+            .connectedScenes
+            .filter { $0.activationState == .foregroundActive }
+            .first
+
+        if let windowScene = windowScene as? UIWindowScene {
+            window = UIWindow(windowScene: windowScene)
+        } else {
+            window = UIWindow(frame: UIScreen.main.bounds)
+        }
+
+        window?.isUserInteractionEnabled = false
+        window?.makeKeyAndVisible()
+
+        return window ?? UIWindow(frame: UIScreen.main.bounds)
     }()
 
-    private var view: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.radius = 16.0
-        view.shadow(opacity: 0.1, radius: 10.0)
-
-        return view
-    }()
-
-    private var imageView: UIImageView = {
-        let imageView = UIImageView()
-
-        return imageView
-    }()
-
-    private var contentsStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.alignment = .leading
-        stackView.spacing = 4.0
-
-        return stackView
-    }()
-
-    private var titleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-
-        return label
-    }()
-
-    private var messageLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.numberOfLines = 0
-
-        return label
-    }()
-
-    private var viewTopConstraint: Constraint?
-    private var viewBottomConstraint: Constraint?
+    private let topView = UIView()
+    private let toastView = ToastView()
 
     private var clickDisposeBag = DisposeBag()
     private var hideDisposeBag = DisposeBag()
@@ -97,7 +170,6 @@ final class Toast {
 
     init() {
         self.setup()
-        self.layout()
     }
 }
 
@@ -105,38 +177,25 @@ final class Toast {
 extension Toast {
 
     private func setup() {
-        self.window.addSubview(self.view)
-
-        self.view.addSubview(self.imageView)
-        self.view.addSubview(self.contentsStackView)
-
-        self.contentsStackView.addArrangedSubview(self.titleLabel)
-        self.contentsStackView.addArrangedSubview(self.messageLabel)
+        self.toastWindow.addSubview(self.topView)
+        self.toastWindow.addSubview(self.toastView)
     }
 
-    private func layout() {
-        self.view.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16.0)
-            self.viewTopConstraint = make.top.equalToSuperview().offset(UIApplication.statusBarHeight).constraint
-            if let superview = self.view.superview {
-                self.viewBottomConstraint = make.bottom.equalTo(superview.snp.top).constraint
-            }
-        }
-        self.viewTopConstraint?.deactivate()
-        
-        self.imageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16.0)
-            make.centerY.equalTo(self.contentsStackView)
-            make.width.height.equalTo(30.0)
-        }
+    private func layout(_ isShow: Bool) {
+        self.topView.pin
+            .horizontally()
+            .top()
 
-        self.contentsStackView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(16.0)
-            make.leading.equalTo(self.imageView.snp.trailing).offset(16.0)
-            make.trailing.equalToSuperview().offset(-16.0)
-        }
+        self.toastView.pin
+            .horizontally()
 
-        self.window.layoutIfNeeded()
+        if isShow {
+            self.toastView.pin
+                .top(self.toastWindow.pin.safeArea)
+        } else {
+            self.toastView.pin
+                .above(of: self.topView)
+        }
     }
 }
 
@@ -150,16 +209,14 @@ extension Toast {
         autoHidden: Bool = true,
         onClick: (() -> Void)? = nil
     ) {
-        self.imageView.image = status.image
-        self.titleLabel.text = status.title
-        self.messageLabel.text = message
+        self.toastView.setData(image: status.image, title: status.title, message: message)
 
         self.hide(delay: false, animated: false)
 
         self.clickDisposeBag = DisposeBag()
         if let onClick = onClick {
-            self.window.isUserInteractionEnabled = true
-            self.view.rx.tapGesture()
+            self.toastWindow.isUserInteractionEnabled = true
+            self.toastView.rx.tapGesture()
                 .when(.recognized)
                 .bind { [weak self] _ in
                     guard let self = self else { return }
@@ -198,28 +255,18 @@ extension Toast {
 extension Toast {
 
     private func present(_ animated: Bool = true, autoHidden: Bool = true) {
-        self.window.isHidden = false
-
-        let layoutWindow: () -> Void = {
-            self.viewBottomConstraint?.deactivate()
-            self.viewTopConstraint?.activate()
-            self.window.layoutIfNeeded()
-            
-            var size = self.window.frame.size
-            size.height = self.view.frame.size.height
-            self.window.frame.size = size
-        }
+        self.toastWindow.isHidden = false
 
         if animated {
             UIView.animate(withDuration: 0.4, animations: {
-                layoutWindow()
+                self.layout(true)
             }, completion: { _ in
                 if autoHidden {
                     self.hide()
                 }
             })
         } else {
-            layoutWindow()
+            self.layout(true)
             if autoHidden {
                 self.hide()
             }
@@ -227,25 +274,17 @@ extension Toast {
     }
 
     private func dismiss(_ animated: Bool = true) {
-        self.window.isUserInteractionEnabled = false
-
-        let layoutWindow: () -> Void = {
-            self.viewTopConstraint?.deactivate()
-            self.viewBottomConstraint?.activate()
-            self.window.layoutIfNeeded()
-            
-            self.window.frame = UIScreen.main.bounds
-        }
+        self.toastWindow.isUserInteractionEnabled = false
 
         if animated {
             UIView.animate(withDuration: 0.4, animations: {
-                layoutWindow()
+                self.layout(false)
             }, completion: { _ in
-                self.window.isHidden = true
+                self.toastWindow.isHidden = true
             })
         } else {
-            layoutWindow()
-            self.window.isHidden = true
+            self.layout(false)
+            self.toastWindow.isHidden = true
         }
     }
 }
